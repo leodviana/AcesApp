@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 namespace AcesApp.Droid
 {
     [Activity(Theme = "@style/MainTheme.Splash",
-              MainLauncher = false,
+              MainLauncher = true,
               NoHistory = true)]
-    public class SplashActivity : AppCompatActivity
+    public class SplashActivity3 : AppCompatActivity
     {
         static readonly string TAG = "X:" + typeof(SplashActivity).Name;
         // Launches the startup task

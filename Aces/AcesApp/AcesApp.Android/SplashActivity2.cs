@@ -9,7 +9,7 @@ namespace AcesApp.Droid
     [Activity(Theme = "@style/MainTheme.Splash",
               MainLauncher = false,
               NoHistory = true)]
-    public class SplashActivity : AppCompatActivity
+    public class SplashActivity2 : AppCompatActivity
     {
         static readonly string TAG = "X:" + typeof(SplashActivity).Name;
         // Launches the startup task
