@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace AcesApp.Droid
 {
     [Activity(Theme = "@style/MainTheme.Splash",
-              MainLauncher = false,
+              MainLauncher = true,
               NoHistory = true)]
     public class SplashActivity : AppCompatActivity
     {

@@ -2,6 +2,7 @@ using AcesApp.ViewModels;
 using AcesApp.Views;
 using Prism;
 using Prism.Ioc;
+using Prism.Plugin.Popups;
 using Xamarin.Essentials.Implementation;
 using Xamarin.Essentials.Interfaces;
 using Xamarin.Forms;
@@ -18,8 +19,8 @@ namespace AcesApp
         protected override async void OnInitialized()
         {
             InitializeComponent();
-
-            await NavigationService.NavigateAsync("NavigationPage/MainPage");
+            await this.NavigationService.NavigateAsync("LoginPage");
+           // await NavigationService.NavigateAsync("NavigationPage/MainPage");
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
@@ -27,7 +28,10 @@ namespace AcesApp
             containerRegistry.RegisterSingleton<IAppInfo, AppInfoImplementation>();
 
             containerRegistry.RegisterForNavigation<NavigationPage>();
-            containerRegistry.RegisterForNavigation<MainPage, MainPageViewModel>();
+           // containerRegistry.RegisterForNavigation<MainPage, MainPageViewModel>();
+            containerRegistry.RegisterForNavigation<LoginPage, LoginPageViewModel>();
+           // containerRegistry.RegisterPopupNavigationService();
+            containerRegistry.RegisterForNavigation<PopupMensagemPage, PopMensagemViewModel>();
         }
     }
 }
