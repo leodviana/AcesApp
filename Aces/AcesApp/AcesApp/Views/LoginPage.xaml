@@ -7,7 +7,7 @@
              x:Class="AcesApp.Views.LoginPage">
 
     <ScrollView>
-        <Grid RowSpacing="0" ColumnSpacing="0" BackgroundColor="#ffffff" >
+        <Grid RowSpacing="0" ColumnSpacing="0" BackgroundColor="{StaticResource BackgroundColor}" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
@@ -23,7 +23,7 @@
 
 
             <StackLayout Grid.Row="3" Margin="10,0,10,10" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" Padding="10,30,20,0">
-                <Grid RowSpacing="20" BackgroundColor="white">
+                <Grid RowSpacing="20" BackgroundColor="{StaticResource BackgroundColor}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="20"/>
                         <ColumnDefinition Width="*"/>
@@ -51,7 +51,7 @@
                     <Entry Placeholder="Senha" Text="{Binding Senha,Mode=TwoWay}" IsPassword="True" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" Grid.Row="2" Grid.Column="1"></Entry>
 
 
-                    <Button Text="Login" Margin="10,0,0,10" Command="{Binding navegar}" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" BorderRadius = "20" BackgroundColor="#28613B" TextColor="White" Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="2" ></Button>
+                    <Button Text="Login" Margin="10,0,0,10" Command="{Binding navegar}" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" BorderRadius = "20" BackgroundColor="{StaticResource MainColor}" TextColor="{StaticResource BackgroundColor}" Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="2" ></Button>
 
 
 
@@ -64,7 +64,7 @@
                 </Grid>
 
             </StackLayout>
-            <Frame  Grid.Row="4" BackgroundColor="#28613B"></Frame>
+            <Frame  Grid.Row="4" BackgroundColor="{StaticResource MainColor}"></Frame>
 
 
         </Grid>
