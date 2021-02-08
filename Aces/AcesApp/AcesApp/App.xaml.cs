@@ -1,3 +1,5 @@
+using AcesApp.Interfaces;
+using AcesApp.Services;
 using AcesApp.ViewModels;
 using AcesApp.Views;
 using Prism;
@@ -32,6 +34,7 @@ namespace AcesApp
             containerRegistry.RegisterForNavigation<LoginPage, LoginPageViewModel>();
            // containerRegistry.RegisterPopupNavigationService();
             containerRegistry.RegisterForNavigation<PopupMensagemPage, PopMensagemViewModel>();
+            containerRegistry.RegisterSingleton<IApiService, ApiService>();
         }
     }
 }

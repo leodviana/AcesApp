@@ -5,7 +5,8 @@
              x:Class="AcesApp.App">
   <Application.Resources>
 
-    <!-- Application resource dictionary -->
+        <x:String x:Key="UrlAPI">https://www.painelstudio.com/Apiaces/</x:String>
+        <!-- Application resource dictionary -->
         <Color x:Key="MainColor">#28613B</Color>
         <Color x:Key="BackgroundColor">#ffffff</Color>
         <Color x:Key="BackgroundColorSecondary">Gray</Color>

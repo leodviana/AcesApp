@@ -1,9 +1,13 @@
-﻿using Prism.Navigation;
+﻿using AcesApp.Interfaces;
+using AcesApp.Models;
+using AcesApp.Services;
+using Prism.Navigation;
 using Prism.Services;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows.Input;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace AcesApp.ViewModels
@@ -13,7 +17,7 @@ namespace AcesApp.ViewModels
         private ICommand _navegar;
         private ICommand _ForgotPasswordCommand;
 
-        //IApiService apiService;
+        IApiService apiService;
 
         private bool isRunning;
 
@@ -78,122 +82,124 @@ namespace AcesApp.ViewModels
         // (INavigationService navigationService,
         //       IPageDialogService pageDialogService, IMarvelApiService marvelApiService) : base(navigationService, pageDialogService)
         
-        public LoginPageViewModel(INavigationService navigationService, IPageDialogService pageDialogService) : base(navigationService, pageDialogService)
+        public LoginPageViewModel(INavigationService navigationService, IPageDialogService pageDialogService,IApiService ApiService) : base(navigationService, pageDialogService)
         {
-           /*  _navigationService = navigationService;
-             _dialogService = dialogService;
-           /* apiService = ApiService;*/
-            mostra_mensagem = false;
-            mensagem = "";
-        }
+            /*  _navigationService = navigationService;
+              _dialogService = dialogService;*/
+             apiService = ApiService;
+             mostra_mensagem = false;
+             mensagem = "";
+         }
 
-        public ICommand navegar
-        {
-            get
-            {
-                return _navegar ?? (_navegar = new Command(objeto =>
-                {
-                    //_navigationService.NavigateAsync("/MasterPage/NavigationPage/DentistaPage");
-                    Login();
-                    // _navigationService.NavigateAsync("PermissaoPage");
-                }));
-            }
-        }
+         public ICommand navegar
+         {
+             get
+             {
+                 return _navegar ?? (_navegar = new Command(objeto =>
+                 {
+                     //_navigationService.NavigateAsync("/MasterPage/NavigationPage/DentistaPage");
+                     Login();
+                     // _navigationService.NavigateAsync("PermissaoPage");
+                 }));
+             }
+         }
 
-        public ICommand ForgotPasswordCommand
-        {
-            get
-            {
-                return _ForgotPasswordCommand ?? (_ForgotPasswordCommand = new Command(objeto =>
-                {
-                    //_navigationService.NavigateAsync("/MasterPage/NavigationPage/DentistaPage");
-                    // navigationService.NavigateAsync
-                    NavigationService.NavigateAsync("LoginPacientePage");
-                }));
-            }
-        }
+         public ICommand ForgotPasswordCommand
+         {
+             get
+             {
+                 return _ForgotPasswordCommand ?? (_ForgotPasswordCommand = new Command(objeto =>
+                 {
+                     //_navigationService.NavigateAsync("/MasterPage/NavigationPage/DentistaPage");
+                     // navigationService.NavigateAsync
+                     NavigationService.NavigateAsync("LoginPacientePage");
+                 }));
+             }
+         }
 
-        private async void Login()
-        {
-            //var testa = await ChecapermisaoService.checa_permissao(new Permissions.StorageWrite());
-            //var testa2 = await ChecapermisaoService.checa_permissao(new Permissions.LocationWhenInUse());
-            //var testa3 = await ChecapermisaoService.checa_permissao(new Permissions.Photos());
-            //var testa4 = await ChecapermisaoService.checa_permissao(new Permissions.StorageRead());
-            if (string.IsNullOrEmpty(Usuarioid))
-            {
-                await exibeErro("Prencha o campo Email!");
+         private async void Login()
+         {
+             //var testa = await ChecapermisaoService.checa_permissao(new Permissions.StorageWrite());
+             //var testa2 = await ChecapermisaoService.checa_permissao(new Permissions.LocationWhenInUse());
+             //var testa3 = await ChecapermisaoService.checa_permissao(new Permissions.Photos());
+             //var testa4 = await ChecapermisaoService.checa_permissao(new Permissions.StorageRead());
+             if (string.IsNullOrEmpty(Usuarioid))
+             {
+                 await exibeErro("Prencha o campo Email!");
 
-                return;
-            }
+                 return;
+             }
 
 
-            if (string.IsNullOrEmpty(Senha))
-            {
-                await exibeErro("Prencha o campo Senha!");
-                //await PageDialogService.DisplayAlertAsync("Erro", "Prencha o campo Senha!", "OK");
-                return;
-            }
+             if (string.IsNullOrEmpty(Senha))
+             {
+                 await exibeErro("Prencha o campo Senha!");
+                 //await PageDialogService.DisplayAlertAsync("Erro", "Prencha o campo Senha!", "OK");
+                 return;
+             }
+            var usuario = new Usuario();
+            usuario.Login = Usuarioid;
+            usuario.Senha = Senha;
+             var response = new Response();
+             IsRunning = true;
+             var current = Connectivity.NetworkAccess;
 
-           /* var response = new Response();
-            IsRunning = true;
-            var current = Connectivity.NetworkAccess;
+             if (current == NetworkAccess.Internet)
 
-            if (current == NetworkAccess.Internet)
+             {
+                 response = await apiService.getUsuario(usuario);
+             }
+             else
+             {
+                 await exibeErro("Dispositivo não está conectado a internet!");
+                 //await PageDialogService.DisplayAlertAsync("Erro", "Dispositivo sem Conexâo", "OK");
+                 //await dialogServices.ShowMessage("Erro", response.Message);
+                 IsRunning = false;
+                 return;
+             }
+             IsRunning = false;
 
-            {
-                response = await apiService.Login(Usuarioid, Senha);
-            }
-            else
-            {
-                await exibeErro("Dispositivo não está conectado a internet!");
-                //await PageDialogService.DisplayAlertAsync("Erro", "Dispositivo sem Conexâo", "OK");
-                //await dialogServices.ShowMessage("Erro", response.Message);
-                IsRunning = false;
-                return;
-            }
-            IsRunning = false;
+             if (!response.IsSuccess)
+             {
+                 await exibeErro(response.Message);
+                 //await PageDialogService.DisplayAlertAsync("Erro", response.Message, "OK");
+                 //await dialogServices.ShowMessage("Erro", response.Message);
+                 return;
+             }
 
-            if (!response.IsSuccess)
-            {
-                await exibeErro(response.Message);
-                //await PageDialogService.DisplayAlertAsync("Erro", response.Message, "OK");
-                //await dialogServices.ShowMessage("Erro", response.Message);
-                return;
-            }
+             var User = (Usuario)response.Result;
 
-            var User = (Models.Dentista)response.Result;
+           /*  if (User.Id == 999999999)
+             {
+                 User.tipo = "Administrador";
+                 App.usuariologado = User;
 
-            if (User.Id == 999999999)
-            {
-                User.tipo = "Administrador";
-                App.usuariologado = User;
-
-                //Settings.Grava_Settings(JsonConvert.SerializeObject(User));
-                Preferences.Set("dentistaserializado", JsonConvert.SerializeObject(User));
-                //Preferences.Get("dentistaserializado", JsonConvert.SerializeObject(User));
-                var mainPage = $"/{nameof(NavigationPage)}/{nameof(MainPage2)}";
-                await NavigationService.NavigateAsync(mainPage);
-                //await NavigationService.NavigateAsync("/MasterPage/NavigationPage/DentistaPage");
-            }
-            else
-            {
-                User.tipo = "Dentista";
-                App.usuariologado = User;
-                if (App.usuariologado.ImagePath.Equals(""))
-                {
-                    App.usuariologado.ImagePath = "perfil";
-                }
-                // Settings.Grava_Settings(JsonConvert.SerializeObject(User));
-                Preferences.Set("dentistaserializado", JsonConvert.SerializeObject(User));
-                //Preferences.Get("dentistaserializado", JsonConvert.SerializeObject(User));
-                var navigationParams = new NavigationParameters();
-                navigationParams.Add("paciente", User);
-                //await NavigationService.NavigateAsync("/MasterPage/NavigationPage/DentistaPage");
-                var mainPage = $"/{nameof(NavigationPage)}/{nameof(MainPage2)}";
-                await NavigationService.NavigateAsync(mainPage);
-                //  await _navigationService.NavigateAsync("/MasterPage/NavigationPage/ExamesPage", navigationParams);
-            }
-           */
+                 //Settings.Grava_Settings(JsonConvert.SerializeObject(User));
+                 Preferences.Set("dentistaserializado", JsonConvert.SerializeObject(User));
+                 //Preferences.Get("dentistaserializado", JsonConvert.SerializeObject(User));
+                 var mainPage = $"/{nameof(NavigationPage)}/{nameof(MainPage2)}";
+                 await NavigationService.NavigateAsync(mainPage);
+                 //await NavigationService.NavigateAsync("/MasterPage/NavigationPage/DentistaPage");
+             }
+             else
+             {
+                 User.tipo = "Dentista";
+                 App.usuariologado = User;
+                 if (App.usuariologado.ImagePath.Equals(""))
+                 {
+                     App.usuariologado.ImagePath = "perfil";
+                 }
+                 // Settings.Grava_Settings(JsonConvert.SerializeObject(User));
+                 Preferences.Set("dentistaserializado", JsonConvert.SerializeObject(User));
+                 //Preferences.Get("dentistaserializado", JsonConvert.SerializeObject(User));
+                 var navigationParams = new NavigationParameters();
+                 navigationParams.Add("paciente", User);
+                 //await NavigationService.NavigateAsync("/MasterPage/NavigationPage/DentistaPage");
+                 var mainPage = $"/{nameof(NavigationPage)}/{nameof(MainPage2)}";
+                 await NavigationService.NavigateAsync(mainPage);
+                 //  await _navigationService.NavigateAsync("/MasterPage/NavigationPage/ExamesPage", navigationParams);
+             }
+            */
         }
 
         public void OnNavigatedFrom(NavigationParameters parameters)

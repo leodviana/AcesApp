@@ -57,7 +57,7 @@
 
 
 
-                    <ActivityIndicator IsRunning="{Binding IsRunning}" Grid.Column="0" Grid.Row="5" Grid.ColumnSpan="2">
+                    <ActivityIndicator IsRunning="{Binding IsRunning}" Grid.Column="0" Grid.Row="5" Grid.ColumnSpan="2" Color="{StaticResource MainColor}">
 
                     </ActivityIndicator>
 
