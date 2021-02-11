@@ -23,7 +23,7 @@ namespace AcesApp.ViewModels
             set { SetProperty(ref _title, value); }
         }
 
-        public bool IsActive { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public bool IsActive { get ; set ; }
 
         protected ViewModelBase(INavigationService navigationService, IPageDialogService pageDialogService)
         {

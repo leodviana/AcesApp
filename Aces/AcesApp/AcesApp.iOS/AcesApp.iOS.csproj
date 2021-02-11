@@ -101,6 +101,7 @@
   <ItemGroup>
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
+    <Compile Include="renderers\CustomTabbedPageRenderer.cs" />
     <None Include="Entitlements.plist" />
     <None Include="Info.plist" />
     <LinkDescription Include="LinkerSettings.xml" />
@@ -185,6 +186,9 @@
   <ItemGroup>
     <PackageReference Include="Prism.Plugin.Popups">
       <Version>7.2.0.1046</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.Essentials">
+      <Version>1.6.1</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Forms" Version="4.8.0.1364" />
     <PackageReference Include="Xamarin.Essentials.Interfaces" Version="1.5.3.2" />
