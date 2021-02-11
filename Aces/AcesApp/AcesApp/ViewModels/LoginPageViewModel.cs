@@ -1,6 +1,8 @@
 ﻿using AcesApp.Interfaces;
 using AcesApp.Models;
 using AcesApp.Services;
+using AcesApp.Views;
+using Newtonsoft.Json;
 using Prism.Navigation;
 using Prism.Services;
 using System;
@@ -83,9 +85,7 @@ namespace AcesApp.ViewModels
         //       IPageDialogService pageDialogService, IMarvelApiService marvelApiService) : base(navigationService, pageDialogService)
         
         public LoginPageViewModel(INavigationService navigationService, IPageDialogService pageDialogService,IApiService ApiService) : base(navigationService, pageDialogService)
-        {
-            /*  _navigationService = navigationService;
-              _dialogService = dialogService;*/
+        {              
              apiService = ApiService;
              mostra_mensagem = false;
              mensagem = "";
@@ -119,10 +119,7 @@ namespace AcesApp.ViewModels
 
          private async void Login()
          {
-             //var testa = await ChecapermisaoService.checa_permissao(new Permissions.StorageWrite());
-             //var testa2 = await ChecapermisaoService.checa_permissao(new Permissions.LocationWhenInUse());
-             //var testa3 = await ChecapermisaoService.checa_permissao(new Permissions.Photos());
-             //var testa4 = await ChecapermisaoService.checa_permissao(new Permissions.StorageRead());
+             
              if (string.IsNullOrEmpty(Usuarioid))
              {
                  await exibeErro("Prencha o campo Email!");
@@ -174,13 +171,13 @@ namespace AcesApp.ViewModels
                  User.tipo = "Administrador";
                  App.usuariologado = User;
 
-                 //Settings.Grava_Settings(JsonConvert.SerializeObject(User));
+                 //Settings.Grava_Settings(JsonConvert.SerializeObject(User));*/
                  Preferences.Set("dentistaserializado", JsonConvert.SerializeObject(User));
-                 //Preferences.Get("dentistaserializado", JsonConvert.SerializeObject(User));
+                 
                  var mainPage = $"/{nameof(NavigationPage)}/{nameof(MainPage2)}";
                  await NavigationService.NavigateAsync(mainPage);
                  //await NavigationService.NavigateAsync("/MasterPage/NavigationPage/DentistaPage");
-             }
+            /* }
              else
              {
                  User.tipo = "Dentista";

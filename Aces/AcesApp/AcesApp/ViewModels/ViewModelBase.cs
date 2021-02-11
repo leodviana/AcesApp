@@ -42,7 +42,10 @@ namespace AcesApp.ViewModels
         {
 
         }
+        public virtual void OnNavigatingTo(INavigationParameters parameters)
+        {
 
+        }
         public virtual void OnNavigatedTo(INavigationParameters parameters)
         {
 
