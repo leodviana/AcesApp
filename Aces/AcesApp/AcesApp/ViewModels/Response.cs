@@ -11,5 +11,6 @@ namespace AcesApp.ViewModels
 
         public object Result { get; set; }
 
+       
     }
 }

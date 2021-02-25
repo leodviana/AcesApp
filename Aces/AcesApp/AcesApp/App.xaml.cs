@@ -3,6 +3,7 @@ using AcesApp.Models;
 using AcesApp.Services;
 using AcesApp.ViewModels;
 using AcesApp.Views;
+using Acr.UserDialogs;
 using Newtonsoft.Json;
 using Prism;
 using Prism.DryIoc;
@@ -82,13 +83,15 @@ namespace AcesApp
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
             containerRegistry.RegisterForNavigation<NavigationPage>();
+            containerRegistry.RegisterInstance(UserDialogs.Instance);
             containerRegistry.RegisterSingleton<IAppInfo, AppInfoImplementation>();
             containerRegistry.RegisterForNavigation<MainPage2, MainPage2ViewModel>();
             containerRegistry.RegisterForNavigation<MainPage, MainPageViewModel>();
             containerRegistry.RegisterForNavigation<LoginPage, LoginPageViewModel>();
             containerRegistry.RegisterForNavigation<PopupMensagemPage, PopMensagemViewModel>();
             containerRegistry.RegisterSingleton<IApiService, ApiService>();
-           
+
+            containerRegistry.RegisterForNavigation<AulasPage, AulasPageViewModel>();
         }
     }
 }

@@ -3,9 +3,9 @@ using Xamarin.Forms;
 
 namespace AcesApp.Views
 {
-    public partial class PerfilPage : ContentPage, ITabPageIcons
+    public partial class AulasPage : ContentPage, ITabPageIcons
     {
-        public PerfilPage()
+        public AulasPage()
         {
             InitializeComponent();
         }

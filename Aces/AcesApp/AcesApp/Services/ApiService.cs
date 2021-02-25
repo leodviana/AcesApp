@@ -60,5 +60,56 @@ namespace AcesApp.Services
                 throw;
             }
         }
+
+
+        public async Task<Response> getEventos(Events evento)
+        {
+
+            try
+            {
+
+
+                var jsonRequest = JsonConvert.SerializeObject(evento);
+                var httpContent = new StringContent(jsonRequest, Encoding.UTF8, "application/json");
+                var client = new HttpClient();
+                client.BaseAddress = new Uri(App.Current.Resources["UrlAPI"].ToString());
+
+                var url = "api/Aulas/GetEvents";
+
+                var response = await client.PostAsync(url, httpContent);
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    return new Response
+                    {
+                        IsSuccess = false,
+                        Message = "Problemas com o horario do contrato" + evento.contrato,
+
+                    };
+
+                }
+
+                var result = await response.Content.ReadAsStringAsync();
+                var Eventos = JsonConvert.DeserializeObject<List<Events>>(result);
+
+                return new Response
+                {
+                    IsSuccess = true,
+                    Message = "Ok",
+                    Result = Eventos
+                };
+
+            }
+            catch (Exception ex)
+            {
+               // return null;
+                return new Response
+                {
+                    IsSuccess = false,
+                    Message = ex.Message,
+                };
+               
+            }
+        }
     }
 }

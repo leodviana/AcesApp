@@ -10,5 +10,7 @@ namespace AcesApp.Interfaces
     public interface IApiService
     {
         Task<Response> getUsuario(Usuario usuario);
+
+        Task<Response> getEventos(Events evento);
     }
 }

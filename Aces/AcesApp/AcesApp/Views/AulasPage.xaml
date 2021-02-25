@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com" 
+             xmlns:controls="clr-namespace:Xamarin.Plugin.Calendar.Controls;assembly=Xamarin.Plugin.Calendar"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             
+             x:Class="AcesApp.Views.AulasPage">
+
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+
+            <Style x:Key="daysTitleLabelStyle" TargetType="Label">
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="FontSize" Value="20" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ScrollView>
+        
+    <controls:Calendar
+        Margin="{OnPlatform Android='0', iOS='0,30'}"
+        Padding="10,0,0,10"
+        AnimateCalendar="True"
+        DayViewCornerRadius="3"
+        DayViewSize="40"
+        DaysTitleColor="{StaticResource MainColor}"
+        DaysTitleHeight="40"
+        DaysTitleLabelStyle="{StaticResource daysTitleLabelStyle}"
+        DeselectedDayTextColor="Blue"
+        DisableSwipeDetection="False"
+        EventIndicatorColor="Red"
+        EventIndicatorSelectedColor="White"
+        Events="{Binding Events}"
+        Culture="{Binding Culture}"
+        HorizontalOptions="FillAndExpand"
+        MonthLabelColor="{StaticResource MainColor}"
+        OtherMonthDayColor="Gray"
+        SelectedDateColor="{StaticResource MainColor}"
+        SelectedDateTextFormat="ddd, dd MMM yyyy"
+        SelectedDayBackgroundColor="DarkCyan"
+        SelectedDayTextColor="Cyan"
+        SwipeToChangeMonthEnabled="False"
+        SwipeUpToHideEnabled="False"
+        TodayFillColor="Silver"
+        TodayOutlineColor="Blue"
+        VerticalOptions="FillAndExpand"
+        YearLabelColor="{StaticResource MainColor}">
+
+        <controls:Calendar.EventTemplate>
+            <DataTemplate>
+                <StackLayout
+                Padding="0,0,0,0">
+                    <Label
+                    Text="{Binding Nome}"
+                    FontAttributes="Bold"
+                    FontSize="Medium" />
+                    <Label
+                    Text="{Binding Descricao}"
+                    FontSize="Small"
+                    LineBreakMode="WordWrap" />
+                </StackLayout>
+            </DataTemplate>
+        </controls:Calendar.EventTemplate>
+
+    </controls:Calendar>
+    </ScrollView>
+</ContentPage>

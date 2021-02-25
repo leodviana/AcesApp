@@ -23,7 +23,17 @@ namespace AcesApp.ViewModels
             set { SetProperty(ref _title, value); }
         }
 
-        public bool IsActive { get ; set ; }
+        private bool _isActive;
+        public bool IsActive
+        {
+            get => _isActive;
+            set => SetProperty(ref _isActive, value, RaiseIsActiveChanged);
+        }
+
+        protected virtual void RaiseIsActiveChanged()
+        {
+            IsActiveChanged?.Invoke(this, EventArgs.Empty);
+        }
 
         protected ViewModelBase(INavigationService navigationService, IPageDialogService pageDialogService)
         {
