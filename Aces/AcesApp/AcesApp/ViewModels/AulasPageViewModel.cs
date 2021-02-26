@@ -10,7 +10,9 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using Xamarin.Essentials;
+using Xamarin.Forms;
 using Xamarin.Plugin.Calendar.Models;
 
 namespace AcesApp.ViewModels
@@ -18,6 +20,7 @@ namespace AcesApp.ViewModels
     public class AulasPageViewModel : ViewModelBase
 
     {
+        private ICommand _MudarHorarioCommand;
         IApiService apiService;
         private readonly IUserDialogs _userDialogs;
         public EventCollection Events { get; set; }
@@ -64,8 +67,28 @@ namespace AcesApp.ViewModels
             IsActiveChanged += HandleIsActiveFalse;
 
         }
+        // public ICommand EventSelectedCommand => new Command(async (item) => await ExecuteEventSelectedCommand(item));
+        public ICommand MudarHorarioCommand => new Command(async (item) => await MudarHorario(item));
+      /*  public ICommand MudarHorarioCommand
+        {
+            get
+            {
+                return _MudarHorarioCommand ?? (_MudarHorarioCommand = new Command(objeto =>
+                {
 
+                     MudarHorario();
+                }));
+            }
+        }*/
 
+        private async Task MudarHorario(object item)
+        {
+            // await PageDialogService.DisplayAlertAsync("app", Selection.nome, "Ok");
+           // var navigationParams = new NavigationParameters();
+           // navigationParams.Add("paciente", Selection);
+            await NavigationService.NavigateAsync("ModificaHorarioPage");
+            //Selection = null;
+        }
 
         private void HandleIsActiveFalse(object sender, EventArgs e)
         {
@@ -112,7 +135,8 @@ namespace AcesApp.ViewModels
            
             var response = new Response();
             IsRunning = true;
-            _userDialogs.ShowLoading("Carregando");
+            
+            _userDialogs.ShowLoading("Carregando",MaskType.Black);
             if (current == NetworkAccess.Internet)
 
             {
