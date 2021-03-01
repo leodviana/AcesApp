@@ -1,9 +1,94 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:prism="http://prismlibrary.com"
+             xmlns:prism="http://prismlibrary.com" 
+             xmlns:pancakeView="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="AcesApp.Views.PerfilPage"
              Title="perfil">
-    <Label Text="Perfil page"></Label>
+
+    <ScrollView BackgroundColor="{StaticResource MainColor}"  >
+        <Grid RowSpacing="0" Padding="0" Margin="0" BackgroundColor="White">
+            <Grid.RowDefinitions >
+
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="{OnPlatform Android='80', iOS='60'}" />
+                <RowDefinition Height="30" />
+                <RowDefinition Height="30" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
+
+
+            <pancakeView:PancakeView Grid.Row="0" Padding="0"
+               BackgroundColor="{StaticResource MainColor}" 
+               HeightRequest="{OnPlatform Android='150', iOS='200'}"
+               >
+
+
+
+            </pancakeView:PancakeView>
+
+            <Frame  Grid.Row="0" Padding="0"  TranslationY="50" HeightRequest="150" WidthRequest="150" IsClippedToBounds="True" CornerRadius="77" VerticalOptions="Center" HorizontalOptions="Center">
+
+
+                <ffimageloading:CachedImage     CacheDuration="50" RetryCount="3" RetryDelay="600"  HorizontalOptions="CenterAndExpand"  VerticalOptions="End"    DownsampleToViewSize="true"
+                                   Aspect="AspectFill"   Source="{Binding Photo}" HeightRequest="150" WidthRequest="150" 
+                                   LoadingPlaceholder = "Spinner.gif"  ErrorPlaceholder="unnamed.png"  CacheType="Memory">
+                    <ffimageloading:CachedImage.Transformations>
+                        <fftransformations:CircleTransformation />
+                    </ffimageloading:CachedImage.Transformations>
+                </ffimageloading:CachedImage>
+
+
+
+
+            </Frame>
+
+            <Grid ColumnSpacing="0" RowSpacing="0" Grid.Row="0"  >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1.8*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+
+                <Image  Grid.Column="1"  Source="foto" HeightRequest="40"   VerticalOptions="End" HorizontalOptions="Start">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer  Command="{Binding abrircameraCommand}"  />
+                    </Image.GestureRecognizers>
+                </Image>
+            </Grid>
+
+            <Label Text="{Binding Nome}" Grid.Row="2" FontSize="Medium" HorizontalOptions="Center" ></Label>
+            <StackLayout Orientation="Horizontal" Grid.Row="3" HorizontalOptions="Center">
+                <Label Text="Id." FontSize="Small"/>
+                <Label Text="{Binding id}"  FontSize="Small" HorizontalOptions="Center" ></Label>
+            </StackLayout>
+
+
+            <FlexLayout Grid.Row="4"  Direction="Column" >
+
+                <Label Text="Login" Margin="10,0,10,5" />
+                <Entry Text="{Binding Login}" Placeholder="Login..." HeightRequest="40" VerticalOptions="StartAndExpand" HorizontalOptions="StartAndExpand"  Margin="10"></Entry>
+
+                <Label Text="Email" Margin="10,0,10,5" />
+                <Entry Text="{Binding Email}" Placeholder="Email..." HeightRequest="40" VerticalOptions="StartAndExpand" HorizontalOptions="StartAndExpand"  Margin="10"></Entry>
+
+
+                <Label Text="Senha" Margin="10,0,10,5" />
+                <Entry Text="{Binding Senha}" Placeholder="Senha..." HeightRequest="40" VerticalOptions="StartAndExpand" HorizontalOptions="StartAndExpand"  Margin="10"></Entry>
+                <Button Text="Salvar" Margin="10,25,10,10"  Command="{Binding navegarCommand}" HorizontalOptions="StartAndExpand" VerticalOptions="StartAndExpand" BorderRadius = "20" BackgroundColor="#4c0507" TextColor="White"  ></Button>
+
+                <Button BackgroundColor="Transparent"   Command="{Binding LogoutCommand}" Text="Sair"></Button>
+            </FlexLayout>
+
+
+
+
+
+
+
+        </Grid>
+    </ScrollView>
+
 </ContentPage>
