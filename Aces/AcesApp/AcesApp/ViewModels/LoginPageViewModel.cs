@@ -167,8 +167,8 @@ namespace AcesApp.ViewModels
              var User = (Usuario)response.Result;
 
            /*  if (User.Id == 999999999)
-             {
-                 User.tipo = "Administrador";
+             {*/
+                 //User.tipo = "Administrador";
                  App.usuariologado = User;
 
                  //Settings.Grava_Settings(JsonConvert.SerializeObject(User));*/

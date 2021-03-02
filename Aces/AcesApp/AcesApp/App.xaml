@@ -15,5 +15,9 @@
         <Color x:Key="MainColor">#28613B</Color>
         <Color x:Key="BackgroundColor">#ffffff</Color>
         <Color x:Key="BackgroundColorSecondary">Gray</Color>
+      <Style TargetType="NavigationPage">
+          <Setter Property="BarBackground" Value="#28613B"/>
+          <Setter Property="BarTextColor" Value="White"/>
+      </Style>
     </Application.Resources>
 </prism:PrismApplication>

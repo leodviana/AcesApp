@@ -69,24 +69,14 @@ namespace AcesApp.ViewModels
         }
         // public ICommand EventSelectedCommand => new Command(async (item) => await ExecuteEventSelectedCommand(item));
         public ICommand MudarHorarioCommand => new Command(async (item) => await MudarHorario(item));
-      /*  public ICommand MudarHorarioCommand
-        {
-            get
-            {
-                return _MudarHorarioCommand ?? (_MudarHorarioCommand = new Command(objeto =>
-                {
-
-                     MudarHorario();
-                }));
-            }
-        }*/
+      
 
         private async Task MudarHorario(object item)
         {
             // await PageDialogService.DisplayAlertAsync("app", Selection.nome, "Ok");
-           // var navigationParams = new NavigationParameters();
-           // navigationParams.Add("paciente", Selection);
-            await NavigationService.NavigateAsync("ModificaHorarioPage");
+            var navigationParams = new NavigationParameters();
+            navigationParams.Add("aluno", item);
+            await NavigationService.NavigateAsync("ModificaHorarioPage",navigationParams);
             //Selection = null;
         }
 

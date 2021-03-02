@@ -1,4 +1,12 @@
-﻿using AcesApp.Interfaces;
+﻿using AcesApp.Helpers;
+using AcesApp.Interfaces;
+using AcesApp.Models;
+using AcesApp.Utils;
+using Acr.UserDialogs;
+using FFImageLoading.Cache;
+using FFImageLoading.Forms;
+using Plugin.Media;
+using Plugin.Media.Abstractions;
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Navigation;
@@ -6,6 +14,10 @@ using Prism.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
+using System.Windows.Input;
+using Xamarin.Essentials;
+using Xamarin.Forms;
 
 namespace AcesApp.ViewModels
 {
@@ -129,7 +141,7 @@ namespace AcesApp.ViewModels
                 CachedImage.InvalidateCache(_photo, CacheType.All, true);
             }
         }
-        public PerfilViewModel(INavigationService navigationService, IPageDialogService pageDialogService, IApiService ApiService, IUserDialogs userDialogs) : base(navigationService, pageDialogService)
+        public PerfilPageViewModel(INavigationService navigationService, IPageDialogService pageDialogService, IApiService ApiService, IUserDialogs userDialogs) : base(navigationService, pageDialogService)
         {
             _userDialogs = userDialogs;
             apiService = ApiService;
@@ -166,12 +178,19 @@ namespace AcesApp.ViewModels
                 return _logout ?? (_logout = new Command(async objeto =>
                 {
 
-
+                    try
+                    {
+                        Preferences.Clear();
+                        App.usuariologado = null;
+                        Page nova = navegacaoAux.GetMainPage();
+                        App.Current.MainPage = nova;
+                    }
+                    catch(Exception ex)
+                    {
+                        await exibeErro(ex.Message.ToString());
+                    }
                     //await PageDialogService.DisplayAlertAsync("app", "Sem conexao!", "Ok");
-                    Preferences.Clear();
-                    App.usuariologado = null;
-                    Page nova = navegacaoAux.GetMainPage();
-                    App.Current.MainPage = nova;
+                    
 
                 }));
             }
@@ -340,7 +359,7 @@ namespace AcesApp.ViewModels
                 }
                 else
                 {
-                    PageDialogService.DisplayAlertAsync(TitleAlert, "Por favor Verifique sua conexao!", "Ok");
+                    await PageDialogService.DisplayAlertAsync(TitleAlert, "Por favor Verifique sua conexao!", "Ok");
                     IsRunning = false;
                     return;
                 }
@@ -368,7 +387,7 @@ namespace AcesApp.ViewModels
         private async Task salvaPerfil()
         {
             IsRunning = true;
-            if (string.IsNullOrEmpty(Email))
+           /* if (string.IsNullOrEmpty(Email))
             {
                 await PageDialogService.DisplayAlertAsync(TitleAlert, "Prencha o campo Email!", "OK");
                 IsRunning = false;
@@ -391,7 +410,7 @@ namespace AcesApp.ViewModels
 
             _userDialogs.ShowLoading("Salvando");
 
-            Dentista dentistaatualizado = new Dentista();
+            Usuario dentistaatualizado = new Usuario();
             dentistaatualizado.Id = id;
             dentistaatualizado.nome = Nome;
             dentistaatualizado.Email = Email;
@@ -429,7 +448,7 @@ namespace AcesApp.ViewModels
             // App.Current.MainPage = nova;
 
         }
-        private async void atribuivalores(Dentista _dentista)
+       /* private async void atribuivalores(Dentista _dentista)
         {
             id = _dentista.Id;
             Nome = _dentista.nome;
@@ -463,6 +482,6 @@ namespace AcesApp.ViewModels
 
                 // await _navigationService.NavigateAsync("/MasterPage/NavigationPage/ExamesPage", navigationParams);
             }
-        }
+        }*/
     }
 }

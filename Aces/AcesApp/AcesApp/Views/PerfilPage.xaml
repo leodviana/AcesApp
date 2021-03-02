@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="http://prismlibrary.com" 
-             xmlns:pancakeView="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             xmlns:pancakeView="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView" xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms" xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="AcesApp.Views.PerfilPage"
              Title="perfil">
@@ -61,25 +61,25 @@
 
             <Label Text="{Binding Nome}" Grid.Row="2" FontSize="Medium" HorizontalOptions="Center" ></Label>
             <StackLayout Orientation="Horizontal" Grid.Row="3" HorizontalOptions="Center">
-                <Label Text="Id." FontSize="Small"/>
+                <Label Text="Contrato No." FontSize="Small" TextColor="{StaticResource MainColor}"/>
                 <Label Text="{Binding id}"  FontSize="Small" HorizontalOptions="Center" ></Label>
             </StackLayout>
 
 
             <FlexLayout Grid.Row="4"  Direction="Column" >
 
-                <Label Text="Login" Margin="10,0,10,5" />
+                <Label Text="Login" Margin="10,0,10,5" TextColor="{StaticResource MainColor}" />
                 <Entry Text="{Binding Login}" Placeholder="Login..." HeightRequest="40" VerticalOptions="StartAndExpand" HorizontalOptions="StartAndExpand"  Margin="10"></Entry>
 
-                <Label Text="Email" Margin="10,0,10,5" />
+                <Label Text="Email" Margin="10,0,10,5" TextColor="{StaticResource MainColor}"/>
                 <Entry Text="{Binding Email}" Placeholder="Email..." HeightRequest="40" VerticalOptions="StartAndExpand" HorizontalOptions="StartAndExpand"  Margin="10"></Entry>
 
 
-                <Label Text="Senha" Margin="10,0,10,5" />
+                <Label Text="Senha" Margin="10,0,10,5" TextColor="{StaticResource MainColor}" />
                 <Entry Text="{Binding Senha}" Placeholder="Senha..." HeightRequest="40" VerticalOptions="StartAndExpand" HorizontalOptions="StartAndExpand"  Margin="10"></Entry>
-                <Button Text="Salvar" Margin="10,25,10,10"  Command="{Binding navegarCommand}" HorizontalOptions="StartAndExpand" VerticalOptions="StartAndExpand" BorderRadius = "20" BackgroundColor="#4c0507" TextColor="White"  ></Button>
+                <Button Text="Salvar" Margin="10,25,10,10"  Command="{Binding navegarCommand}" HorizontalOptions="StartAndExpand" VerticalOptions="StartAndExpand" BorderRadius = "20" BackgroundColor="{StaticResource MainColor}" TextColor="White"  ></Button>
 
-                <Button BackgroundColor="Transparent"   Command="{Binding LogoutCommand}" Text="Sair"></Button>
+                <Button BackgroundColor="Transparent"   Command="{Binding LogoutCommand}" Text="Sair" TextColor="{StaticResource MainColor}"></Button>
             </FlexLayout>
 
 

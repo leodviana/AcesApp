@@ -16,7 +16,21 @@ namespace AcesApp.ViewModels
         {
            
         }
-        
+        public override async void OnNavigatedFrom(INavigationParameters parameters)
+        {
+
+        }
+
+        public override async void OnNavigatedTo(INavigationParameters parameters)
+        {
+
+        }
+
+        public override async void OnNavigatingTo(INavigationParameters parameters)
+        {
+
+            // await InitializeAsync();
+        }
 
     }
 }

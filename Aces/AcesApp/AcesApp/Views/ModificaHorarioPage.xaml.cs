@@ -7,6 +7,7 @@ namespace AcesApp.Views
         public ModificaHorarioPage()
         {
             InitializeComponent();
+            Xamarin.Forms.NavigationPage.SetHasBackButton(this, false);
         }
     }
 }

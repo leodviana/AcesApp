@@ -4,5 +4,54 @@
              xmlns:prism="http://prismlibrary.com"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="AcesApp.Views.ModificaHorarioPage">
-  
+
+
+
+<NavigationPage.TitleView>
+
+        <Grid ColumnSpacing="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="{OnPlatform Android='22', iOS='15'}" />
+                <ColumnDefinition Width="30" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="45" />
+
+            </Grid.ColumnDefinitions>
+            <Button
+                Grid.Column="0"
+                BackgroundColor="Transparent"
+                Command="{Binding voltarCommand}"
+                HeightRequest="22"
+                HorizontalOptions="Start"
+                ImageSource="backwhite" />
+            <Label
+                Grid.Column="1"
+                FontSize="Subtitle"
+                HorizontalOptions="Start"
+                
+                TextColor="White"
+                VerticalOptions="Center">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding voltarCommand}" />
+
+
+                </Label.GestureRecognizers>
+            </Label>
+
+            <StackLayout Grid.Column="2">
+                <Label
+                    FontSize="{OnPlatform Android='20',
+                                          iOS='26'}"
+                    HorizontalOptions="CenterAndExpand"
+                    Text="Horarios"
+                    TextColor="White"
+                    VerticalOptions="CenterAndExpand"
+                    VerticalTextAlignment="Center" />
+
+            </StackLayout>
+
+
+        </Grid>
+
+    </NavigationPage.TitleView>
 </ContentPage>

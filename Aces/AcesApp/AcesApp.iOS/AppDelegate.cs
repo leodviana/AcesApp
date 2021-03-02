@@ -23,6 +23,7 @@ namespace AcesApp.iOS
         {
             global::Xamarin.Forms.Forms.Init();
             global::Rg.Plugins.Popup.Popup.Init();
+            FFImageLoading.Forms.Platform.CachedImageRenderer.Init();
             LoadApplication(new App(new iOSInitializer()));
 
             return base.FinishedLaunching(app, options);
