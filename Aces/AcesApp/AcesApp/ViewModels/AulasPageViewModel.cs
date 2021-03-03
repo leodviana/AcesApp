@@ -73,10 +73,11 @@ namespace AcesApp.ViewModels
 
         private async Task MudarHorario(object item)
         {
-            // await PageDialogService.DisplayAlertAsync("app", Selection.nome, "Ok");
+
             var navigationParams = new NavigationParameters();
             navigationParams.Add("aluno", item);
-            await NavigationService.NavigateAsync("ModificaHorarioPage",navigationParams);
+           // await NavigationService.NavigateAsync("ModificaHorarioPage",navigationParams);*/
+            await NavigationService.NavigateAsync("PopMudaHorario", navigationParams, true, true);
             //Selection = null;
         }
 

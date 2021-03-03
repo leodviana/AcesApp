@@ -51,8 +51,7 @@
 
             <controls:Calendar.EventTemplate>
                 <DataTemplate>
-                    <StackLayout 
-                                 >
+                    <StackLayout>
                         <Label HorizontalOptions="Center" FontSize="Large" Text="Aulas" TextColor="{StaticResource MainColor}"/>
                         <BoxView Color="Silver" HeightRequest="2" HorizontalOptions="FillAndExpand"></BoxView>
                         <Grid RowSpacing="0" >
