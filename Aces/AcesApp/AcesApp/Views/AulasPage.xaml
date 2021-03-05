@@ -23,7 +23,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <StackLayout Margin="0,30,0,0">
-            <Label Text="Agendamento" Margin="0,30" FontAttributes="Bold" FontSize="Title" VerticalOptions="Center" HorizontalOptions="Center"  VerticalTextAlignment="Center" TextColor="{StaticResource BackgroundColor}"/>
+            <Label Text="Agendamento" Margin="0,30" FontFamily="Roboto-Black"  FontSize="Title" VerticalOptions="Center" HorizontalOptions="Center"  VerticalTextAlignment="Center" TextColor="{StaticResource BackgroundColor}"/>
             
         </StackLayout>
         <pancake:PancakeView Grid.Row="1"
