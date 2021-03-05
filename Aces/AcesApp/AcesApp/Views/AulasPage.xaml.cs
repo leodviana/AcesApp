@@ -12,12 +12,12 @@ namespace AcesApp.Views
 
         public string GetIcon()
         {
-            return "Email36";
+            return "calendar";
         }
 
         public string GetSelectedIcon()
         {
-            return "Email36";
+            return "calendarblack";
         }
     }
 }

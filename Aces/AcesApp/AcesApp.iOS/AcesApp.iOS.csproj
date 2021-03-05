@@ -179,6 +179,24 @@
     <BundleResource Include="Resources\backwhite.png" />
     <BundleResource Include="Resources\backwhite%402x.png" />
     <BundleResource Include="Resources\backwhite%403x.png" />
+    <BundleResource Include="Resources\calendar.png" />
+    <BundleResource Include="Resources\calendar%402x.png" />
+    <BundleResource Include="Resources\calendar%403x.png" />
+    <BundleResource Include="Resources\calendarblack.png" />
+    <BundleResource Include="Resources\calendarblack%402x.png" />
+    <BundleResource Include="Resources\calendarblack%403x.png" />
+    <BundleResource Include="Resources\profile.png" />
+    <BundleResource Include="Resources\profile%402x.png" />
+    <BundleResource Include="Resources\profile%403x.png" />
+    <BundleResource Include="Resources\profileblack.png" />
+    <BundleResource Include="Resources\profileblack%402x.png" />
+    <BundleResource Include="Resources\profileblack%403x.png" />
+    <BundleResource Include="Resources\ranking.png" />
+    <BundleResource Include="Resources\ranking%402x.png" />
+    <BundleResource Include="Resources\ranking%403x.png" />
+    <BundleResource Include="Resources\rankingblack.png" />
+    <BundleResource Include="Resources\rankingblack%402x.png" />
+    <BundleResource Include="Resources\rankingblack%403x.png" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />

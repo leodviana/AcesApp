@@ -8,10 +8,11 @@ namespace AcesApp.Views
         {
             InitializeComponent();
 
-            
-           
-            Children.Add(new PerfilPage());
+
+            Children.Add(new RankingPage());
             Children.Add(new AulasPage());
+            Children.Add(new PerfilPage());
+            
             //Children.Add(new Localizacao());
 
             //if (Device.RuntimePlatform == Device.iOS)

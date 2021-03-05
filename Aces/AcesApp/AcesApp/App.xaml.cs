@@ -89,6 +89,7 @@ namespace AcesApp
             containerRegistry.RegisterForNavigation<MainPage, MainPageViewModel>();
             containerRegistry.RegisterForNavigation<LoginPage, LoginPageViewModel>();
             containerRegistry.RegisterForNavigation<PopupMensagemPage, PopMensagemViewModel>();
+            containerRegistry.RegisterForNavigation<RankingPage, RankingPageViewModel>();
             containerRegistry.RegisterForNavigation<PopMudaHorario, PopMudaHorarioViewModel>();
             containerRegistry.RegisterSingleton<IApiService, ApiService>();
 

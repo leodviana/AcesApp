@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="http://prismlibrary.com" 
-             xmlns:controls="clr-namespace:Xamarin.Plugin.Calendar.Controls;assembly=Xamarin.Plugin.Calendar"
+             xmlns:controls="clr-namespace:Xamarin.Plugin.Calendar.Controls;assembly=Xamarin.Plugin.Calendar" xmlns:pancake="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
              prism:ViewModelLocator.AutowireViewModel="True"
             x:Name="simpleCalendarPage"
              x:Class="AcesApp.Views.AulasPage">
@@ -17,7 +17,25 @@
             </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
-    <ScrollView>
+     <Grid BackgroundColor="{StaticResource MainColor}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <StackLayout Margin="0,30,0,0">
+            <Label Text="Agendamento" Margin="0,30" FontAttributes="Bold" FontSize="Title" VerticalOptions="Center" HorizontalOptions="Center"  VerticalTextAlignment="Center" TextColor="{StaticResource BackgroundColor}"/>
+            
+        </StackLayout>
+        <pancake:PancakeView Grid.Row="1"
+           
+           
+           
+           BackgroundColor="{StaticResource BackgroundColor}"
+           CornerRadius="25,25,0,0"
+           HasShadow="True"
+           HeightRequest="200"
+         >
+          <ScrollView VerticalScrollBarVisibility="Never">
 
         <controls:Calendar 
         
@@ -91,4 +109,8 @@
 
         </controls:Calendar>
     </ScrollView>
+
+        </pancake:PancakeView>
+    </Grid>
+    
 </ContentPage>
