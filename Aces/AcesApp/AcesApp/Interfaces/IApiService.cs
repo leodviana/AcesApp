@@ -12,5 +12,7 @@ namespace AcesApp.Interfaces
         Task<Response> getUsuario(Usuario usuario);
 
         Task<Response> getEventos(Events evento);
+
+        Task<Response> getEventosfree(Events evento);
     }
 }

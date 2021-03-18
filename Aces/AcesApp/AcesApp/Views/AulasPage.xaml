@@ -69,41 +69,15 @@
 
             <controls:Calendar.EventTemplate>
                 <DataTemplate>
-                    <StackLayout>
-                        <Label HorizontalOptions="Center" FontSize="Large" Text="Aulas" TextColor="{StaticResource MainColor}"/>
-                        <BoxView Color="Silver" HeightRequest="2" HorizontalOptions="FillAndExpand"></BoxView>
-                        <Grid RowSpacing="0" >
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="2*"/>
-                                <ColumnDefinition Width="1*"/>
-                            </Grid.ColumnDefinitions>
+                    <FlexLayout Padding="10,0,0,10" Direction="Row" JustifyContent="SpaceBetween">
+                        <BoxView HeightRequest="20" WidthRequest="20" CornerRadius="10" Color="{StaticResource stagendado}"></BoxView>
+                        <Label  VerticalTextAlignment="Center" Text="{Binding Nome}" FontAttributes="Bold" FontSize="Medium" />
+                        <Label  VerticalTextAlignment="Center" Text="{Binding Descricao}" FontAttributes="Bold" FontSize="Small" LineBreakMode="WordWrap" />
+                        <Button HeightRequest="20" Command="{Binding BindingContext.MudarHorarioCommand, Source={x:Reference simpleCalendarPage}}" CommandParameter="{Binding .}" ImageSource="password36.png" >
 
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="50"/>
-                                <RowDefinition Height="50"/>
-                                <RowDefinition Height="50"/>
-                               
-                            </Grid.RowDefinitions>
-                            <Label VerticalTextAlignment="Center"  
-                            Text="{Binding Nome}"
-                                    FontAttributes="Bold"
-                             FontSize="Medium" />
-                            <Label Grid.Row="1" Grid.Column="0" 
-                    Text="{Binding Descricao}"
-                    FontSize="Small"
-                    LineBreakMode="WordWrap" />
-                            <Button Command="{Binding BindingContext.MudarHorarioCommand, Source={x:Reference simpleCalendarPage}}" CommandParameter="{Binding .}"  Grid.Row="0" Grid.Column="1" Grid.RowSpan="2"  ImageSource="password36.png" HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand" >
-                                
-                            </Button>
-                            
-
-                            <Label Text="Status" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" HorizontalOptions="Center"></Label>
-                        </Grid>
-                        
-                      
-                            <BoxView Color="Silver" HeightRequest="2" HorizontalOptions="FillAndExpand"></BoxView>
-
-                    </StackLayout>
+                        </Button>
+                     
+                    </FlexLayout>
                 </DataTemplate>
             </controls:Calendar.EventTemplate>
 

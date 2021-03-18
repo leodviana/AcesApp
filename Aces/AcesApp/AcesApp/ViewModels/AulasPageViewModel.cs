@@ -76,8 +76,8 @@ namespace AcesApp.ViewModels
 
             var navigationParams = new NavigationParameters();
             navigationParams.Add("aluno", item);
-           // await NavigationService.NavigateAsync("ModificaHorarioPage",navigationParams);*/
-            await NavigationService.NavigateAsync("PopMudaHorario", navigationParams, true, true);
+            await NavigationService.NavigateAsync("ModificaHorarioPage",navigationParams);
+            //await NavigationService.NavigateAsync("PopMudaHorario", navigationParams, true, true);
             //Selection = null;
         }
 
@@ -153,7 +153,9 @@ namespace AcesApp.ViewModels
             //var lista_eventos = new List<Events>();
             var lista_eventos = (List<Events>)response.Result;
             /*  Events = new EventCollection();*/
+           
             Events.Clear();
+            
             foreach (var item in lista_eventos)
             {
 

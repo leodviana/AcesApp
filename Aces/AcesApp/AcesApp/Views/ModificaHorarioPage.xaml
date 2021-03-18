@@ -1,57 +1,90 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:prism="http://prismlibrary.com"
+             xmlns:prism="http://prismlibrary.com" xmlns:pancake="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView" xmlns:controls="clr-namespace:Xamarin.Plugin.Calendar.Controls;assembly=Xamarin.Plugin.Calendar"
              prism:ViewModelLocator.AutowireViewModel="True"
+              x:Name="simpleCalendarPage"
              x:Class="AcesApp.Views.ModificaHorarioPage">
 
+     <ContentPage.Resources>
+        <ResourceDictionary>
+
+            <Style x:Key="daysTitleLabelStyle" TargetType="Label">
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="FontSize" Value="15" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
 
 
-<NavigationPage.TitleView>
+   
+     <Grid BackgroundColor="{StaticResource MainColor}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <StackLayout Margin="0,30,0,0">
+            <Label Text="Horários Disponiveis" Margin="0,30" FontFamily="Roboto-Black"  FontSize="Title" VerticalOptions="Center" HorizontalOptions="Center"  VerticalTextAlignment="Center" TextColor="{StaticResource BackgroundColor}"/>
+            
+        </StackLayout>
+        <pancake:PancakeView Grid.Row="1"
+           
+           
+           
+           BackgroundColor="{StaticResource BackgroundColor}"
+           CornerRadius="25,25,0,0"
+           HasShadow="True"
+           HeightRequest="200"
+         >
+          <ScrollView VerticalScrollBarVisibility="Never">
 
-        <Grid ColumnSpacing="0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="{OnPlatform Android='22', iOS='15'}" />
-                <ColumnDefinition Width="30" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="45" />
+        <controls:Calendar 
+        
+        Margin="{OnPlatform Android='0', iOS='0,30'}"
+        Padding="10,0,10,0"
+        AnimateCalendar="True"
+        DayViewCornerRadius="3"
+        DayViewSize="40"
+        DaysTitleColor="{StaticResource MainColor}"
+        DaysTitleHeight="40"
+        DaysTitleLabelStyle="{StaticResource daysTitleLabelStyle}"
+        DeselectedDayTextColor="Blue"
+        DisableSwipeDetection="False"
+        EventIndicatorColor="Red"
+        EventIndicatorSelectedColor="White"
+        Events="{Binding Events}"
+        Culture="{Binding Culture}"
+        HorizontalOptions="FillAndExpand"
+        MonthLabelColor="{StaticResource MainColor}"
+        OtherMonthDayColor="Gray"
+        SelectedDateColor="{StaticResource MainColor}"
+        SelectedDateTextFormat="ddd, dd MMM yyyy"
+        SelectedDayBackgroundColor="DarkCyan"
+        SelectedDayTextColor="Cyan"
+        SwipeToChangeMonthEnabled="False"
+        SwipeUpToHideEnabled="False"
+        TodayFillColor="Silver"
+        TodayOutlineColor="Blue"
+        VerticalOptions="FillAndExpand"
+        YearLabelColor="{StaticResource MainColor}">
 
-            </Grid.ColumnDefinitions>
-            <Button
-                Grid.Column="0"
-                BackgroundColor="Transparent"
-                Command="{Binding voltarCommand}"
-                HeightRequest="22"
-                HorizontalOptions="Start"
-                ImageSource="backwhite" />
-            <Label
-                Grid.Column="1"
-                FontSize="Subtitle"
-                HorizontalOptions="Start"
-                
-                TextColor="White"
-                VerticalOptions="Center">
-                <Label.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding voltarCommand}" />
+            <controls:Calendar.EventTemplate>
+                <DataTemplate>
+                    <FlexLayout Padding="10,5,5,10" Direction="Row" JustifyContent="SpaceBetween">
+                        <BoxView HeightRequest="20" WidthRequest="20" CornerRadius="10" Color="{StaticResource stlivre}"></BoxView>
+                        <Label  VerticalTextAlignment="Center" Text="{Binding Start,StringFormat='{0:dd/MM/yyyy HH:mm:ss}'}" FontAttributes="Bold" FontSize="Small" />
+                        <Label  VerticalTextAlignment="Center" Text="{Binding nome_professor}" FontAttributes="Bold" FontSize="Small" LineBreakMode="WordWrap" />
+                        <Button HeightRequest="20" Command="{Binding BindingContext.MudarHorarioCommand, Source={x:Reference simpleCalendarPage}}" CommandParameter="{Binding .}" ImageSource="password36.png"  HorizontalOptions="End">
 
+                        </Button>
+                     
+                    </FlexLayout>
+                </DataTemplate>
+            </controls:Calendar.EventTemplate>
 
-                </Label.GestureRecognizers>
-            </Label>
+        </controls:Calendar>
+    </ScrollView>
 
-            <StackLayout Grid.Column="2">
-                <Label
-                    FontSize="{OnPlatform Android='20',
-                                          iOS='26'}"
-                    HorizontalOptions="CenterAndExpand"
-                    Text="Horarios"
-                    TextColor="White"
-                    VerticalOptions="CenterAndExpand"
-                    VerticalTextAlignment="Center" />
-
-            </StackLayout>
-
-
-        </Grid>
-
-    </NavigationPage.TitleView>
+        </pancake:PancakeView>
+    </Grid>
 </ContentPage>
