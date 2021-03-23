@@ -14,5 +14,7 @@ namespace AcesApp.Interfaces
         Task<Response> getEventos(Events evento);
 
         Task<Response> getEventosfree(Events evento);
+
+        Task<Response> getprofessores(Events evento);
     }
 }

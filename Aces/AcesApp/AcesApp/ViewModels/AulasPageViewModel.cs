@@ -7,6 +7,7 @@ using Prism.Navigation;
 using Prism.Services;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
@@ -24,7 +25,7 @@ namespace AcesApp.ViewModels
         IApiService apiService;
         private readonly IUserDialogs _userDialogs;
         public EventCollection Events { get; set; }
-
+        public List<Professor> Professores { get; set; }
         private CultureInfo _culture = CultureInfo.InvariantCulture;
         public CultureInfo Culture
         {
@@ -55,12 +56,25 @@ namespace AcesApp.ViewModels
 
             }
         }
+
+        private Professor professor;
+
+        public Professor Professor
+        {
+            get { return professor; }
+            set
+            {
+                SetProperty(ref professor, value);
+
+            }
+        }
         public AulasPageViewModel(INavigationService navigationService, 
             IPageDialogService pageDialogService, IApiService ApiService , IUserDialogs userDialogs) : base(navigationService, pageDialogService)
         {
              _userDialogs = userDialogs;
             apiService = ApiService;
             Events = new EventCollection();
+           // Professores = new ObservableCollection<Professor>();
             inicializa = false;
 
             IsActiveChanged += HandleIsActiveTrue;
@@ -91,7 +105,13 @@ namespace AcesApp.ViewModels
         {
             if (IsActive == false) return;
             if (!inicializa)
+            {
                 await CarregarEventosAsync();
+                //saber se e aqui mesmo pois vai oura vez no servidor 
+               // await CarregaProfessoresAsync();
+
+            }
+                
 
         }
 
@@ -114,6 +134,49 @@ namespace AcesApp.ViewModels
         {
             IsActiveChanged -= HandleIsActiveTrue;
             IsActiveChanged -= HandleIsActiveFalse;
+        }
+
+        private async Task CarregaProfessoresAsync()
+        {
+            var parametro = new Events();
+            
+            Culture = CultureInfo.CreateSpecificCulture("pt-BR");
+            var current = Connectivity.NetworkAccess;
+
+            var response = new Response();
+            IsRunning = true;
+
+            _userDialogs.ShowLoading("Carregando", MaskType.Black);
+            if (current == NetworkAccess.Internet)
+
+            {
+                response = await apiService.getprofessores(parametro);
+            }
+            else
+            {
+                _userDialogs.HideLoading();
+                await exibeErro("Dispositivo não está conectado a internet!");
+
+                IsRunning = false;
+                return;
+            }
+            IsRunning = false;
+
+            if (!response.IsSuccess)
+            {
+                _userDialogs.HideLoading();
+                await exibeErro(response.Message);
+
+                return;
+            }
+            //var lista_eventos = new List<Events>();
+            var lista_eventos = (List<Professor>)response.Result;
+            /*  Events = new EventCollection();*/
+            Professores = lista_eventos;
+
+
+            _userDialogs.HideLoading();
+
         }
 
 

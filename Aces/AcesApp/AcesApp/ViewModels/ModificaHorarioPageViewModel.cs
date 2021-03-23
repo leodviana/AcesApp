@@ -57,6 +57,17 @@ namespace AcesApp.ViewModels
         }
 
         private ICommand _voltar;
+
+        public ICommand voltarCommand
+        {
+            get
+            {
+                return _voltar ?? (_voltar = new Command(objeto =>
+                {
+                    NavigationService.GoBackAsync();
+                }));
+            }
+        }
         public ModificaHorarioPageViewModel(INavigationService navigationService,
             IPageDialogService pageDialogService, IApiService ApiService, IUserDialogs userDialogs) : base(navigationService, pageDialogService)
         {
@@ -73,6 +84,16 @@ namespace AcesApp.ViewModels
         {
             if (IsActive == true) return;
 
+        }
+        public ICommand MudarHorarioCommand => new Command(async (item) => await MudarHorario(item));
+        private async Task MudarHorario(object item)
+        {
+
+            var navigationParams = new NavigationParameters();
+            navigationParams.Add("aluno", item);
+            //await NavigationService.NavigateAsync("ModificaHorarioPage", navigationParams);
+            await NavigationService.NavigateAsync("PopMudaHorario", navigationParams, true, true);
+            //Selection = null;
         }
 
         private async void HandleIsActiveTrue(object sender, EventArgs e)
@@ -188,19 +209,6 @@ namespace AcesApp.ViewModels
         }
 
 
-        public ICommand voltarCommand
-        {
-            get
-            {
-                return _voltar ?? (_voltar = new Command(objeto =>
-                {
-
-
-                    NavigationService.GoBackAsync();
-
-
-                }));
-            }
-        }
+      
     }
 }
