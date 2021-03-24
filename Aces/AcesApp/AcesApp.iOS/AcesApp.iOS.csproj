@@ -201,6 +201,18 @@
     <BundleResource Include="Resources\rankingblack%402x.png" />
     <BundleResource Include="Resources\rankingblack%403x.png" />
     <BundleResource Include="Resources\cancelwhite.png" />
+    <BundleResource Include="Resources\tenista.png" />
+    <BundleResource Include="Resources\tenista%402x.png" />
+    <BundleResource Include="Resources\tenista%403x.png" />
+    <BundleResource Include="Resources\tenista2.png" />
+    <BundleResource Include="Resources\tenista2%402x.png" />
+    <BundleResource Include="Resources\tenista2%403x.png" />
+    <BundleResource Include="Resources\cam.png" />
+    <BundleResource Include="Resources\cam%402x.png" />
+    <BundleResource Include="Resources\cam%403x.png" />
+    <BundleResource Include="Resources\edit.png" />
+    <BundleResource Include="Resources\edit%402x.png" />
+    <BundleResource Include="Resources\edit%403x.png" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
