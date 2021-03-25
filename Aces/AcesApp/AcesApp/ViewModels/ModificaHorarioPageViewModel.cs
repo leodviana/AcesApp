@@ -25,6 +25,7 @@ namespace AcesApp.ViewModels
         private readonly IUserDialogs _userDialogs;
         public EventCollection Events { get; set; }
 
+        public Events _horarioInicial;
         private CultureInfo _culture = CultureInfo.InvariantCulture;
         public CultureInfo Culture
         {
@@ -90,7 +91,8 @@ namespace AcesApp.ViewModels
         {
 
             var navigationParams = new NavigationParameters();
-            navigationParams.Add("aluno", item);
+            navigationParams.Add("final", item);
+            navigationParams.Add("inicial", _horarioInicial);
             //await NavigationService.NavigateAsync("ModificaHorarioPage", navigationParams);
             await NavigationService.NavigateAsync("PopMudaHorario", navigationParams, true, true);
             //Selection = null;
@@ -202,6 +204,9 @@ namespace AcesApp.ViewModels
 
         public override async void OnNavigatedTo(INavigationParameters parameters)
         {
+            if (_horarioInicial==null)
+               _horarioInicial = (Events)parameters["aluno"];
+
            /* var navigationMode = parameters.GetNavigationMode();
 
             if (navigationMode != Prism.Navigation.NavigationMode.Back)

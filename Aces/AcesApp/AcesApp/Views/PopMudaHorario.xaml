@@ -62,10 +62,21 @@
               <Label 
                 HorizontalOptions="CenterAndExpand"
                 HorizontalTextAlignment="Center"
-                Text="{Binding Mensagem}"
+                Text="{Binding inicio}"
                 TextColor="{StaticResource MainColor}"
                 VerticalOptions="CenterAndExpand"
                >
+
+
+              </Label>
+                <Label 
+                HorizontalOptions="CenterAndExpand"
+                HorizontalTextAlignment="Center"
+                Text="{Binding final}"
+                TextColor="{StaticResource MainColor}"
+                VerticalOptions="CenterAndExpand"
+               >
+
 
               </Label>
               

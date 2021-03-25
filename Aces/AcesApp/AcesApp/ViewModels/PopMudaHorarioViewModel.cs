@@ -18,7 +18,9 @@ namespace AcesApp.ViewModels
         private ICommand _refresh;
         IApiService apiService;
         private readonly IUserDialogs _userDialogs;
-        
+        public Events _horarioInicial;
+        public Events _horarioFinal;
+
         // public Command voltarCommand; 
         public PopMudaHorarioViewModel(INavigationService navigationService, IPageDialogService pageDialogService, IUserDialogs userDialogs, IApiService ApiService) : base(navigationService, pageDialogService)
         {
@@ -29,12 +31,32 @@ namespace AcesApp.ViewModels
            
         }
 
-        
 
-        
-        
+        private string _inicio;
+        public string inicio
+        {
+            get { return _inicio; }
+            set
+            {
+                SetProperty(ref _inicio, value);
 
-       
+            }
+        }
+
+        private string _final;
+        public string final
+        {
+            get { return _final; }
+            set
+            {
+                SetProperty(ref _final, value);
+
+            }
+        }
+
+
+
+
 
         public override void OnNavigatedFrom(INavigationParameters parameters)
         {
@@ -43,7 +65,11 @@ namespace AcesApp.ViewModels
 
         public override void OnNavigatedTo(INavigationParameters parameters)
         {
-           
+            _horarioInicial = (Events)parameters["inicial"];
+            _horarioFinal = (Events)parameters["final"];
+
+            inicio = _horarioInicial.EventID + " " + _horarioInicial.descricao;
+            final = _horarioFinal.EventID + " " + _horarioFinal.descricao;
         }
 
 

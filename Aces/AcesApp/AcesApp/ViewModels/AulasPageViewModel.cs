@@ -90,6 +90,7 @@ namespace AcesApp.ViewModels
 
             var navigationParams = new NavigationParameters();
             navigationParams.Add("aluno", item);
+            
             await NavigationService.NavigateAsync("ModificaHorarioPage",navigationParams);
             //await NavigationService.NavigateAsync("PopMudaHorario", navigationParams, true, true);
             //Selection = null;
@@ -218,15 +219,27 @@ namespace AcesApp.ViewModels
             /*  Events = new EventCollection();*/
            
             Events.Clear();
-            
-            foreach (var item in lista_eventos)
+
+            Events.Clear();
+            var groupedlist = lista_eventos
+               .GroupBy(x => Convert.ToDateTime(x.Start).ToString("d"))
+               .Select(grp => grp.ToList())
+               .ToList();
+            foreach (var item in groupedlist)
+            {
+                var datakey = Convert.ToDateTime(item[0].Start);
+                var converteditem = item.ToList();
+                Events.Add(datakey, converteditem);
+            }
+
+           /* foreach (var item in lista_eventos)
             {
 
                 var horario = (item.Start.Hour.ToString().Length == 1 ? "0" : "") + item.Start.Hour.ToString() +":" +item.Start.Minute.ToString()+ (item.Start.Minute.ToString().Length == 1 ? "0" : "") + " - " + (item.End.Hour.ToString().Length == 1 ? "0" : "") + item.End.Hour.ToString()+ ":" +item.End.Minute.ToString() + (item.End.Minute.ToString().Length==1?"0":"");
                 var lista_eventos_preenchida = GeraLista(item.nome_professor.ToString(), horario);
                 Events.Add(item.Start, lista_eventos_preenchida);
 
-            }
+            }*/
             _userDialogs.HideLoading();
 
         }

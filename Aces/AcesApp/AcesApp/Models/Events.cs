@@ -20,5 +20,6 @@ namespace AcesApp.Models
        // [NotMapped]
         public int? professor { get; set; }
         public string nome_professor { get; set; }
+        public string  descricao => (Start.Hour.ToString().Length == 1 ? "0" : "") + Start.Hour.ToString() + ":" + Start.Minute.ToString() + (Start.Minute.ToString().Length == 1 ? "0" : "") + " - " + (End.Hour.ToString().Length == 1 ? "0" : "") + End.Hour.ToString() + ":" + End.Minute.ToString() + (End.Minute.ToString().Length == 1 ? "0" : "");
     }
 }
