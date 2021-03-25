@@ -115,13 +115,13 @@
 
             <controls:Calendar.EventTemplate>
                 <DataTemplate>
-                    <FlexLayout Padding="10,5,5,10" Direction="Row" JustifyContent="SpaceBetween">
+                    <FlexLayout Padding="10,10,5,10" Direction="Row" JustifyContent="SpaceBetween">
                         <BoxView HeightRequest="20" WidthRequest="20" CornerRadius="10" Color="{StaticResource stlivre}"></BoxView>
                         <Label  VerticalTextAlignment="Center" Text="{Binding Start,StringFormat='{0:dd/MM/yyyy HH:mm:ss}'}" FontAttributes="Bold" FontSize="Small" />
                         <Label  VerticalTextAlignment="Center" Text="{Binding nome_professor}" FontAttributes="Bold" FontSize="Small" LineBreakMode="WordWrap" />
-                        <Button HeightRequest="20" Command="{Binding BindingContext.MudarHorarioCommand, Source={x:Reference simpleCalendarPage}}" CommandParameter="{Binding .}" ImageSource="edit"  HorizontalOptions="End">
+                        <ImageButton BackgroundColor="Transparent" HeightRequest="25" Command="{Binding BindingContext.MudarHorarioCommand, Source={x:Reference simpleCalendarPage}}" CommandParameter="{Binding .}" Source="edit"  HorizontalOptions="End">
 
-                        </Button>
+                        </ImageButton>
                      
                     </FlexLayout>
                 </DataTemplate>

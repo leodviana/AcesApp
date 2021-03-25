@@ -69,14 +69,14 @@
               <controls:Calendar.EventTemplate>
                 <DataTemplate>
                     
-                    <StackLayout>
+                    <StackLayout Margin="10,10">
                       <FlexLayout Padding="10,0,0,10" Direction="Row" JustifyContent="SpaceBetween" AlignItems="Center">
                         <BoxView HeightRequest="20" WidthRequest="20" CornerRadius="10" Color="{StaticResource stagendado}"></BoxView>
-                        <Label  VerticalTextAlignment="Center" Text="{Binding Nome}" FontAttributes="Bold" FontSize="Medium" />
+                        <Label   VerticalTextAlignment="Center" Text="{Binding Nome}" FontAttributes="Bold" FontSize="Medium" />
                         <Label  VerticalTextAlignment="Center" Text="{Binding Descricao}" FontAttributes="Bold" FontSize="Small" LineBreakMode="WordWrap" />
-                        <Button HeightRequest="20" Command="{Binding BindingContext.MudarHorarioCommand, Source={x:Reference simpleCalendarPage}}" CommandParameter="{Binding .}" ImageSource="edit" >
+                        <ImageButton BackgroundColor="Transparent" HeightRequest="25"  Command="{Binding BindingContext.MudarHorarioCommand, Source={x:Reference simpleCalendarPage}}" CommandParameter="{Binding .}" Source="edit" >
 
-                        </Button>
+                        </ImageButton>
                         
                       </FlexLayout>
                      
