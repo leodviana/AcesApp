@@ -68,13 +68,29 @@ namespace AcesApp.ViewModels
             _horarioInicial = (Events)parameters["inicial"];
             _horarioFinal = (Events)parameters["final"];
 
-            inicio = _horarioInicial.EventID + " " + _horarioInicial.descricao;
-            final = _horarioFinal.EventID + " " + _horarioFinal.descricao;
+            inicio = _horarioInicial.EventID + " " + _horarioInicial.descricao + " " + _horarioInicial.Start;
+            final = _horarioFinal.EventID + " " + _horarioFinal.descricao+ " " + _horarioFinal.Start;
         }
 
 
 
         public ICommand voltarCommand
+        {
+            get
+            {
+                return _refresh ?? (_refresh = new Command(async objeto =>
+                {
+
+
+
+                    await NavigationService.GoBackAsync();
+
+
+                }));
+            }
+        }
+
+        public ICommand AbriprofessorCommand
         {
             get
             {

@@ -91,6 +91,7 @@ namespace AcesApp
             containerRegistry.RegisterForNavigation<PopupMensagemPage, PopMensagemViewModel>();
             containerRegistry.RegisterForNavigation<RankingPage, RankingPageViewModel>();
             containerRegistry.RegisterForNavigation<PopMudaHorario, PopMudaHorarioViewModel>();
+            containerRegistry.RegisterForNavigation<ProfessorPage, ProfessorPageViewModel>();
             containerRegistry.RegisterSingleton<IApiService, ApiService>();
 
             containerRegistry.RegisterForNavigation<AulasPage, AulasPageViewModel>();

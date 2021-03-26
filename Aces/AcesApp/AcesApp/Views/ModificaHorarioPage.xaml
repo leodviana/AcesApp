@@ -24,7 +24,7 @@
                 <ColumnDefinition Width="{OnPlatform Android='22', iOS='15'}" />
                 <ColumnDefinition Width="30" />
                 <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="45" />
+                <ColumnDefinition Width ="38"/>
 
             </Grid.ColumnDefinitions>
             <Button
@@ -48,7 +48,7 @@
                 </Label.GestureRecognizers>
             </Label>
 
-            <StackLayout Grid.Column="2">
+            <StackLayout Grid.Column="2" Margin="0,0,10,0" HorizontalOptions="Center">
                 <Label
                     FontSize="{OnPlatform Android='20',
                                           iOS='26'}"
@@ -59,8 +59,17 @@
                     FontFamily="Roboto-Black"
                     VerticalTextAlignment="Center" />
 
-            </StackLayout>
+               
 
+            </StackLayout>
+             <ImageButton
+                
+                Grid.Column="3"
+                BackgroundColor="Transparent"
+                Command="{Binding ProfessorCommand}"
+                HeightRequest="35"
+                HorizontalOptions="End"
+                Source="profileblack" />
 
         </Grid>
         

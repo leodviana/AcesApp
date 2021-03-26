@@ -213,7 +213,15 @@ namespace AcesApp.ViewModels
                 Task.Run(() => InitializeAsync()).ConfigureAwait(false);*/
         }
 
+        public ICommand ProfessorCommand => new Command(async () => await ProfessorHorario());
+        private async Task ProfessorHorario()
+        {
 
-      
+
+            await NavigationService.NavigateAsync("ProfessorPage", null, true, true);
+            //Selection = null;
+        }
+
+
     }
 }
