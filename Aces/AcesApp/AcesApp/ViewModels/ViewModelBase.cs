@@ -4,8 +4,7 @@ using Prism;
 using Prism.Mvvm;
 using Prism.Navigation;
 using Prism.Services;
-
-
+using Xamarin.Essentials;
 
 namespace AcesApp.ViewModels
 {
@@ -46,6 +45,19 @@ namespace AcesApp.ViewModels
         public virtual void Initialize(INavigationParameters parameters)
         {
 
+        }
+
+        public static bool InternetConnectivity()
+        {
+
+            var current = Connectivity.NetworkAccess;
+
+            if (current == NetworkAccess.Internet)
+            {
+                return true;
+            }
+
+            return false;
         }
 
         public virtual void OnNavigatedFrom(INavigationParameters parameters)

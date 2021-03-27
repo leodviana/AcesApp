@@ -26,6 +26,7 @@ namespace AcesApp.ViewModels
         public EventCollection Events { get; set; }
 
         public Events _horarioInicial;
+        public Professor _professor;
         private CultureInfo _culture = CultureInfo.InvariantCulture;
         public CultureInfo Culture
         {
@@ -130,8 +131,12 @@ namespace AcesApp.ViewModels
 
         private async Task CarregarEventosAsync()
         {
+
             var parametro = new Events();
-            parametro.professor = App.usuariologado.id_professor;
+            if (_professor == null)
+                parametro.professor = App.usuariologado.id_professor;
+            else
+                parametro.professor = _professor.id_grldentista;
             parametro.Start = DateTime.Now;
             Culture = CultureInfo.CreateSpecificCulture("pt-BR");
             var current = Connectivity.NetworkAccess;
@@ -163,6 +168,7 @@ namespace AcesApp.ViewModels
                 return;
             }
             //var lista_eventos = new List<Events>();
+
             var lista_eventos = (List<Events>)response.Result;
             /*  Events = new EventCollection();*/
             Events.Clear();
@@ -204,9 +210,18 @@ namespace AcesApp.ViewModels
 
         public override async void OnNavigatedTo(INavigationParameters parameters)
         {
-            if (_horarioInicial==null)
-               _horarioInicial = (Events)parameters["aluno"];
+            if (_horarioInicial == null)
+                _horarioInicial = (Events)parameters["aluno"];
 
+            //if (parameters.)
+            //if (_professor == null)
+           // {
+                
+                
+                _professor = (Professor)parameters["professor"];
+                await CarregarEventosAsync();
+            //}
+                
            /* var navigationMode = parameters.GetNavigationMode();
 
             if (navigationMode != Prism.Navigation.NavigationMode.Back)

@@ -90,20 +90,7 @@ namespace AcesApp.ViewModels
             }
         }
 
-        public ICommand AbriprofessorCommand
-        {
-            get
-            {
-                return _refresh ?? (_refresh = new Command(async objeto =>
-                {
-
-
-
-                    await NavigationService.GoBackAsync();
-
-
-                }));
-            }
-        }
+        
+        
     }
 }
