@@ -18,7 +18,9 @@ namespace AcesApp.ViewModels
         private ICommand _refresh;
         IApiService apiService;
         private readonly IUserDialogs _userDialogs;
-        public Events _horarioInicial;
+        public ObservableCollection<Events> lsthorarioInicial { get; set; }
+        public ObservableCollection<Events> lsthorarioFinal { get; set; }
+        public Events _horarioInicial { get; set; }
         public Events _horarioFinal;
 
         // public Command voltarCommand; 
@@ -27,8 +29,10 @@ namespace AcesApp.ViewModels
             
             _userDialogs = userDialogs;
             apiService = ApiService;
-           // Professores = new List<Professor>();
-           
+            lsthorarioInicial = new ObservableCollection<Events>();
+            lsthorarioFinal = new ObservableCollection<Events>();
+            // Professores = new List<Professor>();
+
         }
 
 
@@ -67,9 +71,8 @@ namespace AcesApp.ViewModels
         {
             _horarioInicial = (Events)parameters["inicial"];
             _horarioFinal = (Events)parameters["final"];
-
-            inicio = _horarioInicial.EventID + " " + _horarioInicial.descricao + " " + _horarioInicial.Start;
-            final = _horarioFinal.EventID + " " + _horarioFinal.descricao+ " " + _horarioFinal.Start;
+            lsthorarioInicial.Add(_horarioInicial);
+            lsthorarioFinal.Add(_horarioFinal);
         }
 
 

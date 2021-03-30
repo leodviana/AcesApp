@@ -70,7 +70,7 @@
                 <DataTemplate>
                     
                     <StackLayout Margin="0,10">
-                      <FlexLayout Padding="0,0,0,10" Direction="Row" JustifyContent="SpaceBetween" AlignItems="Center">
+                      <FlexLayout  Padding="0,0,0,10" Direction="Row" JustifyContent="SpaceBetween" AlignItems="Center">
                         <BoxView HeightRequest="20" WidthRequest="20" CornerRadius="10" Color="{StaticResource stagendado}"></BoxView>
                         <Label   VerticalTextAlignment="Center" Text="{Binding nome_professor}" FontAttributes="Bold" FontSize="Medium" />
                         <Label  VerticalTextAlignment="Center" Text="{Binding descricao,StringFormat='{0:dd/MM/yyyy HH:mm:ss}'}" FontAttributes="Bold" FontSize="Small" LineBreakMode="WordWrap" />

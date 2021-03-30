@@ -65,17 +65,28 @@
                       <Frame HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"  Margin="10,12,10,12" >
 
                                 <StackLayout   HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="5,10" Margin="0,15,0,15">
+                                    <Label Text="Horario Inicial" HorizontalOptions="Center"></Label>
                                     <BoxView  Color="LightGray" HeightRequest="2" HorizontalOptions="FillAndExpand" ></BoxView>
-                                     <Label 
-                                           HorizontalOptions="CenterAndExpand"
-                                           HorizontalTextAlignment="Center"
-                                           Text="{Binding inicio}"
-                                           TextColor="{StaticResource MainColor}"
-                                            VerticalOptions="CenterAndExpand"
-                                        >
-
-
-                                        </Label>
+                                      
+                                      <FlexLayout  BindableLayout.ItemsSource="{Binding lsthorarioInicial}" Padding="0,0,0,10" Direction="Row" JustifyContent="SpaceBetween" AlignItems="Center">
+                                          <BindableLayout.ItemTemplate>
+                                              <DataTemplate>
+                                                  <StackLayout Orientation="Horizontal">
+                                                     <BoxView HeightRequest="20" WidthRequest="20" CornerRadius="10" Color="{StaticResource stagendado}"></BoxView>
+                                                      <Label  VerticalTextAlignment="Center" Text="{Binding data_inicio,StringFormat='{0:dd/MM/yyyy}'}" FontAttributes="Bold" FontSize="Small" LineBreakMode="TailTruncation" />
+                                                      <Label  VerticalTextAlignment="Center" Text="{Binding descricao,StringFormat='{0:dd/MM/yyyy HH:mm:ss}'}" FontAttributes="Bold" FontSize="Small" LineBreakMode="TailTruncation" />
+                                                      <Label   VerticalTextAlignment="Center" Text="{Binding nome_professor}" FontAttributes="Bold" FontSize="Medium" />
+                                                     
+                                                      
+                        
+                                                  </StackLayout>
+                                               
+                                              </DataTemplate>
+                                             
+                                          </BindableLayout.ItemTemplate>
+                                         
+                        
+                                      </FlexLayout> 
                                     <BoxView  Color="LightGray" HeightRequest="2" HorizontalOptions="FillAndExpand"></BoxView>
                                     
 
@@ -85,24 +96,32 @@
                        <Frame HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"  Margin="10,12,10,12" >
 
                            <StackLayout   HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="5,10" Margin="0,15,0,15">
+                                     <Label Text="Horario Final" HorizontalOptions="Center"></Label>
                                     <BoxView  Color="LightGray" HeightRequest="2" HorizontalOptions="FillAndExpand" ></BoxView>
-                                      <Label 
-                                        HorizontalOptions="CenterAndExpand"
-                                        HorizontalTextAlignment="Center"
-                                        Text="{Binding final}"
-                                        TextColor="{StaticResource MainColor}"
-                                        VerticalOptions="CenterAndExpand"
-                                      >
-
-
-                                      </Label>
+                                      <FlexLayout  BindableLayout.ItemsSource="{Binding lsthorarioFinal}" Padding="0,0,0,10" Direction="Row" JustifyContent="SpaceBetween" AlignItems="Center">
+                                          <BindableLayout.ItemTemplate>
+                                              <DataTemplate>
+                                                  <StackLayout Orientation="Horizontal">
+                                                     <BoxView HeightRequest="20" WidthRequest="20" CornerRadius="10" Color="{StaticResource stagendado}"></BoxView>
+                                                      <Label  VerticalTextAlignment="Center" Text="{Binding data_inicio,StringFormat='{0:dd/MM/yyyy}'}" FontAttributes="Bold" FontSize="Small"  />
+                                                      <Label  VerticalTextAlignment="Center" Text="{Binding descricao,StringFormat='{0:dd/MM/yyyy HH:mm:ss}'}" FontAttributes="Bold" FontSize="Small"  />
+                                                      <Label   VerticalTextAlignment="Center" Text="{Binding nome_professor}" FontAttributes="Bold" FontSize="Medium"  />
+                                                    
+                                                  </StackLayout>
+                                               
+                                              </DataTemplate>
+                                             
+                                          </BindableLayout.ItemTemplate>
+                                         
+                        
+                                      </FlexLayout> 
                                     <BoxView  Color="LightGray" HeightRequest="2" HorizontalOptions="FillAndExpand"></BoxView>
                                     
 
                             </StackLayout>
 
                       </Frame>
-                      <Button Margin="10,0,10,0" BorderRadius="20" Text="Reagendar" BackgroundColor="{StaticResource MainColor}" TextColor="{StaticResource BackgroundColor}"></Button>
+                      <Button   Margin="10,0,10,0" BorderRadius="20" Text="Reagendar" BackgroundColor="{StaticResource MainColor}" TextColor="{StaticResource BackgroundColor}"></Button>
    
                </StackLayout>
                 
