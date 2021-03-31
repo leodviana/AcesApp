@@ -1,15 +1,11 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8" ?>
 <pages:PopupPage
-
+    x:Class="AcesApp.Views.PopMudaHorario"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    x:Class="AcesApp.Views.PopMudaHorario"
-    xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
     xmlns:animations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
-    xmlns:pancake="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
-  
-    
-    >
+    xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+    xmlns:pancake="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView">
 
     <pages:PopupPage.Animation>
         <animations:ScaleAnimation
@@ -21,117 +17,197 @@
             PositionIn="Top"
             PositionOut="Top"
             ScaleIn="1.2"
-            ScaleOut="0.8"/>
+            ScaleOut="0.8" />
     </pages:PopupPage.Animation>
 
 
-    <Grid  VerticalOptions="FillAndExpand" RowSpacing="0" BackgroundColor="{StaticResource BackgroundColorSecondary}" >
+    <Grid
+        BackgroundColor="{StaticResource BackgroundColorSecondary}"
+        RowSpacing="0"
+        VerticalOptions="FillAndExpand">
         <Grid.RowDefinitions>
-            <RowDefinition Height="3*"/>
-            <RowDefinition Height="1*"/>
+            <RowDefinition Height="3*" />
+            <RowDefinition Height="1*" />
         </Grid.RowDefinitions>
 
         <pancake:PancakeView
-           Margin="{OnPlatform iOS='0,50,0,0',Android='5,0,5,0'}"
-           BackgroundColor="White"
-           CornerRadius="0,0,25,25"
-           HasShadow="True"
-           HeightRequest="200"
-         >
+            Margin="{OnPlatform iOS='0,50,0,0',
+                                Android='5,0,5,0'}"
+            BackgroundColor="White"
+            CornerRadius="0,0,25,25"
+            HasShadow="True"
+            HeightRequest="200">
             <StackLayout
+                HorizontalOptions="FillAndExpand"
+                Spacing="0"
+                VerticalOptions="FillAndExpand">
+                <StackLayout
+                    BackgroundColor="{StaticResource MainColor}"
+                    HeightRequest="30"
+                    HorizontalOptions="FillAndExpand"
+                    Orientation="Horizontal">
+                    <ImageButton
+                        x:Name="PopupDialogClose"
+                        Margin="0,0,10,0"
+                        BackgroundColor="{StaticResource MainColor}"
+                        Command="{Binding voltarCommand}"
+                        HorizontalOptions="EndAndExpand"
+                        Source="cancelwhite"
+                        WidthRequest="13" />
 
-               Spacing="0"
-               HorizontalOptions="FillAndExpand"
-              VerticalOptions="FillAndExpand">
-              <StackLayout  
-                 HeightRequest="30"
-                 BackgroundColor="{StaticResource MainColor}"
-                 HorizontalOptions="FillAndExpand"
-                 Orientation="Horizontal">
-                 <ImageButton
-                   BackgroundColor="{StaticResource MainColor}"
-                   x:Name="PopupDialogClose"
-                   Source="cancelwhite"
-                   Command="{Binding voltarCommand}"
-                   WidthRequest="13"
-                   Margin="0,0,10,0"
-                   HorizontalOptions="EndAndExpand">
+                </StackLayout>
 
-                  </ImageButton>
+                <StackLayout Margin="0,10,0,20">
+                    <Frame
+                        Margin="10,12,10,12"
+                        HorizontalOptions="FillAndExpand"
+                        VerticalOptions="FillAndExpand">
 
-              </StackLayout>
+                        <StackLayout
+                            Margin="0,15,0,15"
+                            Padding="5,10"
+                            HorizontalOptions="FillAndExpand"
+                            VerticalOptions="FillAndExpand">
+                            <Label HorizontalOptions="Center" Text="Horario Original" />
+                            <BoxView
+                                HeightRequest="2"
+                                HorizontalOptions="FillAndExpand"
+                                Color="LightGray" />
 
-               <StackLayout Margin="0,10,0,20">
-                      <Frame HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"  Margin="10,12,10,12" >
+                            <FlexLayout
+                                Padding="0,0,0,10"
+                                AlignItems="Center"
+                                BindableLayout.ItemsSource="{Binding lsthorarioInicial}"
+                                Direction="Row"
+                                JustifyContent="SpaceBetween">
+                                <BindableLayout.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackLayout Orientation="Horizontal">
+                                            <BoxView
+                                                CornerRadius="10"
+                                                HeightRequest="20"
+                                                WidthRequest="20"
+                                                Color="{StaticResource stagendado}" />
+                                            <Label
+                                                FontAttributes="Bold"
+                                                FontSize="Small"
+                                                LineBreakMode="TailTruncation"
+                                                Text="{Binding data_inicio, StringFormat='{0:dd/MM/yyyy}'}"
+                                                VerticalTextAlignment="Center" />
+                                            <Label
+                                                FontAttributes="Bold"
+                                                FontSize="Small"
+                                                LineBreakMode="TailTruncation"
+                                                Text="{Binding descricao, StringFormat='{0:dd/MM/yyyy HH:mm:ss}'}"
+                                                VerticalTextAlignment="Center" />
+                                            <Label
+                                                FontAttributes="Bold"
+                                                FontSize="Medium"
+                                                Text="{Binding nome_professor}"
+                                                VerticalTextAlignment="Center" />
 
-                                <StackLayout   HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="5,10" Margin="0,15,0,15">
-                                    <Label Text="Horario Original" HorizontalOptions="Center"></Label>
-                                    <BoxView  Color="LightGray" HeightRequest="2" HorizontalOptions="FillAndExpand" ></BoxView>
-                                      
-                                      <FlexLayout  BindableLayout.ItemsSource="{Binding lsthorarioInicial}" Padding="0,0,0,10" Direction="Row" JustifyContent="SpaceBetween" AlignItems="Center">
-                                          <BindableLayout.ItemTemplate>
-                                              <DataTemplate>
-                                                  <StackLayout Orientation="Horizontal">
-                                                     <BoxView HeightRequest="20" WidthRequest="20" CornerRadius="10" Color="{StaticResource stagendado}"></BoxView>
-                                                      <Label  VerticalTextAlignment="Center" Text="{Binding data_inicio,StringFormat='{0:dd/MM/yyyy}'}" FontAttributes="Bold" FontSize="Small" LineBreakMode="TailTruncation" />
-                                                      <Label  VerticalTextAlignment="Center" Text="{Binding descricao,StringFormat='{0:dd/MM/yyyy HH:mm:ss}'}" FontAttributes="Bold" FontSize="Small" LineBreakMode="TailTruncation" />
-                                                      <Label   VerticalTextAlignment="Center" Text="{Binding nome_professor}" FontAttributes="Bold" FontSize="Medium" />
-                                                     
-                                                      
-                        
-                                                  </StackLayout>
-                                               
-                                              </DataTemplate>
-                                             
-                                          </BindableLayout.ItemTemplate>
-                                         
-                        
-                                      </FlexLayout> 
-                                    <BoxView  Color="LightGray" HeightRequest="2" HorizontalOptions="FillAndExpand"></BoxView>
-                                    
 
-                                </StackLayout>
 
-                      </Frame>
-                       <Frame HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"  Margin="10,12,10,12" >
+                                        </StackLayout>
 
-                           <StackLayout   HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="5,10" Margin="0,15,0,15">
-                                     <Label Text="Horario Modificado" HorizontalOptions="Center"></Label>
-                                    <BoxView  Color="LightGray" HeightRequest="2" HorizontalOptions="FillAndExpand" ></BoxView>
-                                      <FlexLayout  BindableLayout.ItemsSource="{Binding lsthorarioFinal}" Padding="0,0,0,10" Direction="Row" JustifyContent="SpaceBetween" AlignItems="Center">
-                                          <BindableLayout.ItemTemplate>
-                                              <DataTemplate>
-                                                  <StackLayout Orientation="Horizontal">
-                                                     <BoxView HeightRequest="20" WidthRequest="20" CornerRadius="10" Color="{StaticResource stagendado}"></BoxView>
-                                                      <Label  VerticalTextAlignment="Center" Text="{Binding data_inicio,StringFormat='{0:dd/MM/yyyy}'}" FontAttributes="Bold" FontSize="Small"  />
-                                                      <Label  VerticalTextAlignment="Center" Text="{Binding descricao,StringFormat='{0:dd/MM/yyyy HH:mm:ss}'}" FontAttributes="Bold" FontSize="Small"  />
-                                                      <Label   VerticalTextAlignment="Center" Text="{Binding nome_professor}" FontAttributes="Bold" FontSize="Medium"  />
-                                                    
-                                                  </StackLayout>
-                                               
-                                              </DataTemplate>
-                                             
-                                          </BindableLayout.ItemTemplate>
-                                         
-                        
-                                      </FlexLayout> 
-                                    <BoxView  Color="LightGray" HeightRequest="2" HorizontalOptions="FillAndExpand"></BoxView>
-                                    
+                                    </DataTemplate>
 
-                            </StackLayout>
+                                </BindableLayout.ItemTemplate>
 
-                      </Frame>
-                      <Button   Margin="10,0,10,0" BorderRadius="20" Text="Reagendar" BackgroundColor="{StaticResource MainColor}" TextColor="{StaticResource BackgroundColor}"></Button>
-   
-               </StackLayout>
-                
-               
-              
+
+                            </FlexLayout>
+                            <BoxView
+                                HeightRequest="2"
+                                HorizontalOptions="FillAndExpand"
+                                Color="LightGray" />
+
+
+                        </StackLayout>
+
+                    </Frame>
+                    <Frame
+                        Margin="10,12,10,12"
+                        HorizontalOptions="FillAndExpand"
+                        VerticalOptions="FillAndExpand">
+
+                        <StackLayout
+                            Margin="0,15,0,15"
+                            Padding="5,10"
+                            HorizontalOptions="FillAndExpand"
+                            VerticalOptions="FillAndExpand">
+                            <Label HorizontalOptions="Center" Text="Horario Modificado" />
+                            <BoxView
+                                HeightRequest="2"
+                                HorizontalOptions="FillAndExpand"
+                                Color="LightGray" />
+                            <FlexLayout
+                                Padding="0,0,0,10"
+                                AlignItems="Center"
+                                BindableLayout.ItemsSource="{Binding lsthorarioFinal}"
+                                Direction="Row"
+                                JustifyContent="SpaceBetween">
+                                <BindableLayout.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackLayout Orientation="Horizontal">
+                                            <BoxView
+                                                CornerRadius="10"
+                                                HeightRequest="20"
+                                                WidthRequest="20"
+                                                Color="{StaticResource stagendado}" />
+                                            <Label
+                                                FontAttributes="Bold"
+                                                FontSize="Small"
+                                                Text="{Binding data_inicio, StringFormat='{0:dd/MM/yyyy}'}"
+                                                VerticalTextAlignment="Center" />
+                                            <Label
+                                                FontAttributes="Bold"
+                                                FontSize="Small"
+                                                Text="{Binding descricao, StringFormat='{0:dd/MM/yyyy HH:mm:ss}'}"
+                                                VerticalTextAlignment="Center" />
+                                            <Label
+                                                FontAttributes="Bold"
+                                                FontSize="Medium"
+                                                Text="{Binding nome_professor}"
+                                                VerticalTextAlignment="Center" />
+
+                                        </StackLayout>
+
+                                    </DataTemplate>
+
+                                </BindableLayout.ItemTemplate>
+
+
+                            </FlexLayout>
+                            <BoxView
+                                HeightRequest="2"
+                                HorizontalOptions="FillAndExpand"
+                                Color="LightGray" />
+
+
+                        </StackLayout>
+
+                    </Frame>
+                    <Button
+                        Margin="10,0,10,0"
+                        BackgroundColor="{StaticResource MainColor}"
+                        BorderRadius="20"
+                        Command="{Binding reagendarCommand}"
+                        Text="Reagendar"
+                        TextColor="{StaticResource BackgroundColor}" />
+
+                </StackLayout>
+
+
+
             </StackLayout>
 
         </pancake:PancakeView>
 
-        <Button Grid.Row="1"  Command="{Binding voltarCommand}"  VerticalOptions="FillAndExpand" BackgroundColor="{StaticResource BackgroundColorSecondary}"></Button>
+        <Button
+            Grid.Row="1"
+            BackgroundColor="{StaticResource BackgroundColorSecondary}"
+            Command="{Binding voltarCommand}"
+            VerticalOptions="FillAndExpand" />
 
 
     </Grid>

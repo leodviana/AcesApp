@@ -16,6 +16,7 @@ namespace AcesApp.ViewModels
     public class PopMudaHorarioViewModel : ViewModelBase
     {
         private ICommand _refresh;
+        private ICommand _reagendar;
         IApiService apiService;
         private readonly IUserDialogs _userDialogs;
         public ObservableCollection<Events> lsthorarioInicial { get; set; }
@@ -93,7 +94,51 @@ namespace AcesApp.ViewModels
             }
         }
 
-        
-        
+        public ICommand reagendarCommand
+        {
+            get
+            {
+                return _reagendar ?? (_reagendar = new Command(async objeto =>
+                {
+
+
+
+                    await reagendar();
+
+
+                }));
+            }
+        }
+
+        private async Task reagendar()
+        {
+            var response = new Response();
+           // IsRunning = true;
+            var current = Connectivity.NetworkAccess;
+
+            if (current == NetworkAccess.Internet)
+
+            {
+                response = await apiService.saveHorarios(_horarioInicial.EventID,_horarioFinal);
+            }
+            else
+            {
+                await exibeErro("Dispositivo não está conectado a internet!");
+                //await PageDialogService.DisplayAlertAsync("Erro", "Dispositivo sem Conexâo", "OK");
+                //await dialogServices.ShowMessage("Erro", response.Message);
+               // IsRunning = false;
+                return;
+            }
+            //IsRunning = false;
+
+            if (!response.IsSuccess)
+            {
+                await exibeErro(response.Message);
+                //await PageDialogService.DisplayAlertAsync("Erro", response.Message, "OK");
+                //await dialogServices.ShowMessage("Erro", response.Message);
+                return;
+            }
+           var _evento =  (Events)response.Result;
+        }
     }
 }

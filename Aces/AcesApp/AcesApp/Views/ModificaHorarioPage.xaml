@@ -1,14 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:prism="http://prismlibrary.com"
-             xmlns:pancake="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
-             xmlns:controls="clr-namespace:Xamarin.Plugin.Calendar.Controls;assembly=Xamarin.Plugin.Calendar"
-             prism:ViewModelLocator.AutowireViewModel="True"
-              x:Name="simpleCalendarPage"
-             x:Class="AcesApp.Views.ModificaHorarioPage">
+<ContentPage
+    x:Class="AcesApp.Views.ModificaHorarioPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:Xamarin.Plugin.Calendar.Controls;assembly=Xamarin.Plugin.Calendar"
+    xmlns:pancake="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+    xmlns:prism="http://prismlibrary.com"
+    x:Name="simpleCalendarPage"
+    prism:ViewModelLocator.AutowireViewModel="True">
 
-     <ContentPage.Resources>
+    <ContentPage.Resources>
         <ResourceDictionary>
 
             <Style x:Key="daysTitleLabelStyle" TargetType="Label">
@@ -24,7 +25,7 @@
                 <ColumnDefinition Width="{OnPlatform Android='22', iOS='15'}" />
                 <ColumnDefinition Width="30" />
                 <ColumnDefinition Width="*" />
-                <ColumnDefinition Width ="38"/>
+                <ColumnDefinition Width="38" />
 
             </Grid.ColumnDefinitions>
             <Button
@@ -48,22 +49,24 @@
                 </Label.GestureRecognizers>
             </Label>
 
-            <StackLayout Grid.Column="2" Margin="0,0,10,0" HorizontalOptions="Center">
+            <StackLayout
+                Grid.Column="2"
+                Margin="0,0,10,0"
+                HorizontalOptions="Center">
                 <Label
+                    FontFamily="Roboto-Black"
                     FontSize="{OnPlatform Android='20',
                                           iOS='26'}"
                     HorizontalOptions="CenterAndExpand"
                     Text="Horários Disponiveis"
                     TextColor="{StaticResource BackgroundColor}"
                     VerticalOptions="CenterAndExpand"
-                    FontFamily="Roboto-Black"
                     VerticalTextAlignment="Center" />
 
-               
+
 
             </StackLayout>
-             <ImageButton
-                
+            <ImageButton
                 Grid.Column="3"
                 BackgroundColor="Transparent"
                 Command="{Binding ProfessorCommand}"
@@ -72,77 +75,96 @@
                 Source="profileblack" />
 
         </Grid>
-        
+
     </NavigationPage.TitleView>
 
 
-   
-     <Grid BackgroundColor="{StaticResource MainColor}">
+
+    <Grid BackgroundColor="{StaticResource MainColor}">
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            
+            <RowDefinition Height="*" />
+
         </Grid.RowDefinitions>
-        
-        <pancake:PancakeView 
-           
-           BackgroundColor="{StaticResource BackgroundColor}"
-           CornerRadius="25,25,0,0"
-           HasShadow="True"
-           HeightRequest="200"
-         >
-          <ScrollView VerticalScrollBarVisibility="Never">
 
-        <controls:Calendar 
-        
-        Margin="{OnPlatform iOS='0,30'}"
-        Padding="10,0,10,0"
-        AnimateCalendar="True"
-        DayViewCornerRadius="3"
-        DayViewSize="40"
-        DaysTitleColor="{StaticResource MainColor}"
-        DaysTitleHeight="40"
-        DaysTitleLabelStyle="{StaticResource daysTitleLabelStyle}"
-        DeselectedDayTextColor="Blue"
-        DisableSwipeDetection="False"
-        EventIndicatorColor="Red"
-        EventIndicatorSelectedColor="White"
-        Events="{Binding Events}"
-        Culture="{Binding Culture}"
-        HorizontalOptions="FillAndExpand"
-        MonthLabelColor="{StaticResource MainColor}"
-        OtherMonthDayColor="Gray"
-        SelectedDateColor="{StaticResource MainColor}"
-        SelectedDateTextFormat="ddd, dd MMM yyyy"
-        SelectedDayBackgroundColor="DarkCyan"
-        SelectedDayTextColor="Cyan"
-        SwipeToChangeMonthEnabled="False"
-        SwipeUpToHideEnabled="False"
-        TodayFillColor="Silver"
-        TodayOutlineColor="Blue"
-        VerticalOptions="FillAndExpand"
-        YearLabelColor="{StaticResource MainColor}">
+        <pancake:PancakeView
+            BackgroundColor="{StaticResource BackgroundColor}"
+            CornerRadius="25,25,0,0"
+            HasShadow="True"
+            HeightRequest="200">
+            <ScrollView VerticalScrollBarVisibility="Never">
 
-            <controls:Calendar.EventTemplate>
-                <DataTemplate>
-                    
-                       
-                    <FlexLayout Padding="0,10,0,10" Direction="Row" JustifyContent="SpaceBetween" AlignItems="Center">
-                        <BoxView HeightRequest="20" WidthRequest="20" CornerRadius="10" Color="{StaticResource stlivre}"></BoxView>
-                        
-                         <Label  VerticalTextAlignment="Center" Text="{Binding descricao,StringFormat='{0:dd/MM/yyyy HH:mm:ss}'}" FontAttributes="Bold" FontSize="Small" />
-                         <Label   VerticalTextAlignment="Center" Text="{Binding nome_professor}" FontAttributes="Bold" FontSize="Small" LineBreakMode="TailTruncation" MaxLines="2"/>
-                        <ImageButton BackgroundColor="Transparent" HeightRequest="25" Command="{Binding BindingContext.MudarHorarioCommand, Source={x:Reference simpleCalendarPage}}" CommandParameter="{Binding .}" Source="edit"  HorizontalOptions="End">
+                <controls:Calendar
+                    Margin="{OnPlatform iOS='0,30'}"
+                    Padding="10,0,10,0"
+                    AnimateCalendar="True"
+                    Culture="{Binding Culture}"
+                    DayViewCornerRadius="3"
+                    DayViewSize="40"
+                    DaysTitleColor="{StaticResource MainColor}"
+                    DaysTitleHeight="40"
+                    DaysTitleLabelStyle="{StaticResource daysTitleLabelStyle}"
+                    DeselectedDayTextColor="Blue"
+                    DisableSwipeDetection="False"
+                    EventIndicatorColor="Red"
+                    EventIndicatorSelectedColor="White"
+                    Events="{Binding Events}"
+                    HorizontalOptions="FillAndExpand"
+                    MonthLabelColor="{StaticResource MainColor}"
+                    OtherMonthDayColor="Gray"
+                    SelectedDateColor="{StaticResource MainColor}"
+                    SelectedDateTextFormat="ddd, dd MMM yyyy"
+                    SelectedDayBackgroundColor="DarkCyan"
+                    SelectedDayTextColor="Cyan"
+                    SwipeToChangeMonthEnabled="False"
+                    SwipeUpToHideEnabled="False"
+                    TodayFillColor="Silver"
+                    TodayOutlineColor="Blue"
+                    VerticalOptions="FillAndExpand"
+                    YearLabelColor="{StaticResource MainColor}">
 
-                        </ImageButton>
-                     
-                    </FlexLayout>
-                    
-                       
-                </DataTemplate>
-            </controls:Calendar.EventTemplate>
+                    <controls:Calendar.EventTemplate>
+                        <DataTemplate>
 
-        </controls:Calendar>
-    </ScrollView>
+
+                            <FlexLayout
+                                Padding="0,10,0,10"
+                                AlignItems="Center"
+                                Direction="Row"
+                                JustifyContent="SpaceBetween">
+                                <BoxView
+                                    CornerRadius="10"
+                                    HeightRequest="20"
+                                    WidthRequest="20"
+                                    Color="{StaticResource stlivre}" />
+
+                                <Label
+                                    FontAttributes="Bold"
+                                    FontSize="Small"
+                                    Text="{Binding descricao, StringFormat='{0:dd/MM/yyyy HH:mm:ss}'}"
+                                    VerticalTextAlignment="Center" />
+                                <Label
+                                    FontAttributes="Bold"
+                                    FontSize="Small"
+                                    LineBreakMode="TailTruncation"
+                                    MaxLines="2"
+                                    Text="{Binding nome_professor}"
+                                    VerticalTextAlignment="Center" />
+                                <ImageButton
+                                    BackgroundColor="Transparent"
+                                    Command="{Binding BindingContext.MudarHorarioCommand, Source={x:Reference simpleCalendarPage}}"
+                                    CommandParameter="{Binding .}"
+                                    HeightRequest="25"
+                                    HorizontalOptions="End"
+                                    Source="edit" />
+
+                            </FlexLayout>
+
+
+                        </DataTemplate>
+                    </controls:Calendar.EventTemplate>
+
+                </controls:Calendar>
+            </ScrollView>
 
         </pancake:PancakeView>
     </Grid>
