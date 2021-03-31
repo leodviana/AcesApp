@@ -65,7 +65,7 @@
                       <Frame HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"  Margin="10,12,10,12" >
 
                                 <StackLayout   HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="5,10" Margin="0,15,0,15">
-                                    <Label Text="Horario Inicial" HorizontalOptions="Center"></Label>
+                                    <Label Text="Horario Original" HorizontalOptions="Center"></Label>
                                     <BoxView  Color="LightGray" HeightRequest="2" HorizontalOptions="FillAndExpand" ></BoxView>
                                       
                                       <FlexLayout  BindableLayout.ItemsSource="{Binding lsthorarioInicial}" Padding="0,0,0,10" Direction="Row" JustifyContent="SpaceBetween" AlignItems="Center">
@@ -96,7 +96,7 @@
                        <Frame HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"  Margin="10,12,10,12" >
 
                            <StackLayout   HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="5,10" Margin="0,15,0,15">
-                                     <Label Text="Horario Final" HorizontalOptions="Center"></Label>
+                                     <Label Text="Horario Modificado" HorizontalOptions="Center"></Label>
                                     <BoxView  Color="LightGray" HeightRequest="2" HorizontalOptions="FillAndExpand" ></BoxView>
                                       <FlexLayout  BindableLayout.ItemsSource="{Binding lsthorarioFinal}" Padding="0,0,0,10" Direction="Row" JustifyContent="SpaceBetween" AlignItems="Center">
                                           <BindableLayout.ItemTemplate>
