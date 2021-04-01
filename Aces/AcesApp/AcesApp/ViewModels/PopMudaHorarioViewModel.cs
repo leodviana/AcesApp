@@ -72,6 +72,8 @@ namespace AcesApp.ViewModels
         {
             _horarioInicial = (Events)parameters["inicial"];
             _horarioFinal = (Events)parameters["final"];
+            _horarioFinal.Subject = _horarioInicial.Subject;
+            _horarioFinal.contrato = _horarioInicial.contrato;
             lsthorarioInicial.Add(_horarioInicial);
             lsthorarioFinal.Add(_horarioFinal);
         }
@@ -112,33 +114,48 @@ namespace AcesApp.ViewModels
 
         private async Task reagendar()
         {
-            var response = new Response();
-           // IsRunning = true;
-            var current = Connectivity.NetworkAccess;
-
-            if (current == NetworkAccess.Internet)
-
+            try
             {
-                response = await apiService.saveHorarios(_horarioInicial.EventID,_horarioFinal);
-            }
-            else
-            {
-                await exibeErro("Dispositivo não está conectado a internet!");
-                //await PageDialogService.DisplayAlertAsync("Erro", "Dispositivo sem Conexâo", "OK");
-                //await dialogServices.ShowMessage("Erro", response.Message);
-               // IsRunning = false;
-                return;
-            }
-            //IsRunning = false;
 
-            if (!response.IsSuccess)
-            {
-                await exibeErro(response.Message);
-                //await PageDialogService.DisplayAlertAsync("Erro", response.Message, "OK");
-                //await dialogServices.ShowMessage("Erro", response.Message);
-                return;
+                _userDialogs.ShowLoading("Salvando...", MaskType.Black);
+                var response = new Response();
+                //IsRunning = true;
+                var current = Connectivity.NetworkAccess;
+
+                if (current == NetworkAccess.Internet)
+
+                {
+                    response = await apiService.saveHorarios(_horarioInicial.EventID,_horarioFinal);
+
+                    if (!response.IsSuccess)
+                    {
+                        await exibeErro(response.Message);
+                        _userDialogs.HideLoading();
+                        //await PageDialogService.DisplayAlertAsync("Erro", response.Message, "OK");
+                        //await dialogServices.ShowMessage("Erro", response.Message);
+                        return;
+                    }
+                    var _evento = (Events)response.Result;
+                    await NavigationService.GoBackAsync();
+                }
+                else
+                {
+                    await exibeErro("Dispositivo não está conectado a internet!");
+                    _userDialogs.HideLoading();
+                    //await PageDialogService.DisplayAlertAsync("Erro", "Dispositivo sem Conexâo", "OK");
+                    //await dialogServices.ShowMessage("Erro", response.Message);
+                    // IsRunning = false;
+                    return;
+                }
+                    
             }
-           var _evento =  (Events)response.Result;
+            catch(Exception ex)
+            {
+                await exibeErro(ex.Message);
+                _userDialogs.HideLoading();
+            }
+
+
         }
     }
 }

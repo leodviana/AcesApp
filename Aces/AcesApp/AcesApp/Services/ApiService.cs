@@ -229,24 +229,25 @@ namespace AcesApp.Services
                 var client = new HttpClient();
                 client.BaseAddress = new Uri(App.Current.Resources["UrlAPI"].ToString());
 
-                var url = "api/Aulas/Getprofessores?id=" +id;
+                var url = "api/Aulas/SaveEvents?id=" +id;
 
                 var response = await client.PostAsync(url, httpContent);
+                var result = await response.Content.ReadAsStringAsync();
 
                 if (!response.IsSuccessStatusCode)
                 {
                     return new Response
                     {
                         IsSuccess = false,
-                        Message =  "",
+                        Message =  result,
 
                     };
 
                 }
 
-                var result = await response.Content.ReadAsStringAsync();
+                
                
-                var Eventos = JsonConvert.DeserializeObject<List<Events>>(result);
+                var Eventos = JsonConvert.DeserializeObject<Events>(result);
 
                 return new Response
                 {
