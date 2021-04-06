@@ -4,9 +4,11 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:controls="clr-namespace:Xamarin.Plugin.Calendar.Controls;assembly=Xamarin.Plugin.Calendar"
+    xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
     xmlns:pancake="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
     xmlns:prism="http://prismlibrary.com"
     x:Name="simpleCalendarPage"
+    ios:Page.UseSafeArea="True"
     prism:ViewModelLocator.AutowireViewModel="True">
 
     <ContentPage.Resources>
@@ -138,11 +140,14 @@
                                     Color="{StaticResource stlivre}" />
 
                                 <Label
+                                    Margin="5,0"
+                                    FlexLayout.Grow="1"
                                     FontAttributes="Bold"
                                     FontSize="Small"
                                     Text="{Binding descricao, StringFormat='{0:dd/MM/yyyy HH:mm:ss}'}"
                                     VerticalTextAlignment="Center" />
                                 <Label
+                                    FlexLayout.Grow="2"
                                     FontAttributes="Bold"
                                     FontSize="Small"
                                     LineBreakMode="TailTruncation"
@@ -153,6 +158,7 @@
                                     BackgroundColor="Transparent"
                                     Command="{Binding BindingContext.MudarHorarioCommand, Source={x:Reference simpleCalendarPage}}"
                                     CommandParameter="{Binding .}"
+                                    FlexLayout.AlignSelf="End"
                                     HeightRequest="25"
                                     HorizontalOptions="End"
                                     Source="edit" />

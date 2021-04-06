@@ -131,12 +131,14 @@ namespace AcesApp.ViewModels
                     {
                         await exibeErro(response.Message);
                         _userDialogs.HideLoading();
-                        //await PageDialogService.DisplayAlertAsync("Erro", response.Message, "OK");
-                        //await dialogServices.ShowMessage("Erro", response.Message);
+                        
                         return;
                     }
                     var _evento = (Events)response.Result;
+                   // await abrewhattsapp();
                     await NavigationService.GoBackAsync();
+                    //duvida se posso colocar isso ou so goback asyc
+                    //await NavigationService.NavigateAsync("AulasPage", null);
                 }
                 else
                 {
@@ -156,6 +158,25 @@ namespace AcesApp.ViewModels
             }
 
 
+        }
+        private async Task abrewhattsapp()
+        {
+            try
+            {
+                string texto = "A aula com o professor" + _horarioInicial.nome_professor + "no horario: " + _horarioInicial.data_inicio + " " + _horarioInicial.descricao +
+                          "foi alterada para " + _horarioFinal.data_inicio + " " + _horarioFinal.Description + " com o profesor " + _horarioFinal.nome_professor;
+
+
+                //var uriString = "whatsapp://send?phone=" + fone + " teste de mensagen";
+               // var uriString = "whatsapp://send?phone=" + fone + " teste de mensagen";
+                var uriString = "whatsapp://send?phone=8599954175" + texto;
+                await Launcher.OpenAsync(uriString);
+            }
+            catch(Exception ex)
+            {
+                await exibeErro(ex.Message);
+            }
+           
         }
     }
 }

@@ -1,38 +1,70 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:prism="http://prismlibrary.com" 
-             xmlns:pancakeView="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView" xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms" xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
-             prism:ViewModelLocator.AutowireViewModel="True"
-             x:Class="AcesApp.Views.PerfilPage"
-             >
+<ContentPage
+    x:Class="AcesApp.Views.PerfilPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+    xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+    xmlns:pancakeView="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+    xmlns:prism="http://prismlibrary.com"
+    prism:ViewModelLocator.AutowireViewModel="True">
 
-    <ScrollView BackgroundColor="#D8E0E1" Margin="0" >
-        <Grid RowSpacing="0" Padding="0" Margin="0" BackgroundColor="#D8E0E1">
-            <Grid.RowDefinitions >
+    <ScrollView Margin="0" BackgroundColor="#D8E0E1">
+        <Grid
+            Margin="0"
+            Padding="0"
+            BackgroundColor="#D8E0E1"
+            RowSpacing="0">
+            <Grid.RowDefinitions>
 
                 <RowDefinition Height="auto" />
-                
+
                 <RowDefinition Height="*" />
-                
+
             </Grid.RowDefinitions>
             <OnIdiom x:TypeArguments="View">
-            <OnIdiom.Tablet>
-                <Image  Grid.Row="0"  Source="tenista2"  Aspect="Fill"></Image>
-            </OnIdiom.Tablet>
-            <OnIdiom.Phone>
-                <Image  Grid.Row="0"  Source="tenista2"  Aspect="AspectFill"></Image>
-            </OnIdiom.Phone>
-            
+                <OnIdiom.Tablet>
+                    <Image
+                        Grid.Row="0"
+                        Aspect="Fill"
+                        Source="tenista2" />
+                </OnIdiom.Tablet>
+                <OnIdiom.Phone>
+                    <Image
+                        Grid.Row="0"
+                        Aspect="AspectFill"
+                        Source="tenista2" />
+                </OnIdiom.Phone>
+
             </OnIdiom>
-            
-
-            <Frame  Grid.Row="0" Padding="0"  TranslationY="10" HeightRequest="150" WidthRequest="150" IsClippedToBounds="True" CornerRadius="77" VerticalOptions="Center" HorizontalOptions="Center">
 
 
-                <ffimageloading:CachedImage     CacheDuration="50" RetryCount="3" RetryDelay="600"  HorizontalOptions="CenterAndExpand"  VerticalOptions="End"    DownsampleToViewSize="true"
-                                   Aspect="AspectFill"   Source="profile" HeightRequest="100" WidthRequest="100" 
-                                   LoadingPlaceholder = "Spinner.gif"  ErrorPlaceholder="unnamed.png"  CacheType="Memory">
+            <Frame
+                Grid.Row="0"
+                Padding="0"
+                CornerRadius="77"
+                HeightRequest="150"
+                HorizontalOptions="Center"
+                IsClippedToBounds="True"
+                TranslationY="10"
+                VerticalOptions="Center"
+                WidthRequest="150">
+
+
+                <ffimageloading:CachedImage
+                    Aspect="AspectFill"
+                    CacheDuration="50"
+                    CacheType="Memory"
+                    DownsampleToViewSize="true"
+                    ErrorPlaceholder="unnamed.png"
+                    HeightRequest="100"
+                    HorizontalOptions="CenterAndExpand"
+                    LoadingPlaceholder="Spinner.gif"
+                    RetryCount="3"
+                    RetryDelay="600"
+                    Source="profile"
+                    VerticalOptions="End"
+                    WidthRequest="100">
                     <ffimageloading:CachedImage.Transformations>
                         <fftransformations:CircleTransformation />
                     </ffimageloading:CachedImage.Transformations>
@@ -43,25 +75,27 @@
 
             </Frame>
 
-            
-            <pancakeView:PancakeView Grid.Row="1"
-           
-           
-           
-              BackgroundColor="{StaticResource BackgroundColor}"
-              CornerRadius="25,25,0,0"
-               HasShadow="True"
-               HeightRequest="200"
-            >
-            <ScrollView VerticalScrollBarVisibility="Never">
-              <FlexLayout  Direction="Column" AlignItems="Center"
-                
-               >
-               <Label Margin="0,10" Text="Nome bem grande " VerticalOptions="Center" HorizontalOptions="Center"></Label>
 
-              </FlexLayout>
-            </ScrollView>
-           </pancakeView:PancakeView>
+            <pancakeView:PancakeView
+                Grid.Row="1"
+                BackgroundColor="{StaticResource BackgroundColor}"
+                CornerRadius="25,25,0,0"
+                HasShadow="True"
+                HeightRequest="200">
+                <ScrollView VerticalScrollBarVisibility="Never">
+                    <FlexLayout AlignItems="Center" Direction="Column">
+                        <Label
+                            Margin="0,10"
+                            HorizontalOptions="Center"
+                            Text="Nome bem grande "
+                            VerticalOptions="Center" />
+                        <Button
+                            BackgroundColor="Transparent"
+                            Command="{Binding LogoutCommand}"
+                            Text="Logout" />
+                    </FlexLayout>
+                </ScrollView>
+            </pancakeView:PancakeView>
         </Grid>
     </ScrollView>
 

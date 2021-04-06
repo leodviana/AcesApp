@@ -27,7 +27,7 @@
         VerticalOptions="FillAndExpand">
         <Grid.RowDefinitions>
             <RowDefinition Height="3*" />
-            <RowDefinition Height="1*" />
+            <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
 
         <pancake:PancakeView
@@ -193,7 +193,8 @@
                         BorderRadius="20"
                         Command="{Binding reagendarCommand}"
                         Text="Reagendar"
-                        TextColor="{StaticResource BackgroundColor}" />
+                        TextColor="{StaticResource BackgroundColor}"
+                        VerticalOptions="EndAndExpand" />
 
                 </StackLayout>
 
