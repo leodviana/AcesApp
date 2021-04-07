@@ -13,6 +13,7 @@ using Prism.Navigation;
 using Prism.Services;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -58,6 +59,28 @@ namespace AcesApp.ViewModels
             }
         }
 
+        private string _plano;
+
+        public string Plano
+        {
+            get { return _plano; }
+            set
+            {
+                SetProperty(ref _plano, value);
+
+            }
+        }
+        private string _nomeProfessor;
+
+        public string NomeProfessor
+        {
+            get { return _nomeProfessor; }
+            set
+            {
+                SetProperty(ref _nomeProfessor, value);
+
+            }
+        }
         private string _nome;
 
         public string Nome
@@ -70,6 +93,41 @@ namespace AcesApp.ViewModels
             }
         }
 
+        private string _inicio;
+
+        public string Inicio
+        {
+            get { return _inicio; }
+            set
+            {
+                SetProperty(ref _inicio, value);
+
+            }
+        }
+
+        private string _renova;
+
+        public string Renova
+        {
+            get { return _renova; }
+            set
+            {
+                SetProperty(ref _renova, value);
+
+            }
+        }
+
+        private string _contratoId;
+
+        public string ContratoId
+        {
+            get { return _contratoId; }
+            set
+            {
+                SetProperty(ref _contratoId, value);
+
+            }
+        }
         private string _email;
 
         public string Email
@@ -160,8 +218,8 @@ namespace AcesApp.ViewModels
         private async void HandleIsActiveTrue(object sender, EventArgs e)
         {
             if (IsActive == false) return;
-            //if (!inicializa)
-               // atribuivalores(App.usuariologado);
+            if (!inicializa)
+                atribuivalores(App.usuariologado);
 
         }
 
@@ -448,20 +506,26 @@ namespace AcesApp.ViewModels
             // App.Current.MainPage = nova;
 
         }
-       /* private async void atribuivalores(Dentista _dentista)
+        private async void atribuivalores(Usuario _dentista)
         {
-            id = _dentista.Id;
+            //id = _dentista.Id;
             Nome = _dentista.nome;
-            Email = _dentista.Email;
-            Senha = _dentista.senha;
-            Login = _dentista.logon;
+            Email = _dentista.Login;
+            Senha = _dentista.senha_sem;
+            ContratoId = _dentista.contratoId.ToString();
+
+            Inicio = DateTime.Parse(_dentista.inicio.ToString()).ToString("dd/MM/yyyy");
+            Renova = DateTime.Parse(_dentista.Renovacao.ToString()).ToString("dd/MM/yyyy");
+            NomeProfessor = _dentista.professor;
+            Plano = _dentista.plano;
+            /*Login = _dentista.logon;
             status = _dentista.status;
             Photo = _dentista.ImagePath;
             await FFImageLoading.Forms.CachedImage.InvalidateCache(Photo, CacheType.Memory);
-            _dentista.ImageArray = null;
+            _dentista.ImageArray = null;*/
 
         }
-        private void gravaUsuarioLogado(Dentista User)
+       /* private void gravaUsuarioLogado(Dentista User)
         {
             if (User.Id == 999999999)
             {
