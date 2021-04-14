@@ -38,6 +38,7 @@ namespace AcesApp.Models
         public List<ItemOrcamento> Servicos_itens { get; set; }
         public List<Titulos> _titulos { get; set; }
 
+        public int num_aulas {get;set;}
         public string ImagePath { get; set; }
         //public virtual Pessoa pessoas { get; set; }
         // public virtual ICollection<Fornecedor> fornecedores { get; set; }

@@ -115,6 +115,59 @@ namespace AcesApp.Services
 
 
 
+        public async Task<Response> getRanking(Ranking ranking)
+        {
+
+            try
+            {
+
+
+                var jsonRequest = JsonConvert.SerializeObject(ranking);
+                var httpContent = new StringContent(jsonRequest, Encoding.UTF8, "application/json");
+                var client = new HttpClient();
+                client.BaseAddress = new Uri(App.Current.Resources["UrlAPI"].ToString());
+
+                var url = "api/Ranking/GetRanking";
+
+                var response = await client.PostAsync(url, httpContent);
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    return new Response
+                    {
+                        IsSuccess = false,
+                        Message = "Problemas com a conexao do servidor!"
+
+                    };
+
+                }
+
+                var result = await response.Content.ReadAsStringAsync();
+
+                var Eventos = JsonConvert.DeserializeObject<List<Ranking>>(result);
+
+                return new Response
+                {
+                    IsSuccess = true,
+                    Message = "Ok",
+                    Result = Eventos
+                };
+
+            }
+            catch (Exception ex)
+            {
+                // return null;
+                return new Response
+                {
+                    IsSuccess = false,
+                    Message = ex.Message,
+                };
+
+            }
+        }
+
+
+
         public async Task<Response> getEventosfree(Events evento)
         {
 
@@ -164,6 +217,7 @@ namespace AcesApp.Services
 
             }
         }
+
 
 
        public async Task<Response> getprofessores(Events evento)

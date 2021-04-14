@@ -117,6 +117,18 @@ namespace AcesApp.ViewModels
             }
         }
 
+        private int _num_aulas;
+
+        public int Num_Aulas
+        {
+            get { return _num_aulas; }
+            set
+            {
+                SetProperty(ref _num_aulas, value);
+
+            }
+        }
+
         private string _contratoId;
 
         public string ContratoId
@@ -199,6 +211,7 @@ namespace AcesApp.ViewModels
                 CachedImage.InvalidateCache(_photo, CacheType.All, true);
             }
         }
+
         public PerfilPageViewModel(INavigationService navigationService, IPageDialogService pageDialogService, IApiService ApiService, IUserDialogs userDialogs) : base(navigationService, pageDialogService)
         {
             _userDialogs = userDialogs;
@@ -518,6 +531,7 @@ namespace AcesApp.ViewModels
             Renova = DateTime.Parse(_dentista.Renovacao.ToString()).ToString("dd/MM/yyyy");
             NomeProfessor = _dentista.professor;
             Plano = _dentista.plano;
+            Num_Aulas = _dentista.num_aulas;
             /*Login = _dentista.logon;
             status = _dentista.status;
             Photo = _dentista.ImagePath;

@@ -18,5 +18,7 @@ namespace AcesApp.Interfaces
         Task<Response> getprofessores(Events evento);
 
         Task<Response> saveHorarios(long id,Events evento);
+
+        Task<Response> getRanking(Ranking ranking);
     }
 }

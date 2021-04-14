@@ -82,137 +82,137 @@
                 CornerRadius="25,25,0,0"
                 HasShadow="True"
                 HeightRequest="200">
-                <ScrollView VerticalScrollBarVisibility="Never">
-                    <FlexLayout
-                        AlignContent="SpaceBetween"
-                        AlignItems="Stretch"
-                        Direction="Column"
-                        Wrap="NoWrap">
+
+                <FlexLayout
+                    AlignContent="SpaceBetween"
+                    AlignItems="Stretch"
+                    Direction="Column"
+                    Wrap="NoWrap">
+                    <Label
+                        Margin="0,10,0,0"
+                        FlexLayout.AlignSelf="Center"
+                        FontFamily="FontRobotoBold"
+                        FontSize="Large"
+                        HorizontalOptions="Center"
+                        Text="{Binding Nome}"
+                        TextColor="{StaticResource MainColor}"
+                        VerticalOptions="Center" />
+                    <StackLayout
+                        Margin="0,10,0,40"
+                        FlexLayout.AlignSelf="Center"
+                        HorizontalOptions="Center"
+                        Orientation="Horizontal">
                         <Label
-                            Margin="0,10,0,0"
-                            FlexLayout.AlignSelf="Center"
                             FontFamily="FontRobotoBold"
-                            FontSize="Large"
-                            HorizontalOptions="Center"
-                            Text="{Binding Nome}"
-                            TextColor="{StaticResource MainColor}"
-                            VerticalOptions="Center" />
-                        <StackLayout
-                            Margin="0,10,0,40"
-                            FlexLayout.AlignSelf="Center"
-                            HorizontalOptions="Center"
-                            Orientation="Horizontal">
-                            <Label
-                                FontFamily="FontRobotoBold"
-                                Text="Contrato No."
-                                TextColor="{StaticResource MainColor}" />
-                            <Label Text="{Binding ContratoId}" />
-                        </StackLayout>
-
-                        <Label
-                            Margin="10,5"
-                            Text="Usuario"
-                            VerticalTextAlignment="Center" />
-
-                        <Entry
-                            Margin="10,5"
-                            FontFamily="FontRobotoBold"
-                            FontSize="Medium"
-                            HeightRequest="40"
-                            Text="{Binding Email}"
-                            TextColor="{StaticResource MainColor}"
-                            VerticalOptions="StartAndExpand" />
-
-                        <Label
-                            Margin="10,5"
-                            Text="Senha"
-                            VerticalTextAlignment="Center" />
-
-                        <Entry
-                            Margin="10,5"
-                            FontFamily="FontRobotoBold"
-                            FontSize="Medium"
-                            HeightRequest="40"
-                            Text="{Binding Senha}"
+                            Text="Contrato No."
                             TextColor="{StaticResource MainColor}" />
-                        <Grid
-                            Padding="10,5"
-                            ColumnSpacing="0"
-                            HorizontalOptions="StartAndExpand"
-                            RowSpacing="0"
-                            VerticalOptions="StartAndExpand">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="1*" />
-                                <ColumnDefinition Width="0.5*" />
+                        <Label Text="{Binding ContratoId}" />
+                    </StackLayout>
 
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="*" />
-                                <RowDefinition Height="*" />
+                    <Label
+                        Margin="10,5"
+                        Text="Usuario"
+                        VerticalTextAlignment="Center" />
 
-                            </Grid.RowDefinitions>
-                            <Label Text="Inicio" VerticalTextAlignment="Center" />
-                            <Entry
-                                Grid.Row="1"
-                                Grid.Column="0"
-                                FontFamily="FontRobotoBold"
-                                FontSize="Medium"
-                                HorizontalOptions="FillAndExpand"
-                                Text="{Binding Inicio, StringFormat='{0:dd/MM/yyyy}'}"
-                                TextColor="{StaticResource MainColor}" />
-                            <Label
-                                Grid.Row="0"
-                                Grid.Column="2"
-                                Text="Renovação"
-                                VerticalTextAlignment="Center" />
-                            <Entry
-                                Grid.Row="1"
-                                Grid.Column="2"
-                                FontFamily="FontRobotoBold"
-                                FontSize="Medium"
-                                HorizontalOptions="FillAndExpand"
-                                Text="{Binding Renova, StringFormat='{0:dd/MM/yyyy}'}"
-                                TextColor="{StaticResource MainColor}" />
+                    <Entry
+                        Margin="10,5"
+                        FontFamily="FontRobotoBold"
+                        FontSize="Medium"
+                        HeightRequest="40"
+                        Text="{Binding Email}"
+                        TextColor="{StaticResource MainColor}"
+                        VerticalOptions="StartAndExpand" />
 
-                        </Grid>
+                    <Label
+                        Margin="10,5"
+                        Text="Senha"
+                        VerticalTextAlignment="Center" />
 
-                        <Label
-                            Margin="10,5"
-                            Text="Professor"
-                            VerticalTextAlignment="Center" />
+                    <Entry
+                        Margin="10,5"
+                        FontFamily="FontRobotoBold"
+                        FontSize="Medium"
+                        HeightRequest="40"
+                        Text="{Binding Senha}"
+                        TextColor="{StaticResource MainColor}" />
+                    <Grid
+                        Padding="10,5"
+                        ColumnSpacing="0"
+                        HorizontalOptions="StartAndExpand"
+                        RowSpacing="0"
+                        VerticalOptions="StartAndExpand">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="0.5*" />
+
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+
+                        </Grid.RowDefinitions>
+                        <Label Text="Inicio" VerticalTextAlignment="Center" />
                         <Entry
-                            Margin="10,5"
+                            Grid.Row="1"
+                            Grid.Column="0"
                             FontFamily="FontRobotoBold"
                             FontSize="Medium"
                             HorizontalOptions="FillAndExpand"
-                            Text="{Binding NomeProfessor}"
+                            Text="{Binding Inicio, StringFormat='{0:dd/MM/yyyy}'}"
                             TextColor="{StaticResource MainColor}" />
                         <Label
-                            Margin="10,5"
-                            Text="Plano"
+                            Grid.Row="0"
+                            Grid.Column="2"
+                            Text="Renovação"
                             VerticalTextAlignment="Center" />
                         <Entry
-                            Margin="10,5"
+                            Grid.Row="1"
+                            Grid.Column="2"
                             FontFamily="FontRobotoBold"
                             FontSize="Medium"
                             HorizontalOptions="FillAndExpand"
-                            Text="{Binding Plano}"
+                            Text="{Binding Renova, StringFormat='{0:dd/MM/yyyy}'}"
                             TextColor="{StaticResource MainColor}" />
 
-                        <Button
-                            Margin="10,5,10,0"
-                            BackgroundColor="{StaticResource MainColor}"
-                            BorderRadius="20"
-                            Command="{Binding reagendarCommand}"
-                            Text="Reagendar"
-                            TextColor="{StaticResource BackgroundColor}"
-                            VerticalOptions="EndAndExpand" />
-                        <Button
-                            BackgroundColor="Transparent"
-                            Command="{Binding LogoutCommand}"
-                            Text="Logout" />
-                    </FlexLayout>
-                </ScrollView>
+                    </Grid>
+
+                    <Label
+                        Margin="10,5"
+                        Text="Professor"
+                        VerticalTextAlignment="Center" />
+                    <Entry
+                        Margin="10,5"
+                        FontFamily="FontRobotoBold"
+                        FontSize="Medium"
+                        HorizontalOptions="FillAndExpand"
+                        Text="{Binding NomeProfessor}"
+                        TextColor="{StaticResource MainColor}" />
+                    <Label
+                        Margin="10,5"
+                        Text="Plano"
+                        VerticalTextAlignment="Center" />
+                    <Entry
+                        Margin="10,5"
+                        FontFamily="FontRobotoBold"
+                        FontSize="Medium"
+                        HorizontalOptions="FillAndExpand"
+                        Text="{Binding Plano}"
+                        TextColor="{StaticResource MainColor}" />
+
+                    <Button
+                        Margin="10,5,10,0"
+                        BackgroundColor="{StaticResource MainColor}"
+                        BorderRadius="20"
+                        Command="{Binding reagendarCommand}"
+                        Text="Reagendar"
+                        TextColor="{StaticResource BackgroundColor}"
+                        VerticalOptions="EndAndExpand" />
+                    <Button
+                        BackgroundColor="Transparent"
+                        Command="{Binding LogoutCommand}"
+                        Text="Logout" />
+                </FlexLayout>
+
             </pancakeView:PancakeView>
         </Grid>
     </ScrollView>

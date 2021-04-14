@@ -8,7 +8,7 @@ using Xamarin.Essentials;
 
 namespace AcesApp.ViewModels
 {
-    public class ViewModelBase : BindableBase, IInitialize, INavigationAware, IDestructible, IActiveAware
+    public class ViewModelBase : BindableBase, INavigationAware, IDestructible, IActiveAware
     {
         protected INavigationService NavigationService { get; private set; }
         protected IPageDialogService PageDialogService { get; private set; }
