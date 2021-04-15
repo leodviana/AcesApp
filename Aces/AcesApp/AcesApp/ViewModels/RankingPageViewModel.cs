@@ -8,6 +8,7 @@ using Acr.UserDialogs;
 using Prism.Navigation;
 using Prism.Services;
 using Xamarin.Essentials;
+using System.Linq;
 
 namespace AcesApp.ViewModels
 {
@@ -152,7 +153,7 @@ namespace AcesApp.ViewModels
             //var lista_eventos = new List<Events>();
             var lista_eventos = (List<Ranking>)response.Result;
             pacs.Clear();
-            pacs = new ObservableCollection<Ranking>( lista_eventos);
+            pacs = new ObservableCollection<Ranking>( lista_eventos.Where(x=>x.posicao==1).OrderBy(x=>x.categoria));
             /*  Events = new EventCollection();*/
 
             

@@ -3,6 +3,7 @@
     x:Class="AcesApp.Views.RankingPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:converters="clr-namespace:AcesApp.Converters"
     xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
     xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
     xmlns:pancake="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
@@ -51,7 +52,6 @@
 
                 <CollectionView
                     x:Name="colecdentistas"
-                    Margin="0,10,0,0"
                     ItemSizingStrategy="MeasureFirstItem"
                     ItemsSource="{Binding pacs, Mode=OneWay}"
                     SelectionMode="None">
@@ -62,6 +62,7 @@
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
                             <StackLayout>
+
                                 <Frame
                                     Margin="10,12,10,12"
                                     HorizontalOptions="FillAndExpand"
@@ -90,10 +91,14 @@
                                         <StackLayout Grid.Column="1" Spacing="0">
                                             <Label
                                                 Grid.Column="0"
-                                                FontAttributes="Bold"
-                                                LineBreakMode="TailTruncation"
-                                                Text="{Binding jogador}"
+                                                Margin="0,0,0,10"
+                                                FontFamily="Roboto-Black"
+                                                FontSize="Medium"
+                                                HorizontalOptions="Center"
+                                                Text="{Binding categoria, Converter={converters:CategoriaConverter}}"
                                                 TextColor="{StaticResource MainColor}" />
+
+
                                             <Grid>
                                                 <Grid.ColumnDefinitions>
                                                     <ColumnDefinition Width="Auto" />
@@ -102,25 +107,32 @@
                                                     Grid.Column="0"
                                                     Orientation="Vertical"
                                                     Spacing="0">
+
+
+                                                    <Label
+                                                        LineBreakMode="TailTruncation"
+                                                        Text="{Binding jogador}"
+                                                        TextColor="{StaticResource MainColor}" />
+
                                                     <StackLayout Orientation="Horizontal">
-                                                        <Label Text="Dt. Nasc.:" TextColor="{StaticResource MainColor}" />
-                                                        <Label Text="teste" TextColor="{StaticResource MainColor}" />
+                                                        <Label Text="Pontuação.:" TextColor="{StaticResource MainColor}" />
+                                                        <Label Text="{Binding pontos}" TextColor="{StaticResource MainColor}" />
                                                     </StackLayout>
                                                     <StackLayout Orientation="Horizontal">
-                                                        <Label Text="Dt. Atend.:" TextColor="{StaticResource MainColor}" />
-                                                        <Label Text="teste2" TextColor="{StaticResource MainColor}" />
+                                                        <Label Text="Posição:" TextColor="{StaticResource MainColor}" />
+                                                        <Label Text="{Binding posicao}" TextColor="{StaticResource MainColor}" />
                                                     </StackLayout>
-                                                    <StackLayout Orientation="Horizontal">
-                                                        <Label Text="Atendimento No.:" TextColor="{StaticResource MainColor}" />
-                                                        <Label Text="teste3" TextColor="{StaticResource MainColor}" />
-                                                    </StackLayout>
-                                                    <StackLayout Orientation="Horizontal">
-                                                        <Label Text="Exame Realizado:" TextColor="{StaticResource MainColor}" />
-                                                        <Label Text="teste94" TextColor="{StaticResource MainColor}" />
-                                                    </StackLayout>
+
+                                                    <Label Text="{Binding jogador2}" TextColor="{StaticResource MainColor}" />
+
                                                 </StackLayout>
 
                                             </Grid>
+                                            <Button
+                                                HorizontalOptions="End"
+                                                Text="Ranking"
+                                                TextColor="{StaticResource MainColor}"
+                                                VerticalOptions="End" />
                                         </StackLayout>
 
                                     </Grid>

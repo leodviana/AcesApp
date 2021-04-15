@@ -81,5 +81,6 @@
   <ItemGroup>
     <Folder Include="Utils\" />
     <Folder Include="Helpers\" />
+    <Folder Include="Converters\" />
   </ItemGroup>
 </Project>
