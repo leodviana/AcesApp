@@ -96,6 +96,7 @@ namespace AcesApp
 
             containerRegistry.RegisterForNavigation<AulasPage, AulasPageViewModel>();
             containerRegistry.RegisterForNavigation<ModificaHorarioPage, ModificaHorarioPageViewModel>();
+            containerRegistry.RegisterForNavigation<RankingCategoriaPage, RankingCategoriaViewModel>();
         }
     }
 }

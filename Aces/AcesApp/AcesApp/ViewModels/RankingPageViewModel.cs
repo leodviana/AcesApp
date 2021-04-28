@@ -9,6 +9,8 @@ using Prism.Navigation;
 using Prism.Services;
 using Xamarin.Essentials;
 using System.Linq;
+using System.Windows.Input;
+using Xamarin.Forms;
 
 namespace AcesApp.ViewModels
 {
@@ -17,7 +19,7 @@ namespace AcesApp.ViewModels
         IApiService apiService;
         
         private readonly IUserDialogs _userDialogs;
-
+        private ICommand _navegar;
 
         public ObservableCollection<Ranking> _pacs;
         public ObservableCollection<Ranking> pacs
@@ -36,6 +38,17 @@ namespace AcesApp.ViewModels
             set
             {
                 SetProperty(ref _inicializa, value);
+
+            }
+        }
+
+        private bool _mostra;
+        public bool mostra
+        {
+            get { return _mostra; }
+            set
+            {
+                SetProperty(ref _mostra, value);
 
             }
         }
@@ -73,6 +86,7 @@ namespace AcesApp.ViewModels
             IsActiveChanged += HandleIsActiveTrue;
             IsActiveChanged += HandleIsActiveFalse;
             pacs = new ObservableCollection<Ranking>();
+            mostra = false;
         }
 
 
@@ -82,6 +96,23 @@ namespace AcesApp.ViewModels
 
         }
 
+
+        public ICommand navegar
+        {
+            get
+            {
+                return _navegar ?? (_navegar = new Command<Ranking>(async objeto =>
+                {
+                    Ranking posicao = objeto;
+
+                    var navigationParams = new NavigationParameters();
+                    navigationParams.Add("ranking", posicao);
+
+                    await NavigationService.NavigateAsync("RankingCategoriaPage", navigationParams);
+
+                }));
+            }
+        }
         private async Task InitializeAsync()
         {
             //await PageDialogService.DisplayAlertAsync("app", "Sem conexao!", "Ok");
@@ -152,6 +183,10 @@ namespace AcesApp.ViewModels
             }
             //var lista_eventos = new List<Events>();
             var lista_eventos = (List<Ranking>)response.Result;
+            if (lista_eventos.Count==0)
+            {
+                mostra = true;
+            }
             pacs.Clear();
             pacs = new ObservableCollection<Ranking>( lista_eventos.Where(x=>x.posicao==1).OrderBy(x=>x.categoria));
             /*  Events = new EventCollection();*/

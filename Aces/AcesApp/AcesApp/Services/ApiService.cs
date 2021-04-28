@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace AcesApp.Services
 {
@@ -167,6 +168,7 @@ namespace AcesApp.Services
         }
 
 
+        
 
         public async Task<Response> getEventosfree(Events evento)
         {

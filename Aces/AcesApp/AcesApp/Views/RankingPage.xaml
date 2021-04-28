@@ -52,7 +52,7 @@
 
                 <CollectionView
                     x:Name="colecdentistas"
-                    ItemSizingStrategy="MeasureFirstItem"
+                    ItemSizingStrategy="MeasureAllItems"
                     ItemsSource="{Binding pacs, Mode=OneWay}"
                     SelectionMode="None">
 
@@ -129,6 +129,8 @@
 
                                             </Grid>
                                             <Button
+                                                Command="{Binding Path=BindingContext.navegar, Source={x:Reference colecdentistas}}"
+                                                CommandParameter="{Binding .}"
                                                 HorizontalOptions="End"
                                                 Text="Ranking"
                                                 TextColor="{StaticResource MainColor}"
@@ -145,7 +147,7 @@
                         <StackLayout Margin="30,0,0,20">
                             <Frame
                                 HorizontalOptions="CenterAndExpand"
-                                IsVisible="{Binding Mostramensagem}"
+                                IsVisible="{Binding mostra}"
                                 VerticalOptions="CenterAndExpand"
                                 WidthRequest="300">
                                 <Label

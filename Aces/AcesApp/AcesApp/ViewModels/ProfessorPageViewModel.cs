@@ -201,6 +201,7 @@ namespace AcesApp.ViewModels
             Lista_filtrada = new ObservableCollection<Professor>();
             Lista = new List<Professor>();
             mostra = false;
+            Mostramensagem = false;
             // Professores = new List<Professor>();
 
         }

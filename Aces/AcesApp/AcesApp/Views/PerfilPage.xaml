@@ -89,7 +89,7 @@
                     Direction="Column"
                     Wrap="NoWrap">
                     <Label
-                        Margin="0,10,0,0"
+                        Margin="10,10,10,0"
                         FlexLayout.AlignSelf="Center"
                         FontFamily="FontRobotoBold"
                         FontSize="Large"
