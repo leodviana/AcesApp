@@ -72,7 +72,7 @@ namespace AcesApp.ViewModels
             {
                 SetProperty(ref _Selection, value);
 
-                //Navega();
+                 Navega(_Selection);
             }
         }
         public RankingPageViewModel(INavigationService navigationService,
@@ -105,13 +105,18 @@ namespace AcesApp.ViewModels
                 {
                     Ranking posicao = objeto;
 
-                    var navigationParams = new NavigationParameters();
-                    navigationParams.Add("ranking", posicao);
-
-                    await NavigationService.NavigateAsync("RankingCategoriaPage", navigationParams);
+                    await Navega(posicao);
 
                 }));
             }
+        }
+
+        private async Task Navega (Ranking ranking)
+        {
+            var navigationParams = new NavigationParameters();
+            navigationParams.Add("ranking", ranking);
+
+            await NavigationService.NavigateAsync("RankingCategoriaPage", navigationParams);
         }
         private async Task InitializeAsync()
         {

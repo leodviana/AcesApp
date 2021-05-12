@@ -96,7 +96,7 @@
                             <Grid Margin="10" ColumnSpacing="10">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="60" />
-                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="auto" />
                                 </Grid.ColumnDefinitions>
                                 <ffimageloading:CachedImage
                                     Grid.Column="0"
@@ -126,7 +126,10 @@
                                             Grid.Column="0"
                                             Orientation="Vertical"
                                             Spacing="0">
-                                            <Label Text="{Binding jogador2}" TextColor="{StaticResource MainColor}" />
+                                            <Label
+                                                LineBreakMode="TailTruncation"
+                                                Text="{Binding jogador2}"
+                                                TextColor="{StaticResource MainColor}" />
                                             <StackLayout Orientation="Horizontal">
                                                 <Label Text="Pontuação.:" TextColor="{StaticResource MainColor}" />
                                                 <Label Text="{Binding pontos}" TextColor="{StaticResource MainColor}" />
