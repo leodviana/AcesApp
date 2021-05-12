@@ -65,6 +65,8 @@
 
                                 <Frame
                                     Margin="10,12,10,12"
+                                    BorderColor="Gray"
+                                    HasShadow="True"
                                     HorizontalOptions="FillAndExpand"
                                     VerticalOptions="FillAndExpand">
 
@@ -129,6 +131,7 @@
 
                                             </Grid>
                                             <Button
+                                                BackgroundColor="Transparent"
                                                 Command="{Binding Path=BindingContext.navegar, Source={x:Reference colecdentistas}}"
                                                 CommandParameter="{Binding .}"
                                                 HorizontalOptions="End"
