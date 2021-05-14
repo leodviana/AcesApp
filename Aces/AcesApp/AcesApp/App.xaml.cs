@@ -46,10 +46,10 @@ namespace AcesApp
                 {
 
                 
-                /*if (usuariologado.ImagePath.Equals(""))
+                if (usuariologado.ImagePath==null)
                 {
-                    usuariologado.ImagePath = "perfil";
-                }*/
+                    usuariologado.ImagePath = "profile";
+                }
                
                 /*if (usuariologado.Id == 999999999)
                 {

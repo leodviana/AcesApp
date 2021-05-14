@@ -39,8 +39,8 @@
     <MtouchLink>None</MtouchLink>
     <MtouchArch>i386, x86_64</MtouchArch>
     <ConsolePause>false</ConsolePause>
-    <CodesignProvision>iOS Team Provisioning Profile: com.aces.Acesapp</CodesignProvision>
-    <CodesignKey>Apple Development: Perboyre Castelo (6838288AZ8)</CodesignKey>
+    <CodesignProvision>AcessappProfile</CodesignProvision>
+    <CodesignKey>Apple Distribution: Perboyre Castelo (36V76X3N9M)</CodesignKey>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhone' ">
     <DebugSymbols>true</DebugSymbols>
@@ -97,8 +97,8 @@
     <WarningLevel>4</WarningLevel>
     <ConsolePause>False</ConsolePause>
     <MtouchArch>ARM64</MtouchArch>
-    <CodesignProvision>iOS Team Provisioning Profile: com.aces.Acesapp</CodesignProvision>
-    <CodesignKey>Apple Development: Perboyre Castelo (6838288AZ8)</CodesignKey>
+    <CodesignProvision>AcessappProfile</CodesignProvision>
+    <CodesignKey>Apple Distribution: Perboyre Castelo (36V76X3N9M)</CodesignKey>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
     <MtouchEnableSGenConc>true</MtouchEnableSGenConc>
     <MtouchLink>SdkOnly</MtouchLink>

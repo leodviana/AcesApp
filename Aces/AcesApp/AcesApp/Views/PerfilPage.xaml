@@ -34,7 +34,7 @@
             CornerRadius="25,25,0,0"
             HasShadow="True"
             HeightRequest="200">
-            <ScrollView>
+            <ScrollView VerticalScrollBarVisibility="Never">
                 <StackLayout Margin="0,10" Padding="0,30">
 
                     <Grid ColumnSpacing="0" HorizontalOptions="Center">
@@ -58,15 +58,14 @@
                                 CacheDuration="50"
                                 CacheType="Memory"
                                 DownsampleToViewSize="true"
-                                ErrorPlaceholder="unnamed.png"
-                                HeightRequest="100"
+                                HeightRequest="200"
                                 HorizontalOptions="CenterAndExpand"
                                 LoadingPlaceholder="Spinner.gif"
                                 RetryCount="3"
                                 RetryDelay="600"
-                                Source="profile"
+                                Source="{Binding Photo}"
                                 VerticalOptions="End"
-                                WidthRequest="100">
+                                WidthRequest="200">
                                 <ffimageloading:CachedImage.Transformations>
                                     <fftransformations:CircleTransformation />
                                 </ffimageloading:CachedImage.Transformations>
@@ -78,7 +77,12 @@
                             Source="cam.png"
                             TranslationY="-30"
                             VerticalOptions="End"
-                            WidthRequest="30" />
+                            WidthRequest="30">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding abrircameraCommand}" />
+                            </Image.GestureRecognizers>
+                        </Image>
+
                     </Grid>
                     <FlexLayout
                         AlignContent="SpaceBetween"
