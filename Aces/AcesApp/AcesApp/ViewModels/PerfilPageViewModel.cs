@@ -34,7 +34,12 @@ namespace AcesApp.ViewModels
         private readonly IUserDialogs _userDialogs;
         IApiService apiService;
 
+        //aula_dada
 
+        private Int64 aula_nao_dada;
+
+        public Int64 aula_dada;
+        
         private bool _inicializa;
 
         public bool inicializa
@@ -200,6 +205,18 @@ namespace AcesApp.ViewModels
             }
         }
 
+        private string _exibeaulas;
+
+        public string exibeaulas
+        {
+            get { return _exibeaulas; }
+            set
+            {
+                SetProperty(ref _exibeaulas, value);
+
+            }
+        }
+
         private ImageSource _photo;
 
         public ImageSource Photo
@@ -232,7 +249,63 @@ namespace AcesApp.ViewModels
         {
             if (IsActive == false) return;
             if (!inicializa)
+            {
+                await CarregarEventosAsync();
                 atribuivalores(App.usuariologado);
+            }
+                
+
+        }
+
+        private async Task CarregarEventosAsync()
+        {
+            aula_nao_dada = 0;
+            aula_dada = 0;
+            var parametro = new Events();
+            parametro.contrato = App.usuariologado.contratoId;
+           // Culture = CultureInfo.CreateSpecificCulture("pt-BR");
+            var current = Connectivity.NetworkAccess;
+
+            var response = new Response();
+            IsRunning = true;
+
+            _userDialogs.ShowLoading("Carregando", MaskType.Black);
+            if (current == NetworkAccess.Internet)
+
+            {
+                response = await apiService.getEventos(parametro);
+            }
+            else
+            {
+                _userDialogs.HideLoading();
+                await exibeErro("Dispositivo não está conectado a internet!");
+
+                IsRunning = false;
+                return;
+            }
+            IsRunning = false;
+
+            if (!response.IsSuccess)
+            {
+                _userDialogs.HideLoading();
+                await exibeErro(response.Message);
+
+                return;
+            }
+            //var lista_eventos = new List<Events>();
+            
+            var lista_eventos = (List<Events>)response.Result;
+            foreach (var item in lista_eventos)
+            {
+                if (DateTime.Now >= Convert.ToDateTime(item.Start))
+                    aula_dada = aula_dada + 1;
+                else
+                    aula_nao_dada = aula_nao_dada + 1;
+            }
+            /*  Events = new EventCollection();*/
+
+            exibeaulas = aula_dada + " de " + App.usuariologado.num_aulas;
+            _userDialogs.HideLoading();
 
         }
 
