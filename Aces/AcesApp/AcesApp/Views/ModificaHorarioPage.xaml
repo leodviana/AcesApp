@@ -135,19 +135,19 @@
                                 JustifyContent="SpaceBetween">
                                 <BoxView
                                     CornerRadius="10"
+                                    FlexLayout.Shrink="0"
                                     HeightRequest="20"
                                     WidthRequest="20"
                                     Color="{StaticResource stlivre}" />
 
                                 <Label
                                     Margin="5,0"
-                                    FlexLayout.Grow="1"
+                                    FlexLayout.Shrink="0"
                                     FontAttributes="Bold"
                                     FontSize="Small"
                                     Text="{Binding descricao, StringFormat='{0:dd/MM/yyyy HH:mm:ss}'}"
                                     VerticalTextAlignment="Center" />
                                 <Label
-                                    FlexLayout.Grow="2"
                                     FontAttributes="Bold"
                                     FontSize="Small"
                                     LineBreakMode="TailTruncation"
@@ -159,6 +159,7 @@
                                     Command="{Binding BindingContext.MudarHorarioCommand, Source={x:Reference simpleCalendarPage}}"
                                     CommandParameter="{Binding .}"
                                     FlexLayout.AlignSelf="End"
+                                    FlexLayout.Shrink="0"
                                     HeightRequest="25"
                                     HorizontalOptions="End"
                                     Source="edit" />

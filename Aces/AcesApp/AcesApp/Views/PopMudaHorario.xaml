@@ -82,34 +82,53 @@
                                 JustifyContent="SpaceBetween">
                                 <BindableLayout.ItemTemplate>
                                     <DataTemplate>
-                                        <StackLayout Orientation="Horizontal">
+                                        <Grid ColumnSpacing="10">
+                                            <Grid.ColumnDefinitions>
+
+                                                <ColumnDefinition Width="30" />
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="*" />
+
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="*" />
+                                                <RowDefinition Height="*" />
+                                            </Grid.RowDefinitions>
                                             <BoxView
-                                                CornerRadius="10"
-                                                HeightRequest="20"
-                                                WidthRequest="20"
+                                                Grid.RowSpan="2"
+                                                Grid.Column="0"
+                                                CornerRadius="15"
+                                                HeightRequest="30"
+                                                VerticalOptions="Center"
+                                                WidthRequest="30"
                                                 Color="{StaticResource stagendado}" />
                                             <Label
+                                                Grid.Column="1"
                                                 FontAttributes="Bold"
                                                 FontSize="Small"
                                                 LineBreakMode="TailTruncation"
                                                 Text="{Binding data_inicio, StringFormat='{0:dd/MM/yyyy}'}"
                                                 VerticalTextAlignment="Center" />
                                             <Label
+                                                Grid.Column="2"
                                                 FontAttributes="Bold"
                                                 FontSize="Small"
                                                 LineBreakMode="TailTruncation"
                                                 Text="{Binding descricao, StringFormat='{0:dd/MM/yyyy HH:mm:ss}'}"
                                                 VerticalTextAlignment="Center" />
+
+
+
+
                                             <Label
+                                                Grid.Row="1"
+                                                Grid.Column="1"
+                                                Grid.ColumnSpan="3"
                                                 FontAttributes="Bold"
-                                                FontSize="Medium"
-                                                Text="{Binding nome_professor}"
-                                                VerticalTextAlignment="Center" />
+                                                FontSize="Small"
+                                                Text="{Binding nome_professor}" />
 
-
-
-                                        </StackLayout>
-
+                                        </Grid>
                                     </DataTemplate>
 
                                 </BindableLayout.ItemTemplate>
@@ -148,29 +167,54 @@
                                 JustifyContent="SpaceBetween">
                                 <BindableLayout.ItemTemplate>
                                     <DataTemplate>
-                                        <StackLayout Orientation="Horizontal">
+                                        <Grid ColumnSpacing="10">
+                                            <Grid.ColumnDefinitions>
+
+                                                <ColumnDefinition Width="30" />
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="*" />
+
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="*" />
+                                                <RowDefinition Height="*" />
+                                            </Grid.RowDefinitions>
                                             <BoxView
-                                                CornerRadius="10"
-                                                HeightRequest="20"
-                                                WidthRequest="20"
+                                                Grid.RowSpan="2"
+                                                Grid.Column="0"
+                                                CornerRadius="15"
+                                                HeightRequest="30"
+                                                VerticalOptions="Center"
+                                                WidthRequest="30"
                                                 Color="{StaticResource stagendado}" />
                                             <Label
+                                                Grid.Column="1"
                                                 FontAttributes="Bold"
                                                 FontSize="Small"
+                                                LineBreakMode="TailTruncation"
                                                 Text="{Binding data_inicio, StringFormat='{0:dd/MM/yyyy}'}"
                                                 VerticalTextAlignment="Center" />
                                             <Label
+                                                Grid.Column="2"
                                                 FontAttributes="Bold"
                                                 FontSize="Small"
+                                                LineBreakMode="TailTruncation"
                                                 Text="{Binding descricao, StringFormat='{0:dd/MM/yyyy HH:mm:ss}'}"
                                                 VerticalTextAlignment="Center" />
-                                            <Label
-                                                FontAttributes="Bold"
-                                                FontSize="Medium"
-                                                Text="{Binding nome_professor}"
-                                                VerticalTextAlignment="Center" />
 
-                                        </StackLayout>
+
+
+
+                                            <Label
+                                                Grid.Row="1"
+                                                Grid.Column="1"
+                                                Grid.ColumnSpan="3"
+                                                FontAttributes="Bold"
+                                                FontSize="Small"
+                                                Text="{Binding nome_professor}" />
+
+                                        </Grid>
+
 
                                     </DataTemplate>
 

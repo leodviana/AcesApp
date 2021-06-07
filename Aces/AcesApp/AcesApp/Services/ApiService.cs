@@ -256,7 +256,7 @@ namespace AcesApp.Services
                 {
                     IsSuccess = true,
                     Message = "Ok",
-                    Result = Eventos
+                    Result = Eventos.Where(x=>x.Ativo.Equals("S"))
                 };
 
             }
