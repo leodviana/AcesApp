@@ -86,8 +86,8 @@
                                             <Grid.ColumnDefinitions>
 
                                                 <ColumnDefinition Width="30" />
-                                                <ColumnDefinition Width="*" />
-                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="Auto" />
+                                                <ColumnDefinition Width="auto" />
 
                                             </Grid.ColumnDefinitions>
                                             <Grid.RowDefinitions>
@@ -106,14 +106,12 @@
                                                 Grid.Column="1"
                                                 FontAttributes="Bold"
                                                 FontSize="Small"
-                                                LineBreakMode="TailTruncation"
                                                 Text="{Binding data_inicio, StringFormat='{0:dd/MM/yyyy}'}"
                                                 VerticalTextAlignment="Center" />
                                             <Label
                                                 Grid.Column="2"
                                                 FontAttributes="Bold"
                                                 FontSize="Small"
-                                                LineBreakMode="TailTruncation"
                                                 Text="{Binding descricao, StringFormat='{0:dd/MM/yyyy HH:mm:ss}'}"
                                                 VerticalTextAlignment="Center" />
 
@@ -171,8 +169,8 @@
                                             <Grid.ColumnDefinitions>
 
                                                 <ColumnDefinition Width="30" />
-                                                <ColumnDefinition Width="*" />
-                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="auto" />
+                                                <ColumnDefinition Width="auto" />
 
                                             </Grid.ColumnDefinitions>
                                             <Grid.RowDefinitions>
@@ -191,14 +189,12 @@
                                                 Grid.Column="1"
                                                 FontAttributes="Bold"
                                                 FontSize="Small"
-                                                LineBreakMode="TailTruncation"
                                                 Text="{Binding data_inicio, StringFormat='{0:dd/MM/yyyy}'}"
                                                 VerticalTextAlignment="Center" />
                                             <Label
                                                 Grid.Column="2"
                                                 FontAttributes="Bold"
                                                 FontSize="Small"
-                                                LineBreakMode="TailTruncation"
                                                 Text="{Binding descricao, StringFormat='{0:dd/MM/yyyy HH:mm:ss}'}"
                                                 VerticalTextAlignment="Center" />
 

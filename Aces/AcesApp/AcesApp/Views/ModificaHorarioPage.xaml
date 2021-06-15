@@ -125,7 +125,7 @@
                     YearLabelColor="{StaticResource MainColor}">
 
                     <controls:Calendar.EventTemplate>
-                        <DataTemplate >
+                        <DataTemplate>
 
 
                             <FlexLayout
@@ -145,16 +145,23 @@
                                     FlexLayout.Shrink="0"
                                     FontAttributes="Bold"
                                     FontSize="Small"
-                                    
                                     Text="{Binding descricao, StringFormat='{0:dd/MM/yyyy HH:mm:ss}'}"
-                                    VerticalTextAlignment="Center" />
+                                    VerticalTextAlignment="Center">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding BindingContext.MudarHorarioCommand, Source={x:Reference simpleCalendarPage}}" CommandParameter="{Binding .}" />
+                                    </Label.GestureRecognizers>
+                                </Label>
                                 <Label
                                     FontAttributes="Bold"
                                     FontSize="Small"
                                     LineBreakMode="TailTruncation"
                                     MaxLines="2"
                                     Text="{Binding nome_professor}"
-                                    VerticalTextAlignment="Center" />
+                                    VerticalTextAlignment="Center">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding BindingContext.MudarHorarioCommand, Source={x:Reference simpleCalendarPage}}" CommandParameter="{Binding .}" />
+                                    </Label.GestureRecognizers>
+                                </Label>
                                 <ImageButton
                                     BackgroundColor="Transparent"
                                     Command="{Binding BindingContext.MudarHorarioCommand, Source={x:Reference simpleCalendarPage}}"
@@ -169,7 +176,7 @@
 
 
                         </DataTemplate>
-                        
+
                     </controls:Calendar.EventTemplate>
 
                 </controls:Calendar>

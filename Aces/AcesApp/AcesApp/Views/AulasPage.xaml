@@ -95,13 +95,21 @@
                                         FontSize="Small"
                                         LineBreakMode="WordWrap"
                                         Text="{Binding descricao, StringFormat='{0:dd/MM/yyyy HH:mm:ss}'}"
-                                        VerticalTextAlignment="Center" />
+                                        VerticalTextAlignment="Center">
+                                        <Label.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding BindingContext.MudarHorarioCommand, Source={x:Reference simpleCalendarPage}}" CommandParameter="{Binding .}" />
+                                        </Label.GestureRecognizers>
+                                    </Label>
                                     <Label
                                         FlexLayout.Grow="2"
                                         FontAttributes="Bold"
                                         FontSize="Small"
                                         Text="{Binding nome_professor}"
-                                        VerticalTextAlignment="Center" />
+                                        VerticalTextAlignment="Center">
+                                        <Label.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding BindingContext.MudarHorarioCommand, Source={x:Reference simpleCalendarPage}}" CommandParameter="{Binding .}" />
+                                        </Label.GestureRecognizers>
+                                    </Label>
 
                                     <ImageButton
                                         BackgroundColor="Transparent"
