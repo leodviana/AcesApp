@@ -88,9 +88,36 @@ namespace AcesApp.ViewModels
         private async Task MudarHorario(object item)
         {
 
+            var evento = (Events)item;  
+            var inicio = evento.Start;
+            var final = DateTime.Now;
+
+            TimeSpan resultado =  inicio- final;
+            
+             var numero_dias  = resultado.Days;
+            var numero_horas  = resultado.TotalHours;
+
+            if(App.usuariologado.Renovacao<DateTime.Now)
+            {
+                _userDialogs.HideLoading();
+                await exibeErro("Contrato sem vigência!");
+
+                return;
+            }
+           
+
+            if (numero_horas < 6)
+            {
+                _userDialogs.HideLoading();
+                await exibeErro("Periodo de Remarcação Expirado!");
+
+                return;
+                // await PageDialogService.DisplayAlertAsync("app", "Aula já Realizada não é possivel Remarcação!", "Ok");
+            }
             var navigationParams = new NavigationParameters();
             navigationParams.Add("aluno", item);
-            
+
+           
             await NavigationService.NavigateAsync("ModificaHorarioPage",navigationParams);
             //await NavigationService.NavigateAsync("PopMudaHorario", navigationParams, true, true);
             //Selection = null;

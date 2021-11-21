@@ -273,19 +273,49 @@ namespace AcesApp.Services
         }
 
 
-        public async Task<Response> saveHorarios(long id , Events evento)
+        public async Task<Response> saveHorarios(Events evento_inicial , Events evento)
         {
 
+                
             try
             {
+                //salva na classe do log
+                var events_log = new AulasLog();
 
-                var jsonRequest = JsonConvert.SerializeObject(evento);
+
+                events_log.Subject_inicial = evento_inicial.Subject;
+                events_log.inicio = evento_inicial.Start;
+                events_log.Fim = evento_inicial.End;
+                //events_log. = evento_inicial.Description;
+                //events_log.IsFullDay = "1";
+                //events_log.Theme_color = evento_inicial.ThemeColor;
+                events_log.id_Stqcporcamento_inicio = evento_inicial.contrato;
+                events_log.status_inicial = "1";
+                events_log.idGercdaulas_inicial =evento_inicial.EventID;
+                events_log.id_grldentista_inicial = evento_inicial.professor;
+                events_log.dia_semana_inicial = evento_inicial.Start.DayOfWeek.ToString();
+
+                events_log.Subject_final = evento.Subject;
+                events_log.horario_inicio_final = evento.Start;
+                events_log.hora_final_final = evento.End;
+                //events_log. = evento_inicial.Description;
+                //events_log.IsFullDay = "1";
+                //events_log.Theme_color = evento_inicial.ThemeColor;
+                events_log.id_Stqcporcamento_final = evento.contrato;
+                events_log.status_final = "1";
+
+                events_log.idGercdaulas_final = evento.EventID;
+                events_log.id_grldentista_final = evento.professor;
+                events_log.dia_semana_final = evento.Start.DayOfWeek.ToString();
+                events_log.id_usuario = Convert.ToInt32(App.usuariologado.Id_grlbasico);
+
+                var jsonRequest = JsonConvert.SerializeObject(events_log);
                 var httpContent = new StringContent(jsonRequest, Encoding.UTF8, "application/json");
 
                 var client = new HttpClient();
                 client.BaseAddress = new Uri(App.Current.Resources["UrlAPI"].ToString());
 
-                var url = "api/Aulas/SaveEvents?id=" +id;
+                var url = "api/Aulas/SaveEvents";
 
                 var response = await client.PostAsync(url, httpContent);
                 var result = await response.Content.ReadAsStringAsync();

@@ -1,15 +1,13 @@
 ﻿<?xml version="1.0" encoding="UTF-8" ?>
 <pages:PopupPage
-
+    x:Class="AcesApp.Views.ProfessorPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    x:Class="AcesApp.Views.ProfessorPage"
-    xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
     xmlns:animations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
-    xmlns:pancake="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView" xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms" xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
-  
-    
-    >
+    xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+    xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+    xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+    xmlns:pancake="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView">
 
     <ContentPage.Resources>
         <Style TargetType="StackLayout">
@@ -44,160 +42,160 @@
             PositionIn="Top"
             PositionOut="Top"
             ScaleIn="1.2"
-            ScaleOut="0.8"/>
+            ScaleOut="0.8" />
     </pages:PopupPage.Animation>
 
 
-    <Grid  VerticalOptions="FillAndExpand" RowSpacing="0" BackgroundColor="{StaticResource BackgroundColorSecondary}" >
+    <Grid
+        BackgroundColor="{StaticResource BackgroundColorSecondary}"
+        RowSpacing="0"
+        VerticalOptions="FillAndExpand">
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            
+            <RowDefinition Height="*" />
+
         </Grid.RowDefinitions>
 
         <pancake:PancakeView
-           Margin="{OnPlatform iOS='0,50,0,0',Android='5,0,5,0'}"
-           BackgroundColor="White"
-           
-           HasShadow="True"
-           HeightRequest="200"
-         >
-            <StackLayout 
-               Spacing="0"
-               HorizontalOptions="FillAndExpand"
-              VerticalOptions="FillAndExpand">
-              <StackLayout  
-                 HeightRequest="30"
-                 BackgroundColor="{StaticResource MainColor}"
-                 HorizontalOptions="FillAndExpand"
-                 Orientation="Horizontal">
-                 <ImageButton
-                   BackgroundColor="{StaticResource MainColor}"
-                   x:Name="PopupDialogClose"
-                   Source="cancelwhite"
-                   Command="{Binding voltarCommand}"
-                   WidthRequest="13"
-                   Margin="0,0,10,0"
-                   HorizontalOptions="EndAndExpand">
+            Margin="{OnPlatform iOS='0,50,0,0',
+                                Android='5,0,5,0'}"
+            BackgroundColor="White"
+            HasShadow="True"
+            HeightRequest="200">
+            <StackLayout
+                HorizontalOptions="FillAndExpand"
+                Spacing="0"
+                VerticalOptions="FillAndExpand">
+                <StackLayout
+                    BackgroundColor="{StaticResource MainColor}"
+                    HeightRequest="30"
+                    HorizontalOptions="FillAndExpand"
+                    Orientation="Horizontal">
+                    <ImageButton
+                        x:Name="PopupDialogClose"
+                        Margin="0,0,10,0"
+                        BackgroundColor="{StaticResource MainColor}"
+                        Command="{Binding voltarCommand}"
+                        HorizontalOptions="EndAndExpand"
+                        Source="cancelwhite"
+                        WidthRequest="13" />
 
-                  </ImageButton>
+                </StackLayout>
+                <SearchBar
+                    x:Name="filtro"
+                    Margin="{OnPlatform Android='10,10,15,10',
+                                        iOS='10,10,15,10'}"
+                    HeightRequest="40"
+                    IsVisible="{Binding Mostra}"
+                    Placeholder="Localizar"
+                    SearchCommand="{Binding PesquisaCommand}"
+                    Text="{Binding DentistaFilter, Mode=TwoWay}"
+                    TextColor="#8F8E8F" />
 
-              </StackLayout>
-              <SearchBar
-            x:Name="filtro"
-            Margin="{OnPlatform Android='10,10,15,10',
-                                iOS='10,10,15,10'}"
-            HeightRequest="40"
-            IsVisible="{Binding Mostra}"
-            Placeholder="Localizar"
-            SearchCommand="{Binding PesquisaCommand}"
-            Text="{Binding DentistaFilter, Mode=TwoWay}"
-            TextColor="#8F8E8F" />
+                <RefreshView
+                    Command="{Binding RefreshCommand}"
+                    IsRefreshing="{Binding IsRunning}"
+                    RefreshColor="#4c0507">
+                    <CollectionView
+                        x:Name="colecdentistas"
+                        Margin="0,10,0,0"
+                        ItemSizingStrategy="MeasureFirstItem"
+                        ItemsSource="{Binding dentistas, Mode=OneWay}"
+                        SelectedItem="{Binding Selection}"
+                        SelectionMode="Single">
 
-        <RefreshView
-            Command="{Binding RefreshCommand}"
-            IsRefreshing="{Binding IsRunning}"
-            RefreshColor="#4c0507">
-            <CollectionView
-                x:Name="colecdentistas"
-                Margin="0,10,0,0"
-                ItemSizingStrategy="MeasureFirstItem"
-                ItemsSource="{Binding dentistas, Mode=OneWay}"
-                SelectedItem="{Binding Selection}"
-                SelectionMode="Single">
-
-                <CollectionView.ItemsLayout>
-                    <GridItemsLayout Orientation="Vertical" VerticalItemSpacing="2" />
-                </CollectionView.ItemsLayout>
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <StackLayout>
-                            <Grid Margin="10" ColumnSpacing="10">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="60" />
-                                    <ColumnDefinition Width="*" />
-                                </Grid.ColumnDefinitions>
-                                <ffimageloading:CachedImage
-                                    Grid.Column="0"
-                                    Margin="0,0,0,0"
-                                    Aspect="AspectFit"
-                                    DownsampleToViewSize="true"
-                                    HeightRequest="60"
-                                    Source="profile"
-                                    VerticalOptions="Start"
-                                    WidthRequest="60">
-                                    <ffimageloading:CachedImage.Transformations>
-                                        <fftransformations:CircleTransformation />
-                                    </ffimageloading:CachedImage.Transformations>
-                                </ffimageloading:CachedImage>
-                                <StackLayout Grid.Column="1" Spacing="0">
-                                    <Label
-                                        Grid.Column="0"
-                                        FontAttributes="Bold"
-                                        LineBreakMode="TailTruncation"
-                                        Text="{Binding Idgrlbasic.nome}"
-                                        TextColor="{StaticResource MainColor}" />
-                                    <Grid>
+                        <CollectionView.ItemsLayout>
+                            <GridItemsLayout Orientation="Vertical" VerticalItemSpacing="2" />
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <StackLayout>
+                                    <Grid Margin="10" ColumnSpacing="10">
                                         <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="60" />
+                                            <ColumnDefinition Width="*" />
                                         </Grid.ColumnDefinitions>
-                                        <StackLayout
+                                        <ffimageloading:CachedImage
                                             Grid.Column="0"
-                                            Orientation="Vertical"
-                                            Spacing="0">
-                                            <StackLayout Orientation="Horizontal">
-                                                <Label Text="Dt. Nasc.:" TextColor="{StaticResource MainColor}" />
-                                                <Label Text="Nascimento" TextColor="{StaticResource MainColor}" />
-                                            </StackLayout>
-                                            <StackLayout Orientation="Horizontal">
-                                                <Label Text="Dt. Atend.:" TextColor="{StaticResource MainColor}" />
-                                                <Label Text="19/01/1974" TextColor="{StaticResource MainColor}" />
-                                            </StackLayout>
-                                            <StackLayout Orientation="Horizontal">
-                                                <Label Text="Atendimento No.:" TextColor="{StaticResource MainColor}" />
-                                                <Label Text="id" TextColor="{StaticResource MainColor}" />
-                                            </StackLayout>
-                                            
+                                            Margin="0,0,0,0"
+                                            Aspect="AspectFit"
+                                            DownsampleToViewSize="true"
+                                            HeightRequest="60"
+                                            Source="profile"
+                                            VerticalOptions="Start"
+                                            WidthRequest="60">
+                                            <ffimageloading:CachedImage.Transformations>
+                                                <fftransformations:CircleTransformation />
+                                            </ffimageloading:CachedImage.Transformations>
+                                        </ffimageloading:CachedImage>
+                                        <StackLayout Grid.Column="1" Spacing="0">
+                                            <Label
+                                                Grid.Column="0"
+                                                FontAttributes="Bold"
+                                                LineBreakMode="TailTruncation"
+                                                Text="{Binding Idgrlbasic.nome}"
+                                                TextColor="{StaticResource MainColor}" />
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="Auto" />
+                                                </Grid.ColumnDefinitions>
+                                                <StackLayout
+                                                    Grid.Column="0"
+                                                    Orientation="Vertical"
+                                                    Spacing="0">
+                                                    <StackLayout Orientation="Horizontal">
+                                                        <Label Text="Dt. Nasc.:" TextColor="{StaticResource MainColor}" />
+                                                        <Label Text="Nascimento" TextColor="{StaticResource MainColor}" />
+                                                    </StackLayout>
+                                                    <StackLayout Orientation="Horizontal">
+                                                        <Label Text="Dt. Atend.:" TextColor="{StaticResource MainColor}" />
+                                                        <Label Text="19/01/1974" TextColor="{StaticResource MainColor}" />
+                                                    </StackLayout>
+                                                    <StackLayout Orientation="Horizontal">
+                                                        <Label Text="Id.:" TextColor="{StaticResource MainColor}" />
+                                                        <Label Text="id" TextColor="{StaticResource MainColor}" />
+                                                    </StackLayout>
+
+                                                </StackLayout>
+                                            </Grid>
                                         </StackLayout>
+
                                     </Grid>
+                                    <Frame
+                                        Margin="10,0,10,0"
+                                        Padding="0"
+                                        BackgroundColor="Black"
+                                        HasShadow="False"
+                                        HeightRequest="1" />
                                 </StackLayout>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                        <CollectionView.EmptyView>
 
-                            </Grid>
-                            <Frame
-                                Margin="10,0,10,0"
-                                Padding="0"
-                                BackgroundColor="Black"
-                                HasShadow="False"
-                                HeightRequest="1" />
-                        </StackLayout>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-                <CollectionView.EmptyView>
-
-                    <StackLayout Margin="30,0,0,20">
-                        <Frame
-                            HorizontalOptions="CenterAndExpand"
-                            IsVisible="{Binding Mostramensagem}"
-                            VerticalOptions="CenterAndExpand"
-                            WidthRequest="300">
-                            <Label
-                                FontSize="20"
-                                HorizontalOptions="CenterAndExpand"
-                                Text="{Binding Mensagem}"
-                                VerticalOptions="CenterAndExpand" />
-                        </Frame>
-                    </StackLayout>
+                            <StackLayout Margin="30,0,0,20">
+                                <Frame
+                                    HorizontalOptions="CenterAndExpand"
+                                    IsVisible="{Binding Mostramensagem}"
+                                    VerticalOptions="CenterAndExpand"
+                                    WidthRequest="300">
+                                    <Label
+                                        FontSize="20"
+                                        HorizontalOptions="CenterAndExpand"
+                                        Text="{Binding Mensagem}"
+                                        VerticalOptions="CenterAndExpand" />
+                                </Frame>
+                            </StackLayout>
 
 
 
-                </CollectionView.EmptyView>
-            </CollectionView>
-        </RefreshView>
-              
+                        </CollectionView.EmptyView>
+                    </CollectionView>
+                </RefreshView>
+
             </StackLayout>
 
         </pancake:PancakeView>
 
-        
+
 
 
     </Grid>

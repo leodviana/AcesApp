@@ -125,7 +125,7 @@ namespace AcesApp.ViewModels
                 if (current == NetworkAccess.Internet)
 
                 {
-                    response = await apiService.saveHorarios(_horarioInicial.EventID,_horarioFinal);
+                    response = await apiService.saveHorarios(_horarioInicial,_horarioFinal);
 
                     if (!response.IsSuccess)
                     {

@@ -30,6 +30,7 @@ namespace AcesApp
         protected override async void OnInitialized()
         {
             InitializeComponent();
+           Application.Current.UserAppTheme = OSAppTheme.Light;
             string usuario_logado = Preferences.Get("dentistaserializado", "");
             App.usuariologado = JsonConvert.DeserializeObject<Usuario>(usuario_logado);
 
