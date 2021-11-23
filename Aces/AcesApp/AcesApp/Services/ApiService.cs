@@ -94,6 +94,8 @@ namespace AcesApp.Services
                 
                 var Eventos = JsonConvert.DeserializeObject<List<Events>>(result);
 
+               
+
                 return new Response
                 {
                     IsSuccess = true,
