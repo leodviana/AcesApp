@@ -9,9 +9,20 @@ namespace AcesApp.Views
             InitializeComponent();
 
 
-            Children.Add(new RankingPage());
-            Children.Add(new AulasPage());
-            Children.Add(new PerfilPage());
+            var tipo_usuario = App.usuariologado.Tipo_usuario;
+            if (App.usuariologado.Tipo_usuario==3)
+            {
+                Children.Add(new RankingPage());
+                Children.Add(new AulasProfessorPage2());
+                Children.Add(new PerfilProfessorPage());
+            }
+            else
+            {
+                Children.Add(new RankingPage());
+                Children.Add(new AulasPage());
+                Children.Add(new PerfilPage());
+            }
+            
             
             //Children.Add(new Localizacao());
 

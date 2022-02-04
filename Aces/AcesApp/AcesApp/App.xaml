@@ -9,9 +9,11 @@
     mc:Ignorable="d">
     <Application.Resources>
 
-        <!--<x:String x:Key="UrlAPI">https://www.painelstudio.com/Apiaces/</x:String>-->
+        <x:String x:Key="UrlAPI">https://www.painelstudio.com/Apiaces/</x:String>
 
-        <x:String x:Key="UrlAPI">https://www.painelstudio.com/acestreinamentoapi/</x:String>
+        <x:String x:Key="versao">1.4</x:String>
+
+        <!--<x:String x:Key="UrlAPI">https://www.painelstudio.com/acestreinamentoapi/</x:String>-->
 
         <!--  Application resource dictionary  -->
         <Color x:Key="MainColor">#28613B</Color>

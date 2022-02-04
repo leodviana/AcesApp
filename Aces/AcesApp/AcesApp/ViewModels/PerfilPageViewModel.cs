@@ -26,6 +26,7 @@ namespace AcesApp.ViewModels
     {
         private const string TitleAlert = "Aces APP";
         private ICommand _logout;
+        private ICommand _versao;
 
         public byte[] imageArray;
         private ICommand _abrircameraCommand;
@@ -339,7 +340,19 @@ namespace AcesApp.ViewModels
                 }));
             }
         }
+        public ICommand VersaoCommand
+        {
+            get
+            {
+                return _versao ?? (_versao = new Command(async () =>
+                {
 
+                    await exibeErro(App.Current.Resources["versao"].ToString());
+
+                }));
+            }
+        }
+        
 
         public ICommand abrircameraCommand
         {

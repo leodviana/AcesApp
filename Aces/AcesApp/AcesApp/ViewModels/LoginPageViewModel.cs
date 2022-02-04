@@ -149,8 +149,7 @@ namespace AcesApp.ViewModels
              else
              {
                  await exibeErro("Dispositivo não está conectado a internet!");
-                 //await PageDialogService.DisplayAlertAsync("Erro", "Dispositivo sem Conexâo", "OK");
-                 //await dialogServices.ShowMessage("Erro", response.Message);
+                 
                  IsRunning = false;
                  return;
              }
@@ -159,44 +158,17 @@ namespace AcesApp.ViewModels
              if (!response.IsSuccess)
              {
                  await exibeErro(response.Message);
-                 //await PageDialogService.DisplayAlertAsync("Erro", response.Message, "OK");
-                 //await dialogServices.ShowMessage("Erro", response.Message);
+                 
                  return;
              }
 
              var User = (Usuario)response.Result;
-
-           /*  if (User.Id == 999999999)
-             {*/
-                 //User.tipo = "Administrador";
-                 App.usuariologado = User;
-
-                 //Settings.Grava_Settings(JsonConvert.SerializeObject(User));*/
-                 Preferences.Set("dentistaserializado", JsonConvert.SerializeObject(User));
+             App.usuariologado = User;
+             Preferences.Set("dentistaserializado", JsonConvert.SerializeObject(User));
+             var mainPage = $"/{nameof(NavigationPage)}/{nameof(MainPage2)}";
+             await NavigationService.NavigateAsync(mainPage);
                  
-                 var mainPage = $"/{nameof(NavigationPage)}/{nameof(MainPage2)}";
-                 await NavigationService.NavigateAsync(mainPage);
-                 //await NavigationService.NavigateAsync("/MasterPage/NavigationPage/DentistaPage");
-            /* }
-             else
-             {
-                 User.tipo = "Dentista";
-                 App.usuariologado = User;
-                 if (App.usuariologado.ImagePath.Equals(""))
-                 {
-                     App.usuariologado.ImagePath = "perfil";
-                 }
-                 // Settings.Grava_Settings(JsonConvert.SerializeObject(User));
-                 Preferences.Set("dentistaserializado", JsonConvert.SerializeObject(User));
-                 //Preferences.Get("dentistaserializado", JsonConvert.SerializeObject(User));
-                 var navigationParams = new NavigationParameters();
-                 navigationParams.Add("paciente", User);
-                 //await NavigationService.NavigateAsync("/MasterPage/NavigationPage/DentistaPage");
-                 var mainPage = $"/{nameof(NavigationPage)}/{nameof(MainPage2)}";
-                 await NavigationService.NavigateAsync(mainPage);
-                 //  await _navigationService.NavigateAsync("/MasterPage/NavigationPage/ExamesPage", navigationParams);
-             }
-            */
+            
         }
 
         public void OnNavigatedFrom(NavigationParameters parameters)

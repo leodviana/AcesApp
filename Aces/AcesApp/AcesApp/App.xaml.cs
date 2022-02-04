@@ -30,7 +30,7 @@ namespace AcesApp
         protected override async void OnInitialized()
         {
             InitializeComponent();
-           Application.Current.UserAppTheme = OSAppTheme.Light;
+            Application.Current.UserAppTheme = OSAppTheme.Light;
             string usuario_logado = Preferences.Get("dentistaserializado", "");
             App.usuariologado = JsonConvert.DeserializeObject<Usuario>(usuario_logado);
 
@@ -47,31 +47,14 @@ namespace AcesApp
                 {
 
                 
-                if (usuariologado.ImagePath==null)
-                {
-                    usuariologado.ImagePath = "profile";
-                }
+                  if (usuariologado.ImagePath==null)
+                  {
+                      usuariologado.ImagePath = "profile";
+                  }
                
-                /*if (usuariologado.Id == 999999999)
-                {
-
-                    usuariologado.tipo = "Administrador";
-                    */
                     var mainPage = $"{nameof(NavigationPage)}/{nameof(MainPage2)}";
                     await this.NavigationService.NavigateAsync(mainPage);
-
-                    /* }
-                     else
-                     {
-                         App.usuariologado.tipo = "Dentista";
-                         var navigationParams = new NavigationParameters();
-                         navigationParams.Add("paciente", App.usuariologado);
-
-
-                         var mainPage = $"{nameof(NavigationPage)}/{nameof(MainPage2)}";
-                         await NavigationService.NavigateAsync(mainPage);
-
-                     }*/
+    
                 }
                 catch(Exception ex)
                 {
@@ -96,6 +79,7 @@ namespace AcesApp
             containerRegistry.RegisterSingleton<IApiService, ApiService>();
 
             containerRegistry.RegisterForNavigation<AulasPage, AulasPageViewModel>();
+            containerRegistry.RegisterForNavigation<AulasProfessorPage2, AulasProfessorPage2ViewModel>();
             containerRegistry.RegisterForNavigation<PopAulasPage, PopAulasViewModel>();
             containerRegistry.RegisterForNavigation<ModificaHorarioPage, ModificaHorarioPageViewModel>();
             containerRegistry.RegisterForNavigation<RankingCategoriaPage, RankingCategoriaViewModel>();
