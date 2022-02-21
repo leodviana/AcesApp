@@ -15,6 +15,7 @@ namespace AcesApp.Views
                 Children.Add(new RankingPage());
                 Children.Add(new AulasProfessorPage2());
                 Children.Add(new PerfilProfessorPage());
+                Children.Add(new ModificacoesPage());
             }
             else
             {

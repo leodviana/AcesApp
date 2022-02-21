@@ -327,6 +327,7 @@ namespace AcesApp.Services
         }
 
 
+
         public async Task<Response> saveHorarios(Events evento_inicial , Events evento)
         {
 
@@ -389,6 +390,58 @@ namespace AcesApp.Services
                
                 var Eventos = JsonConvert.DeserializeObject<Events>(result);
 
+                return new Response
+                {
+                    IsSuccess = true,
+                    Message = "Ok",
+                    Result = Eventos
+                };
+
+            }
+            catch (Exception ex)
+            {
+                // return null;
+                return new Response
+                {
+                    IsSuccess = false,
+                    Message = ex.Message,
+                };
+
+            }
+        }
+
+
+        public async Task<Response> getAulasLog(AulasLog _aulasLog)
+        {
+
+            try
+            {
+
+                var jsonRequest = JsonConvert.SerializeObject(_aulasLog);
+                var httpContent = new StringContent(jsonRequest, Encoding.UTF8, "application/json");
+
+                var client = new HttpClient();
+                client.BaseAddress = new Uri(App.Current.Resources["UrlAPI"].ToString());
+
+                var url = "api/Aulas/GetAulasLog";
+
+                var response = await client.PostAsync(url, httpContent);
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    return new Response
+                    {
+                        IsSuccess = false,
+                        Message = "Problemas com o Log das aulas",
+
+                    };
+
+                }
+
+                var result = await response.Content.ReadAsStringAsync();
+                var Eventos = JsonConvert.DeserializeObject<List<AulasLog>>(result);
+               
+                //Eventos.OrderByDescending(x => x.inicio);
                 return new Response
                 {
                     IsSuccess = true,

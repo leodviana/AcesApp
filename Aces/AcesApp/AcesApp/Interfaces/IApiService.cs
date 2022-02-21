@@ -22,5 +22,7 @@ namespace AcesApp.Interfaces
         Task<Response> getRanking(Ranking ranking);
 
         Task<Response> getEventosProfessor(Events evento);
+
+        Task<Response> getAulasLog(AulasLog _aulasLog);
     }
 }   

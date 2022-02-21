@@ -1,9 +1,243 @@
 ﻿<?xml version="1.0" encoding="UTF-8" ?>
 <ContentPage
+    x:Class="AcesApp.Views.PerfilProfessorPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    x:Class="AcesApp.Views.PerfilProfessorPage">
-    <ContentPage.Content>
-        
-    </ContentPage.Content>
+    xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+    xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+    xmlns:pancakeView="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+    xmlns:prism="http://prismlibrary.com"
+    prism:ViewModelLocator.AutowireViewModel="True">
+
+
+    <Grid BackgroundColor="{StaticResource MainColor}" RowSpacing="0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <StackLayout Margin="{OnPlatform iOS='0,30,0,0', Android='0,10,0,0'}">
+            <Label
+                Margin="0,30"
+                FontFamily="Roboto-Black"
+                FontSize="Title"
+                HorizontalOptions="Center"
+                Text="Perfil"
+                TextColor="{StaticResource BackgroundColor}"
+                VerticalOptions="Center"
+                VerticalTextAlignment="Center" />
+
+
+        </StackLayout>
+        <pancakeView:PancakeView
+            Grid.Row="1"
+            BackgroundColor="{StaticResource BackgroundColor}"
+            CornerRadius="25,25,0,0"
+            HasShadow="True"
+            HeightRequest="200">
+            <ScrollView VerticalScrollBarVisibility="Never">
+                <StackLayout Margin="0,10" Padding="0,30">
+
+                    <Grid ColumnSpacing="0" HorizontalOptions="Center">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto" />
+
+                        </Grid.ColumnDefinitions>
+                        <Frame
+                            Grid.Column="0"
+                            Padding="0"
+                            CornerRadius="77"
+                            HeightRequest="150"
+                            HorizontalOptions="End"
+                            IsClippedToBounds="True"
+                            VerticalOptions="Center"
+                            WidthRequest="150">
+
+                            <ffimageloading:CachedImage
+                                Grid.Column="0"
+                                Aspect="AspectFill"
+                                CacheDuration="50"
+                                CacheType="Memory"
+                                DownsampleToViewSize="true"
+                                HeightRequest="200"
+                                HorizontalOptions="CenterAndExpand"
+                                LoadingPlaceholder="Spinner.gif"
+                                RetryCount="3"
+                                RetryDelay="600"
+                                Source="{Binding Photo}"
+                                VerticalOptions="End"
+                                WidthRequest="200">
+                                <ffimageloading:CachedImage.Transformations>
+                                    <fftransformations:CircleTransformation />
+                                </ffimageloading:CachedImage.Transformations>
+                            </ffimageloading:CachedImage>
+                        </Frame>
+                        <Image
+                            Grid.Column="0"
+                            HorizontalOptions="End"
+                            Source="cam.png"
+                            TranslationY="-30"
+                            VerticalOptions="End"
+                            WidthRequest="30">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding abrircameraCommand}" />
+                            </Image.GestureRecognizers>
+                        </Image>
+
+                    </Grid>
+                    <FlexLayout
+                        AlignContent="SpaceBetween"
+                        AlignItems="Stretch"
+                        Direction="Column"
+                        Wrap="NoWrap">
+                        <Label
+                            Margin="20,10,20,0"
+                            FlexLayout.AlignSelf="Center"
+                            FontFamily="FontRobotoBold"
+                            FontSize="{OnPlatform Android='Medium',
+                                                  iOS='Large'}"
+                            HorizontalOptions="Center"
+                            LineBreakMode="TailTruncation"
+                            Text="{Binding Nome}"
+                            TextColor="{StaticResource MainColor}"
+                            VerticalOptions="Center" />
+
+
+                        <Label
+                            Margin="10,5"
+                            Text="Usuario"
+                            VerticalTextAlignment="Center" />
+                        <Label
+                            Margin="10,5"
+                            FontFamily="FontRobotoBold"
+                            FontSize="Medium"
+                            HeightRequest="40"
+                            Text="{Binding Email}"
+                            TextColor="{StaticResource MainColor}"
+                            VerticalOptions="StartAndExpand" />
+                        <Label
+                            Margin="10,5"
+                            Text="Senha"
+                            VerticalTextAlignment="Center" />
+                        <Entry
+                            Margin="10,5"
+                            FontFamily="FontRobotoBold"
+                            FontSize="Medium"
+                            HeightRequest="40"
+                            Text="{Binding Senha}"
+                            TextColor="{StaticResource MainColor}" />
+                        <Grid
+                            Padding="10,5"
+                            ColumnSpacing="0"
+                            HorizontalOptions="StartAndExpand"
+                            RowSpacing="0"
+                            VerticalOptions="StartAndExpand">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*" />
+                                <ColumnDefinition Width="0.5*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <Label Text="" VerticalTextAlignment="Center" />
+                            <Label
+                                Grid.Row="1"
+                                Grid.Column="0"
+                                FontFamily="FontRobotoBold"
+                                FontSize="Medium"
+                                HorizontalOptions="FillAndExpand"
+                                Text=""
+                                TextColor="{StaticResource MainColor}" />
+                            <Label
+                                Grid.Row="0"
+                                Grid.Column="2"
+                                Text=""
+                                VerticalTextAlignment="Center" />
+                            <Label
+                                Grid.Row="1"
+                                Grid.Column="2"
+                                FontFamily="FontRobotoBold"
+                                FontSize="Medium"
+                                HorizontalOptions="FillAndExpand"
+                                Text=""
+                                TextColor="{StaticResource MainColor}" />
+                        </Grid>
+                        <Label
+                            Margin="10,5"
+                            Text=""
+                            VerticalTextAlignment="Center" />
+                        <Label
+                            Margin="10,5"
+                            FontFamily="FontRobotoBold"
+                            FontSize="Medium"
+                            HorizontalOptions="FillAndExpand"
+                            Text=""
+                            TextColor="{StaticResource MainColor}" />
+
+                        <Grid
+                            Padding="10,5"
+                            ColumnSpacing="0"
+                            HorizontalOptions="StartAndExpand"
+                            RowSpacing="0"
+                            VerticalOptions="StartAndExpand">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto" />
+                                <ColumnDefinition Width="*" />
+
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <Label Text="" VerticalTextAlignment="Center" />
+                            <Label
+                                Grid.Row="1"
+                                Grid.Column="0"
+                                FontFamily="FontRobotoBold"
+                                FontSize="Medium"
+                                HorizontalOptions="FillAndExpand"
+                                Text=""
+                                TextColor="{StaticResource MainColor}" />
+                            <Label
+                                Grid.Row="0"
+                                Grid.Column="2"
+                                Text=""
+                                VerticalTextAlignment="Center" />
+                            <Label
+                                Grid.Row="1"
+                                Grid.Column="2"
+                                FontFamily="FontRobotoBold"
+                                FontSize="Medium"
+                                HorizontalOptions="FillAndExpand"
+                                Text=""
+                                TextColor="{StaticResource MainColor}" />
+
+                        </Grid>
+
+
+                        <Button
+                            Margin="10,75,10,0"
+                            BackgroundColor="{StaticResource MainColor}"
+                            BorderRadius="20"
+                            Command="{Binding reagendarCommand}"
+                            Text="Salvar"
+                            TextColor="{StaticResource BackgroundColor}"
+                            VerticalOptions="EndAndExpand" />
+                        <Button
+                            BackgroundColor="Transparent"
+                            Command="{Binding LogoutCommand}"
+                            Text="Logout" />
+                        <Button
+                            BackgroundColor="Transparent"
+                            Command="{Binding VersaoCommand}"
+                            Text="Versão" />
+                    </FlexLayout>
+                </StackLayout>
+
+            </ScrollView>
+        </pancakeView:PancakeView>
+
+
+
+    </Grid>
 </ContentPage>

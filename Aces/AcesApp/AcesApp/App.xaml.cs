@@ -76,6 +76,8 @@ namespace AcesApp
             containerRegistry.RegisterForNavigation<RankingPage, RankingPageViewModel>();
             containerRegistry.RegisterForNavigation<PopMudaHorario, PopMudaHorarioViewModel>();
             containerRegistry.RegisterForNavigation<ProfessorPage, ProfessorPageViewModel>();
+            containerRegistry.RegisterForNavigation<PerfilProfessorPage, PerfilProfessorViewModel>();
+
             containerRegistry.RegisterSingleton<IApiService, ApiService>();
 
             containerRegistry.RegisterForNavigation<AulasPage, AulasPageViewModel>();
@@ -83,6 +85,7 @@ namespace AcesApp
             containerRegistry.RegisterForNavigation<PopAulasPage, PopAulasViewModel>();
             containerRegistry.RegisterForNavigation<ModificaHorarioPage, ModificaHorarioPageViewModel>();
             containerRegistry.RegisterForNavigation<RankingCategoriaPage, RankingCategoriaViewModel>();
+            containerRegistry.RegisterForNavigation<ModificacoesPage, ModificacoesViewModel>();
         }
     }
 }

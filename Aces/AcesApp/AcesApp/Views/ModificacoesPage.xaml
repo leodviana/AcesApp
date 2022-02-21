@@ -1,0 +1,188 @@
+﻿<ContentPage
+    x:Class="AcesApp.Views.ModificacoesPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+    xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+    xmlns:pancakeView="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+    xmlns:prism="http://prismlibrary.com"
+    prism:ViewModelLocator.AutowireViewModel="True">
+
+
+    <Grid BackgroundColor="{StaticResource MainColor}" RowSpacing="0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <StackLayout Margin="{OnPlatform iOS='0,30,0,0', Android='0,10,0,0'}">
+            <Label
+                Margin="0,30"
+                FontFamily="Roboto-Black"
+                FontSize="Title"
+                HorizontalOptions="Center"
+                Text="Modificação de  horários"
+                TextColor="{StaticResource BackgroundColor}"
+                VerticalOptions="Center"
+                VerticalTextAlignment="Center" />
+
+
+        </StackLayout>
+        <pancakeView:PancakeView
+            Grid.Row="1"
+            BackgroundColor="{StaticResource BackgroundColor}"
+            CornerRadius="25,25,0,0"
+            HasShadow="True"
+            HeightRequest="200">
+            <RefreshView
+                Command="{Binding RefreshCommand}"
+                IsRefreshing="{Binding IsRunning}"
+                RefreshColor="#4c0507">
+                <CollectionView
+                    x:Name="colecdentistas"
+                    Margin="0,10,0,0"
+                    ItemSizingStrategy="MeasureFirstItem"
+                    ItemsSource="{Binding pacs, Mode=OneWay}"
+                    SelectedItem="{Binding Selection}"
+                    SelectionMode="Single">
+
+                    <CollectionView.ItemsLayout>
+                        <GridItemsLayout Orientation="Vertical" VerticalItemSpacing="2" />
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout Margin="0,10,0,20">
+                                <Frame
+                                    Margin="10,12,10,12"
+                                    HorizontalOptions="FillAndExpand"
+                                    VerticalOptions="FillAndExpand">
+
+                                    <StackLayout
+                                        Margin="0,15,0,15"
+                                        Padding="5,5"
+                                        HorizontalOptions="FillAndExpand"
+                                        VerticalOptions="FillAndExpand">
+                                        <Label HorizontalOptions="Center" Text="{Binding Exibicao}" />
+                                        <BoxView
+                                            HeightRequest="2"
+                                            HorizontalOptions="FillAndExpand"
+                                            Color="LightGray" />
+
+                                        <Grid ColumnSpacing="10">
+                                            <Grid.ColumnDefinitions>
+
+                                                <ColumnDefinition Width="30" />
+                                                <ColumnDefinition Width="Auto" />
+                                                <ColumnDefinition Width="auto" />
+                                                <ColumnDefinition Width="30" />
+                                                <ColumnDefinition Width="Auto" />
+                                                <ColumnDefinition Width="auto" />
+
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="*" />
+                                                <RowDefinition Height="*" />
+                                            </Grid.RowDefinitions>
+                                            <BoxView
+                                                Grid.RowSpan="2"
+                                                Grid.Column="0"
+                                                CornerRadius="15"
+                                                HeightRequest="30"
+                                                VerticalOptions="Center"
+                                                WidthRequest="30"
+                                                Color="{StaticResource stagendado}" />
+                                            <Label
+                                                Grid.Column="1"
+                                                FontAttributes="Bold"
+                                                FontSize="Small"
+                                                Text="{Binding descricao, StringFormat='{0:dd/MM/yyyy}'}"
+                                                VerticalTextAlignment="Center" />
+
+
+                                            <Label
+                                                Grid.Row="1"
+                                                Grid.Column="1"
+                                                Grid.ColumnSpan="3"
+                                                FontAttributes="Bold"
+                                                FontSize="Small"
+                                                Text="{Binding nome_dentista_inicial}" />
+                                            <Label
+                                                Grid.Row="2"
+                                                Grid.Column="1"
+                                                Grid.ColumnSpan="3"
+                                                FontAttributes="Bold"
+                                                FontSize="Small"
+                                                Text="{Binding nome_aluno}" />
+                                            <BoxView
+                                                Grid.Row="4"
+                                                Grid.RowSpan="2"
+                                                Grid.Column="0"
+                                                CornerRadius="15"
+                                                HeightRequest="30"
+                                                VerticalOptions="Center"
+                                                WidthRequest="30"
+                                                Color="{StaticResource stlivre}" />
+                                            <Label
+                                                Grid.Row="4"
+                                                Grid.Column="1"
+                                                FontAttributes="Bold"
+                                                FontSize="Small"
+                                                Text="{Binding descricao_final, StringFormat='{0:dd/MM/yyyy}'}"
+                                                VerticalTextAlignment="Center" />
+
+
+                                            <Label
+                                                Grid.Row="5"
+                                                Grid.Column="1"
+                                                Grid.ColumnSpan="3"
+                                                FontAttributes="Bold"
+                                                FontSize="Small"
+                                                Text="{Binding nome_dentista_final}" />
+                                            <Label
+                                                Grid.Row="6"
+                                                Grid.Column="1"
+                                                Grid.ColumnSpan="3"
+                                                FontAttributes="Bold"
+                                                FontSize="Small"
+                                                Text="{Binding nome_aluno_final}" />
+                                        </Grid>
+                                        <BoxView
+                                            HeightRequest="2"
+                                            HorizontalOptions="FillAndExpand"
+                                            Color="LightGray" />
+
+
+                                    </StackLayout>
+
+                                </Frame>
+                            </StackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                    <CollectionView.EmptyView>
+
+                        <StackLayout Margin="30,0,0,20">
+                            <Frame
+                                HorizontalOptions="CenterAndExpand"
+                                IsVisible="{Binding mostra}"
+                                VerticalOptions="CenterAndExpand"
+                                WidthRequest="300">
+                                <Label
+                                    FontSize="20"
+                                    HorizontalOptions="CenterAndExpand"
+                                    Text="{Binding Mensagem}"
+                                    VerticalOptions="CenterAndExpand" />
+                            </Frame>
+                        </StackLayout>
+
+
+
+                    </CollectionView.EmptyView>
+                </CollectionView>
+            </RefreshView>
+        </pancakeView:PancakeView>
+
+    </Grid>
+
+
+
+
+</ContentPage>
