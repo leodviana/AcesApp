@@ -110,7 +110,8 @@
                             Margin="10,5"
                             FontFamily="FontRobotoBold"
                             FontSize="Medium"
-                            HeightRequest="40"
+                            HeightRequest="60"
+                            HorizontalOptions="StartAndExpand"
                             Text="{Binding Email}"
                             TextColor="{StaticResource MainColor}"
                             VerticalOptions="StartAndExpand" />
@@ -122,7 +123,7 @@
                             Margin="10,5"
                             FontFamily="FontRobotoBold"
                             FontSize="Medium"
-                            HeightRequest="40"
+                            HeightRequest="60"
                             Text="{Binding Senha}"
                             TextColor="{StaticResource MainColor}" />
                         <Grid

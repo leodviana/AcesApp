@@ -163,7 +163,12 @@ namespace AcesApp.ViewModels
              }
 
              var User = (Usuario)response.Result;
-             App.usuariologado = User;
+            if (User.ImagePath == null)
+            {
+                User.ImagePath = "profile";
+            }
+            App.usuariologado = User;
+
              Preferences.Set("dentistaserializado", JsonConvert.SerializeObject(User));
              var mainPage = $"/{nameof(NavigationPage)}/{nameof(MainPage2)}";
              await NavigationService.NavigateAsync(mainPage);

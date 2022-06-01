@@ -24,5 +24,7 @@ namespace AcesApp.Interfaces
         Task<Response> getEventosProfessor(Events evento);
 
         Task<Response> getAulasLog(AulasLog _aulasLog);
+
+        Task<Response> PutUsuario(Usuario usuario);
     }
 }   

@@ -62,7 +62,6 @@ namespace AcesApp.Services
             }
         }
 
-
         public async Task<Response> getEventos(Events evento)
         {
 
@@ -115,7 +114,6 @@ namespace AcesApp.Services
                
             }
         }
-
 
         public async Task<Response> getEventosProfessor(Events evento)
         {
@@ -221,9 +219,6 @@ namespace AcesApp.Services
             }
         }
 
-
-        
-
         public async Task<Response> getEventosfree(Events evento)
         {
 
@@ -274,9 +269,7 @@ namespace AcesApp.Services
             }
         }
 
-
-
-       public async Task<Response> getprofessores(Events evento)
+        public async Task<Response> getprofessores(Events evento)
         {
 
             try
@@ -325,8 +318,6 @@ namespace AcesApp.Services
 
             }
         }
-
-
 
         public async Task<Response> saveHorarios(Events evento_inicial , Events evento)
         {
@@ -410,7 +401,6 @@ namespace AcesApp.Services
             }
         }
 
-
         public async Task<Response> getAulasLog(AulasLog _aulasLog)
         {
 
@@ -458,6 +448,61 @@ namespace AcesApp.Services
                     IsSuccess = false,
                     Message = ex.Message,
                 };
+
+            }
+        }
+
+
+        public async Task<Response> PutUsuario(Usuario usuario)
+        {
+            try
+            {
+
+                var jsonRequest = JsonConvert.SerializeObject(usuario);
+                var httpContent = new StringContent(jsonRequest, Encoding.UTF8, "application/json");
+                var client = new HttpClient();
+                client.BaseAddress = new Uri(App.Current.Resources["UrlAPI"].ToString());
+                
+                var url = "api/teste/AtualizaLogin";
+                var response = await client.PutAsync(url, httpContent);
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    var error = await response.Content.ReadAsStringAsync();
+                    //string teste  =   response.RequestMessage.ToString();
+                    // string teste2 = response.Headers.ToString();
+                    return new Response
+                    {
+                        IsSuccess = false,
+                        Message = error,
+
+                    };
+
+
+                }
+
+                var result = await response.Content.ReadAsStringAsync();
+                Usuario dent = JsonConvert.DeserializeObject<Usuario>(result);
+                // return exames.Skip(pageIndex * pageSize).Take(pageSize).ToList();     //_pessoas.Skip(pageIndex * pageSize).Take(pageSize).ToList();
+                return new Response
+                {
+                    IsSuccess = true,
+                    Message = "Usuario Atualizado com Sucesso!",
+                    Result = dent
+                };
+
+
+            }
+            catch (Exception ex)
+            {
+
+                return new Response
+                {
+                    IsSuccess = false,
+                    Message = ex.Message,
+                };
+                throw;
+
 
             }
         }

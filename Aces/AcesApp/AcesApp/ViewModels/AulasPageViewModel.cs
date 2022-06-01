@@ -97,7 +97,9 @@ namespace AcesApp.ViewModels
              var numero_dias  = resultado.Days;
             var numero_horas  = resultado.TotalHours;
 
-            if(App.usuariologado.Renovacao<DateTime.Now)
+            DateTime? renovacao = App.usuariologado.Renovacao.Value.AddHours(23).AddMinutes(59).AddSeconds(59);
+             
+            if (renovacao<DateTime.Now)
             {
                 _userDialogs.HideLoading();
                 await exibeErro("Contrato sem vigência!");
@@ -106,7 +108,7 @@ namespace AcesApp.ViewModels
             }
            
 
-            if (numero_horas < 6)
+            if (numero_horas < 4)
             {
                 _userDialogs.HideLoading();
                 await exibeErro("Periodo de Remarcação Expirado!");

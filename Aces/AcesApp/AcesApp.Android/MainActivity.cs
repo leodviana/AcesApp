@@ -19,6 +19,7 @@ namespace AcesApp.Droid
 
             base.OnCreate(savedInstanceState);
 
+
             FFImageLoading.Forms.Platform.CachedImageRenderer.Init(enableFastRenderer: true);
             Rg.Plugins.Popup.Popup.Init(this);
             UserDialogs.Init(this);

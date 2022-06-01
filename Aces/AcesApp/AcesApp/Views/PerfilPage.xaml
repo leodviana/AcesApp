@@ -58,14 +58,14 @@
                                 CacheDuration="50"
                                 CacheType="Memory"
                                 DownsampleToViewSize="true"
-                                HeightRequest="200"
+                                ErrorPlaceholder="profile"
+                                HeightRequest="150"
                                 HorizontalOptions="CenterAndExpand"
-                                LoadingPlaceholder="Spinner.gif"
                                 RetryCount="3"
                                 RetryDelay="600"
                                 Source="{Binding Photo}"
                                 VerticalOptions="End"
-                                WidthRequest="200">
+                                WidthRequest="150">
                                 <ffimageloading:CachedImage.Transformations>
                                     <fftransformations:CircleTransformation />
                                 </ffimageloading:CachedImage.Transformations>
@@ -229,7 +229,7 @@
                             Margin="10,15,10,0"
                             BackgroundColor="{StaticResource MainColor}"
                             BorderRadius="20"
-                            Command="{Binding reagendarCommand}"
+                            Command="{Binding navegarCommand}"
                             Text="Salvar"
                             TextColor="{StaticResource BackgroundColor}"
                             VerticalOptions="EndAndExpand" />

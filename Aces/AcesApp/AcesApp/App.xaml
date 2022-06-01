@@ -11,7 +11,7 @@
 
         <x:String x:Key="UrlAPI">https://www.painelstudio.com/Apiaces/</x:String>
 
-        <x:String x:Key="versao">1.4</x:String>
+        <x:String x:Key="versao">1.7</x:String>
 
         <!--<x:String x:Key="UrlAPI">https://www.painelstudio.com/acestreinamentoapi/</x:String>-->
 

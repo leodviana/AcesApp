@@ -85,47 +85,53 @@
                         <controls:Calendar.EventTemplate>
                             <DataTemplate>
 
-                                <StackLayout Margin="0,10">
 
-                                    <FlexLayout
-                                        Padding="0,0,0,10"
-                                        AlignContent="Center"
-                                        AlignItems="Stretch"
-                                        Direction="Row"
-                                        FlexLayout.Grow="1"
-                                        Wrap="Wrap">
-                                        <BoxView
-                                            CornerRadius="10"
-                                            HeightRequest="20"
-                                            WidthRequest="20"
-                                            Color="{StaticResource stagendado}" />
-                                        <Label
-                                            Margin="5,0"
-                                            FontAttributes="Bold"
-                                            FontSize="Small"
-                                            LineBreakMode="WordWrap"
-                                            Text="{Binding descricao, StringFormat='{0:dd/MM/yyyy HH:mm:ss}'}"
-                                            VerticalTextAlignment="Center">
-                                            <Label.GestureRecognizers>
-                                                <TapGestureRecognizer Command="{Binding BindingContext.MudarHorarioCommand, Source={x:Reference simpleCalendarPage}}" CommandParameter="{Binding .}" />
-                                            </Label.GestureRecognizers>
-                                        </Label>
+                                <Grid ColumnSpacing="0" RowSpacing="0">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="50" />
+                                        <RowDefinition Height="*" />
+
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="50" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <BoxView
+                                        Grid.Row="0"
+                                        Grid.Column="0"
+                                        Margin="5,5,0,0"
+                                        CornerRadius="15"
+                                        HeightRequest="30"
+                                        HorizontalOptions="CenterAndExpand"
+                                        VerticalOptions="CenterAndExpand"
+                                        WidthRequest="30"
+                                        Color="{StaticResource stagendado}" />
+                                    <Label
+                                        Grid.Row="0"
+                                        Grid.Column="1"
+                                        Margin="5,0"
+                                        FontAttributes="Bold"
+                                        FontSize="Medium"
+                                        LineBreakMode="WordWrap"
+                                        Text="{Binding descricao, StringFormat='{0:dd/MM/yyyy HH:mm:ss}'}"
+                                        VerticalOptions="CenterAndExpand"
+                                        VerticalTextAlignment="Start" />
+
+                                    <Label
+                                        Grid.Row="1"
+                                        Grid.Column="0"
+                                        Grid.ColumnSpan="2"
+                                        Margin="{OnPlatform iOS='45,0,0,10',
+                                                            Android='45,0,0,10'}"
+                                        FontAttributes="Bold"
+                                        FontSize="Medium"
+                                        Text="{Binding Subject}"
+                                        VerticalTextAlignment="Center" />
+                                </Grid>
 
 
 
-                                        <Label
-                                            FlexLayout.Basis="200"
-                                            FontAttributes="Bold"
-                                            FontSize="Small"
-                                            Text="{Binding Subject}"
-                                            VerticalTextAlignment="Center">
-                                            <Label.GestureRecognizers>
-                                                <TapGestureRecognizer Command="{Binding BindingContext.MudarHorarioCommand, Source={x:Reference simpleCalendarPage}}" CommandParameter="{Binding .}" />
-                                            </Label.GestureRecognizers>
-                                        </Label>
-                                    </FlexLayout>
 
-                                </StackLayout>
 
                             </DataTemplate>
                         </controls:Calendar.EventTemplate>
