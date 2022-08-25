@@ -41,6 +41,8 @@ namespace AcesApp.Models
         public int num_aulas {get;set;}
         public string ImagePath { get; set; }
         public byte[] ImageArray { get; set; }
+
+        public Int32 contrato_dupla { get; set; }
         //public virtual Pessoa pessoas { get; set; }
         // public virtual ICollection<Fornecedor> fornecedores { get; set; }
         // public virtual ICollection<NotaEntrada> NotaEntradas { get; set; }

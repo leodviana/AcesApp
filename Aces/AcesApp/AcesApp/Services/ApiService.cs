@@ -83,7 +83,7 @@ namespace AcesApp.Services
                     return new Response
                     {
                         IsSuccess = false,
-                        Message = "Problemas com o horario do contrato" + evento.contrato,
+                        Message = "Problemas com o horario do contrato " + evento.contrato,
 
                     };
 
@@ -136,7 +136,7 @@ namespace AcesApp.Services
                     return new Response
                     {
                         IsSuccess = false,
-                        Message = "Problemas com o horario do contrato" + evento.contrato,
+                        Message = "Problemas com o horario do contrato " + evento.contrato,
 
                     };
 
@@ -240,7 +240,7 @@ namespace AcesApp.Services
                     return new Response
                     {
                         IsSuccess = false,
-                        Message = "Problemas com o horario do contrato" + evento.contrato,
+                        Message = "Problemas com o horario do contrato " + evento.contrato,
 
                     };
 
@@ -368,12 +368,9 @@ namespace AcesApp.Services
 
                 if (!response.IsSuccessStatusCode)
                 {
-                    return new Response
-                    {
-                        IsSuccess = false,
-                        Message =  result,
-
-                    };
+                    var resposta = JsonConvert.DeserializeObject<Response>(result);
+                  
+                   return resposta;
 
                 }
 

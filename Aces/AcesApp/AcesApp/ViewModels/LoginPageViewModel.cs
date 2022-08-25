@@ -7,6 +7,7 @@ using Prism.Navigation;
 using Prism.Services;
 using System;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using System.Text;
 using System.Windows.Input;
 using Xamarin.Essentials;
@@ -117,7 +118,7 @@ namespace AcesApp.ViewModels
              }
          }
 
-         private async void Login()
+        private async void Login()
          {
              
              if (string.IsNullOrEmpty(Usuarioid))
@@ -134,9 +135,12 @@ namespace AcesApp.ViewModels
                  //await PageDialogService.DisplayAlertAsync("Erro", "Prencha o campo Senha!", "OK");
                  return;
              }
+            //var senhaNovaDigitadaCript =GetMd5Hash(MD5.Create(), Senha);
+            var senhaNovaDigitadaCript =base64Encode(Senha);
+
             var usuario = new Usuario();
             usuario.Login = Usuarioid;
-            usuario.Senha = Senha;
+            usuario.Senha = senhaNovaDigitadaCript;
              var response = new Response();
              IsRunning = true;
              var current = Connectivity.NetworkAccess;
@@ -176,6 +180,8 @@ namespace AcesApp.ViewModels
             
         }
 
+
+       
         public void OnNavigatedFrom(NavigationParameters parameters)
         {
 

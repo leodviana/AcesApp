@@ -70,12 +70,17 @@ namespace AcesApp.ViewModels
 
         public override void OnNavigatedTo(INavigationParameters parameters)
         {
-            _horarioInicial = (Events)parameters["inicial"];
-            _horarioFinal = (Events)parameters["final"];
-            _horarioFinal.Subject = _horarioInicial.Subject;
-            _horarioFinal.contrato = _horarioInicial.contrato;
-            lsthorarioInicial.Add(_horarioInicial);
-            lsthorarioFinal.Add(_horarioFinal);
+            var navigationMode = parameters.GetNavigationMode();
+            if (navigationMode != Prism.Navigation.NavigationMode.Back)
+            {
+                _horarioInicial = (Events)parameters["inicial"];
+                _horarioFinal = (Events)parameters["final"];
+                _horarioFinal.Subject = _horarioInicial.Subject;
+                _horarioFinal.contrato = _horarioInicial.contrato;
+                lsthorarioInicial.Add(_horarioInicial);
+                lsthorarioFinal.Add(_horarioFinal);
+            }
+                
         }
 
 

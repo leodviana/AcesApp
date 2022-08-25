@@ -16,6 +16,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Essentials;
@@ -167,6 +168,7 @@ namespace AcesApp.ViewModels
             {
                 SetProperty(ref _senha, value);
 
+
             }
         }
 
@@ -241,6 +243,7 @@ namespace AcesApp.ViewModels
             apiService = ApiService;
             //Photo = App.usuariologado.ImagePath;
              atribuivalores(App.usuariologado);
+            
             inicializa = false;
             IsActiveChanged += HandleIsActiveTrue;
             IsActiveChanged += HandleIsActiveFalse;
@@ -309,6 +312,31 @@ namespace AcesApp.ViewModels
                     aula_dada = aula_dada + 1;
                 else
                     aula_nao_dada = aula_nao_dada + 1;
+            }
+            if (lista_eventos.Count==0)
+            {
+                if (current == NetworkAccess.Internet)
+
+                {
+                    parametro.contrato = App.usuariologado.contrato_dupla;
+                    response = await apiService.getEventos(parametro);
+                    lista_eventos = (List<Events>)response.Result;
+                    foreach (var item in lista_eventos)
+                    {
+                        if (DateTime.Now >= Convert.ToDateTime(item.Start))
+                            aula_dada = aula_dada + 1;
+                        else
+                            aula_nao_dada = aula_nao_dada + 1;
+                    }
+                }
+                else
+                {
+                    _userDialogs.HideLoading();
+                    await exibeErro("Dispositivo não está conectado a internet!");
+
+                    IsRunning = false;
+                    return;
+                }
             }
             /*  Events = new EventCollection();*/
 
@@ -569,13 +597,18 @@ namespace AcesApp.ViewModels
            
             _userDialogs.ShowLoading("Salvando");
 
+            
+            //var senhaNovaDigitadaCript = GetMd5Hash(MD5.Create(), Senha);
+            var senhaNovaDigitadaCript = base64Encode(Senha);
             Usuario dentistaatualizado = new Usuario();
+           
+
             dentistaatualizado.contratoId = Convert.ToInt32(ContratoId);
             dentistaatualizado.nome = Nome;
             dentistaatualizado.Login = Email;
             dentistaatualizado.UsuarioId = App.usuariologado.UsuarioId;
             
-            dentistaatualizado.Senha = Senha;
+            dentistaatualizado.Senha = senhaNovaDigitadaCript;
             dentistaatualizado.ImagePath = "";
             dentistaatualizado.ImageArray = imageArray;
 
@@ -610,12 +643,18 @@ namespace AcesApp.ViewModels
         }
         private async Task atribuivalores(Usuario _dentista)
         {
+
             try
             {
                 //id = _dentista.Id;
                 Nome = _dentista.nome;
                 Email = _dentista.Login;
-                Senha = _dentista.senha_sem;
+
+
+                //Senha = _dentista.Senha;//_dentista.senha_sem;
+                Senha = base64Decode2(_dentista.Senha);
+                
+                
                 ContratoId = _dentista.contratoId.ToString();
 
                 Inicio = DateTime.Parse(_dentista.inicio.ToString()).ToString("dd/MM/yyyy");

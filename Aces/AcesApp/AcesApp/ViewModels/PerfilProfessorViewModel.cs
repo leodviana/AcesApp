@@ -8,6 +8,7 @@ using AcesApp.Utils;
 using Acr.UserDialogs;
 using FFImageLoading.Cache;
 using FFImageLoading.Forms;
+using Newtonsoft.Json;
 using Plugin.Media;
 using Plugin.Media.Abstractions;
 using Prism.Navigation;
@@ -19,8 +20,6 @@ namespace AcesApp.ViewModels
 {
     public class PerfilProfessorViewModel : ViewModelBase
     {
-    
-        
         private const string TitleAlert = "Aces APP";
         private ICommand _logout;
         private ICommand _versao;
@@ -163,6 +162,7 @@ namespace AcesApp.ViewModels
             {
                 SetProperty(ref _senha, value);
 
+
             }
         }
 
@@ -223,15 +223,21 @@ namespace AcesApp.ViewModels
             set
             {
                 SetProperty(ref _photo, value);
-                CachedImage.InvalidateCache(_photo, CacheType.All, true);
+                modificaCache();
             }
         }
 
+        private async Task modificaCache()
+        {
+            await CachedImage.InvalidateCache(_photo, CacheType.All, true);
+        }
         public PerfilProfessorViewModel(INavigationService navigationService, IPageDialogService pageDialogService, IApiService ApiService, IUserDialogs userDialogs) : base(navigationService, pageDialogService)
         {
             _userDialogs = userDialogs;
             apiService = ApiService;
-            Photo = App.usuariologado.ImagePath;
+            //Photo = App.usuariologado.ImagePath;
+            atribuivalores(App.usuariologado);
+
             inicializa = false;
             IsActiveChanged += HandleIsActiveTrue;
             IsActiveChanged += HandleIsActiveFalse;
@@ -248,14 +254,53 @@ namespace AcesApp.ViewModels
             if (IsActive == false) return;
             if (!inicializa)
             {
+
                 //await CarregarEventosAsync();
-                atribuivalores(App.usuariologado);
+                 await atribuivalores(App.usuariologado);
             }
 
 
         }
 
-        
+        private async Task CarregarEventosAsync()
+        {
+            aula_nao_dada = 0;
+            aula_dada = 0;
+            var parametro = new Events();
+            parametro.contrato = App.usuariologado.contratoId;
+            // Culture = CultureInfo.CreateSpecificCulture("pt-BR");
+            var current = Connectivity.NetworkAccess;
+
+            var response = new Response();
+            IsRunning = true;
+
+            _userDialogs.ShowLoading("Carregando", MaskType.Black);
+            if (current == NetworkAccess.Internet)
+
+            {
+                response = await apiService.getEventos(parametro);
+            }
+            else
+            {
+                _userDialogs.HideLoading();
+                await exibeErro("Dispositivo não está conectado a internet!");
+
+                IsRunning = false;
+                return;
+            }
+            IsRunning = false;
+
+            if (!response.IsSuccess)
+            {
+                _userDialogs.HideLoading();
+                await exibeErro(response.Message);
+
+                return;
+            }
+           
+            _userDialogs.HideLoading();
+
+        }
 
         public override void Destroy()
         {
@@ -416,6 +461,7 @@ namespace AcesApp.ViewModels
                 file.Dispose();
                 return stream;
             });
+
         }
 
 
@@ -450,7 +496,7 @@ namespace AcesApp.ViewModels
             await exibeErro("Densidade " + mainDisplayInfo.Density.ToString() + " largura" + mainDisplayInfo.Width.ToString() + " altura " + mainDisplayInfo.Height.ToString());
         }
 
-        private async void atualizar()
+        private async Task atualizar()
         {
             try
             {
@@ -463,7 +509,7 @@ namespace AcesApp.ViewModels
                 }
                 else
                 {
-                    await PageDialogService.DisplayAlertAsync(TitleAlert, "Por favor Verifique sua conexao!", "Ok");
+                    await exibeErro("Por favor Verifique sua conexao!");
                     IsRunning = false;
                     return;
                 }
@@ -491,108 +537,136 @@ namespace AcesApp.ViewModels
         private async Task salvaPerfil()
         {
             IsRunning = true;
-            /* if (string.IsNullOrEmpty(Email))
-             {
-                 await PageDialogService.DisplayAlertAsync(TitleAlert, "Prencha o campo Email!", "OK");
-                 IsRunning = false;
-                 return;
-             }
+            if (string.IsNullOrEmpty(Email))
+            {
+                await exibeErro("Prencha o campo Email!");
+                IsRunning = false;
+                return;
+            }
 
 
-             if (string.IsNullOrEmpty(Senha))
-             {
-                 await PageDialogService.DisplayAlertAsync(TitleAlert, "Prencha o campo Senha!", "OK");
-                 IsRunning = false;
-                 return;
-             }
-             if (string.IsNullOrEmpty(Login))
-             {
-                 await PageDialogService.DisplayAlertAsync(TitleAlert, "Prencha o campo Login!", "OK");
-                 IsRunning = false;
-                 return;
-             }
+            if (string.IsNullOrEmpty(Senha))
+            {
+                await exibeErro("Prencha o campo Senha!");
+                IsRunning = false;
+                return;
+            }
 
-             _userDialogs.ShowLoading("Salvando");
+            _userDialogs.ShowLoading("Salvando");
 
-             Usuario dentistaatualizado = new Usuario();
-             dentistaatualizado.Id = id;
-             dentistaatualizado.nome = Nome;
-             dentistaatualizado.Email = Email;
-             dentistaatualizado.logon = Login;
-             dentistaatualizado.status = "0";
-             dentistaatualizado.senha = Senha;
-             dentistaatualizado.ImagePath = "";
-             dentistaatualizado.ImageArray = imageArray;
 
-             //Lista = await apiService.getDentistas();
-             // await _dialogService.DisplayAlertAsync("Painel Studio - Perboyre Castelo", _dentista.senha, "Ok");
-             var response = await apiService.PutDentista(dentistaatualizado);
-             if (!response.IsSuccess)
-             {
-                 _userDialogs.HideLoading();
-                 await PageDialogService.DisplayAlertAsync(TitleAlert, response.Message, "OK");
-                 //?await PageDialogService.DisplayAlertAsync("Painel Studio - Perboyre Castelo", response.Message, "Ok");
-                 return;
-             }
-             var result = (Dentista)response.Result;
+            //var senhaNovaDigitadaCript = GetMd5Hash(MD5.Create(), Senha);
+            var senhaNovaDigitadaCript = base64Encode(Senha);
+            Usuario dentistaatualizado = new Usuario();
 
-             // await _dialogService.DisplayAlertAsync("Painel Studio - Perboyre Castelo", result.senha, "Ok");
-             limpaFormulario();
-             gravaUsuarioLogado(result);
-             Photo = "";
-             atribuivalores(result);
-             _userDialogs.HideLoading();
-             await PageDialogService.DisplayAlertAsync(TitleAlert, response.Message, "OK");
-             //await PageDialogService.DisplayAlertAsync("Painel Studio - Perboyre Castelo", response.Message, "OK");
-             IsRunning = false;
 
-             /*  Settings.ClearAllData();
-               App.usuariologado = null;*/
+            dentistaatualizado.contratoId = Convert.ToInt32(ContratoId);
+            dentistaatualizado.nome = Nome;
+            dentistaatualizado.Login = Email;
+            dentistaatualizado.UsuarioId = App.usuariologado.UsuarioId;
+
+            dentistaatualizado.Senha = senhaNovaDigitadaCript;
+            dentistaatualizado.ImagePath = "";
+            dentistaatualizado.ImageArray = imageArray;
+
+            //Lista = await apiService.getDentistas();
+            // await _dialogService.DisplayAlertAsync("Painel Studio - Perboyre Castelo", _dentista.senha, "Ok");
+            var response = await apiService.PutUsuario(dentistaatualizado);
+            if (!response.IsSuccess)
+            {
+                _userDialogs.HideLoading();
+                await exibeErro(response.Message);
+                //?await PageDialogService.DisplayAlertAsync("Painel Studio - Perboyre Castelo", response.Message, "Ok");
+                return;
+            }
+            var result = (Usuario)response.Result;
+
+            // await _dialogService.DisplayAlertAsync("Painel Studio - Perboyre Castelo", result.senha, "Ok");
+            limpaFormulario();
+            gravaUsuarioLogado(result);
+            Photo = "";
+            Photo = App.usuariologado.ImagePath;
+            await atribuivalores(result);
+            _userDialogs.HideLoading();
+            await exibeErro(response.Message);
+            //await PageDialogService.DisplayAlertAsync("Painel Studio - Perboyre Castelo", response.Message, "OK");
+            IsRunning = false;
+
+            /*  Settings.ClearAllData();
+              App.usuariologado = null;*/
             //  Page nova = Navegacao_aux.GetMainPage();
             // App.Current.MainPage = nova;
 
         }
-        private async void atribuivalores(Usuario _dentista)
+        private async Task atribuivalores(Usuario _dentista)
         {
-            //id = _dentista.Id;
-            Nome = _dentista.nome;
-            Email = _dentista.Login;
-            Senha = _dentista.senha_sem;
-           // ContratoId = _dentista.contratoId.ToString();
 
-           // Inicio = DateTime.Parse(_dentista.inicio.ToString()).ToString("dd/MM/yyyy");
-           // Renova = DateTime.Parse(_dentista.Renovacao.ToString()).ToString("dd/MM/yyyy");
-           // NomeProfessor = _dentista.professor;
-           // Plano = _dentista.plano;
-           // Num_Aulas = _dentista.num_aulas;
-            /*Login = _dentista.logon;
-            status = _dentista.status;
-            Photo = _dentista.ImagePath;
-            await FFImageLoading.Forms.CachedImage.InvalidateCache(Photo, CacheType.Memory);
-            _dentista.ImageArray = null;*/
+            try
+            {
+                //id = _dentista.Id;
+                Nome = _dentista.nome;
+                Email = _dentista.Login;
+
+
+                //Senha = _dentista.Senha;//_dentista.senha_sem;
+                Senha = base64Decode2(_dentista.Senha);
+
+
+                //ContratoId = _dentista.contratoId.ToString();
+
+                //Inicio = DateTime.Parse(_dentista.inicio.ToString()).ToString("dd/MM/yyyy");
+                //Renova = DateTime.Parse(_dentista.Renovacao.ToString()).ToString("dd/MM/yyyy");
+               // NomeProfessor = _dentista.professor;
+               // Plano = _dentista.plano;
+               // Num_Aulas = _dentista.num_aulas;
+
+
+                Photo = _dentista.ImagePath;
+
+
+                await FFImageLoading.Forms.CachedImage.InvalidateCache(_photo, CacheType.Memory);
+                _dentista.ImageArray = null;
+                /*Login = _dentista.logon;
+                status = _dentista.status;
+
+                await FFImageLoading.Forms.CachedImage.InvalidateCache(Photo, CacheType.Memory);
+                _dentista.ImageArray = null;*/
+            }
+            catch (Exception ex)
+            {
+                await exibeErro(ex.Message.ToString());
+            }
+
+
 
         }
-        /* private void gravaUsuarioLogado(Dentista User)
-         {
-             if (User.Id == 999999999)
-             {
-                 User.tipo = "Administrador";
-                 App.usuariologado = User;
-                 Preferences.Set("dentistaserializado", JsonConvert.SerializeObject(User));
-                 // Preferences.Get("dentistaserializado", JsonConvert.SerializeObject(User));
-                 //Settings.Grava_Settings(JsonConvert.SerializeObject(User));
-                 // await _navigationService.NavigateAsync("/MasterPage/NavigationPage/DentistaPage");
-             }
-             else
-             {
-                 User.tipo = "Dentista";
-                 App.usuariologado = User;
-                 Preferences.Set("dentistaserializado", JsonConvert.SerializeObject(User));
-                 var navigationParams = new NavigationParameters();
-                 navigationParams.Add("paciente", User);
+        private async void gravaUsuarioLogado(Usuario User)
+        {
 
-                 // await _navigationService.NavigateAsync("/MasterPage/NavigationPage/ExamesPage", navigationParams);
-             }
-         }*/
+            string usuario_logado = Preferences.Get("dentistaserializado", "");
+            var _usuario = JsonConvert.DeserializeObject<Usuario>(usuario_logado);
+            _usuario.Senha = User.Senha;
+            _usuario.ImagePath = User.ImagePath;
+            Preferences.Set("dentistaserializado", JsonConvert.SerializeObject(_usuario));
+            /*if (User.Tipo_usuario == 999999999)
+            {
+                User.tipo = "Administrador";
+                App.usuariologado = User;
+                Preferences.Set("dentistaserializado", JsonConvert.SerializeObject(User));
+                // Preferences.Get("dentistaserializado", JsonConvert.SerializeObject(User));
+                //Settings.Grava_Settings(JsonConvert.SerializeObject(User));
+                // await _navigationService.NavigateAsync("/MasterPage/NavigationPage/DentistaPage");
+            }
+            else
+            {
+                User.tipo = "Dentista";
+                App.usuariologado = User;
+                Preferences.Set("dentistaserializado", JsonConvert.SerializeObject(User));
+                var navigationParams = new NavigationParameters();
+                navigationParams.Add("paciente", User);
+
+                // await _navigationService.NavigateAsync("/MasterPage/NavigationPage/ExamesPage", navigationParams);
+            }*/
+        }
     }
 }

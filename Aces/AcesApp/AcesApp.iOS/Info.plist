@@ -29,21 +29,21 @@
 	<key>CFBundleName</key>
 	<string>AcesApp</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.aces.Acesapp</string>
+	<string>br.com.Acesapp</string>
 	<key>CFBundleVersion</key>
 	<string>1.0</string>
 	<key>UIUserInterfaceStyle</key>
 	<string>Light</string>
 	<key>NSCameraUsageDescription</key>
-	<string>This app needs access to the camera to take photos.</string>
+	<string>O aplicativo Aces necessita acesso a sua camera  para foto do perfil! </string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>This app needs access to photos.</string>
+	<string>O aplicativo Ciros necessita acesso a Photos para selecionar foto do perfil</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>This app needs access to microphone.</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>This app needs access to the photo gallery.</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.7</string>
+	<string>2.2</string>
 	<key>UIRequiresFullScreen</key>
 	<true/>
 	<key>UIMainStoryboardFile</key>

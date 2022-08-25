@@ -40,8 +40,7 @@
     <MtouchLink>None</MtouchLink>
     <MtouchArch>i386, x86_64</MtouchArch>
     <ConsolePause>false</ConsolePause>
-    <CodesignProvision>AcessappProfile</CodesignProvision>
-    <CodesignKey>Apple Distribution: Perboyre Castelo (36V76X3N9M)</CodesignKey>
+    <CodesignKey>iPhone Distribution: Aces - Academia Cearense de Squash ltda (SQ389A28XC)</CodesignKey>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhone' ">
     <DebugSymbols>true</DebugSymbols>
@@ -71,11 +70,11 @@
     <WarningLevel>4</WarningLevel>
     <MtouchArch>ARM64</MtouchArch>
     <ConsolePause>false</ConsolePause>
-    <CodesignKey>Apple Distribution: PERBOYRE CASTELO RADIOLOGIA DIAGNOSTICA POR IMAGEM SS LTDA (36V76X3N9M)</CodesignKey>
+    <CodesignKey>iPhone Distribution: Aces - Academia Cearense de Squash ltda (SQ389A28XC)</CodesignKey>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
     <MtouchEnableSGenConc>true</MtouchEnableSGenConc>
     <MtouchLink>SdkOnly</MtouchLink>
-    <CodesignProvision>AcesappProfile</CodesignProvision>
+    <CodesignProvision>Acesappprofilefinal</CodesignProvision>
     <MtouchSdkVersion>15.0</MtouchSdkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Ad-Hoc|iPhone' ">
@@ -114,6 +113,7 @@
     <None Include="Info.plist" />
     <LinkDescription Include="LinkerSettings.xml" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <None Include="Info %28copiar%29.plist" />
   </ItemGroup>
   <ItemGroup>
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-20x20@1x1.png">

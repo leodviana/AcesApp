@@ -246,7 +246,25 @@ namespace AcesApp.ViewModels
             //var lista_eventos = new List<Events>();
             var lista_eventos = (List<Events>)response.Result;
             /*  Events = new EventCollection();*/
-           
+            if (lista_eventos.Count==0)
+            {
+                if (current == NetworkAccess.Internet)
+
+                {
+                    parametro.contrato = App.usuariologado.contrato_dupla;
+                    response = await apiService.getEventos(parametro);
+                }
+                else
+                {
+                    _userDialogs.HideLoading();
+                    await exibeErro("Dispositivo não está conectado a internet!");
+
+                    IsRunning = false;
+                    return;
+                }
+                lista_eventos = (List<Events>)response.Result;
+            }
+            
             Events.Clear();
 
             Events.Clear();
@@ -260,6 +278,7 @@ namespace AcesApp.ViewModels
                 var converteditem = item.ToList();
                 Events.Add(datakey, converteditem);
             }
+
 
            /* foreach (var item in lista_eventos)
             {
